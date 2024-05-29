@@ -23,7 +23,7 @@ Il valore atteso dell'indice di Calinski-Harabasz sarà -\> $inf$.
 ```{r}
 library(UniversalCVI)
 
-load("~/Calinski-Harabasz-Thesis/Data/Dataset_Artificiale.RData")
+load("~/Calinski_Harabasz_Thesis/Data/Dataset_Artificiale.RData")
 
 # CASO BASE: prima metà delle righe composta di soli 0 e la seconda metà 
 # composta di soli 1.

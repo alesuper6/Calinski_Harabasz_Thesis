@@ -2,7 +2,7 @@ library(ggplot2)
 library(readr)
 library(UniversalCVI)
 
-load("~/Calinski-Harabasz-Thesis/Data/Dataset_Check.RData")
+load("~/Calinski_Harabasz_Thesis/Data/Dataset_Check.RData")
 
 # Esempio 1: 
 # dataset con due cluster ben separati tra loro

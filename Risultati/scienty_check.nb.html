@@ -1761,12 +1761,13 @@ un determinato valore dell’indice di Calinski-Harabasz.</p>
 dataset</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxubGlicmFyeShyZWFkcilcbmxpYnJhcnkoVW5pdmVyc2FsQ1ZJKVxuXG5sb2FkKFwifi9DYWxpbnNraS1IYXJhYmFzei1UaGVzaXMvRGF0YS9EYXRhc2V0X0NoZWNrLlJEYXRhXCIpXG5cbiMgRXNlbXBpbyAxOiBcbiMgZGF0YXNldCBjb24gZHVlIGNsdXN0ZXIgYmVuIHNlcGFyYXRpIHRyYSBsb3JvXG5cbiMgVmlzdWFsaXp6YXppb25lIGRlaSBkYXRpXG5nZ3Bsb3QoY2xfc2VwYXJhdGksIGFlcyh4ID0geCwgeSA9IHksIGNvbG9yID0gY2x1c3RlcikpICtcbiAgZ2VvbV9wb2ludCgpICtcbiAgdGhlbWVfbWluaW1hbCgpXG5gYGAifQ== -->
-<pre class="r"><code>library(ggplot2)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeShnZ3Bsb3QyKVxubGlicmFyeShyZWFkcilcbmxpYnJhcnkoVW5pdmVyc2FsQ1ZJKVxuXG5sb2FkKFxcfi9DYWxpbnNraS1IYXJhYmFzei1UaGVzaXMvRGF0YS9EYXRhc2V0X0NoZWNrLlJEYXRhXFwpXG5cbiMgRXNlbXBpbyAxOiBcbiMgZGF0YXNldCBjb24gZHVlIGNsdXN0ZXIgYmVuIHNlcGFyYXRpIHRyYSBsb3JvXG5cbiMgVmlzdWFsaXp6YXppb25lIGRlaSBkYXRpXG5nZ3Bsb3QoY2xfc2VwYXJhdGksIGFlcyh4ID0geCwgeSA9IHksIGNvbG9yID0gY2x1c3RlcikpICtcbiAgZ2VvbV9wb2ludCgpICtcbiAgdGhlbWVfbWluaW1hbCgpXG5gYGBcbmBgYCJ9 -->
+<pre class="r"><code>```r
+library(ggplot2)
 library(readr)
 library(UniversalCVI)
 
-load(&quot;~/Calinski-Harabasz-Thesis/Data/Dataset_Check.RData&quot;)
+load(\~/Calinski-Harabasz-Thesis/Data/Dataset_Check.RData\)
 
 # Esempio 1: 
 # dataset con due cluster ben separati tra loro
@@ -1775,47 +1776,94 @@ load(&quot;~/Calinski-Harabasz-Thesis/Data/Dataset_Check.RData&quot;)
 ggplot(cl_separati, aes(x = x, y = y, color = cluster)) +
   geom_point() +
   theme_minimal()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Calcolo dell’indice di Calinski-Harabasz con CH.IDX</p>
-<p>Valore atteso -&gt; <span class="math inline">\(inf\)</span></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiBpbmYuXG5DSC5JRFgoY2xfc2VwYXJhdGlbLDE6Ml0sIDIpXG5gYGAifQ== -->
-<pre class="r"><code># Calcolo Calinski-Harabasz con CH.IDX
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
+
+Valore atteso -\&gt; $inf$
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBDYWxjb2xvIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiBpbmYuXG5DSC5JRFgoY2xfc2VwYXJhdGlbLDE6Ml0sIDIpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+# Calcolo Calinski-Harabasz con CH.IDX
 # Valore atteso -&gt; inf.
 CH.IDX(cl_separati[,1:2], 2)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>2° ESEMPIO: dataset con 2 cluster sovrapposti Visualizzazione
-dataset</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBFc2VtcGlvIDI6IFxuIyBkYXRhc2V0IGNvbiBkdWUgY2x1c3RlciBzb3ZyYXBwb3N0aSB0cmEgbG9yb1xuXG4jIFZpc3VhbGl6emF6aW9uZSBkZWkgZGF0aVxuZ2dwbG90KGNsX3NvdnJhcHBvc3RpLCBhZXMoeCA9IHgsIHkgPSB5LCBjb2xvciA9IGNsdXN0ZXIpKSArXG4gIGdlb21fcG9pbnQoKSArXG4gIHRoZW1lX21pbmltYWwoKVxuYGBgIn0= -->
-<pre class="r"><code># Esempio 2: 
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+2° ESEMPIO: dataset con 2 cluster sovrapposti Visualizzazione dataset
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBFc2VtcGlvIDI6IFxuIyBkYXRhc2V0IGNvbiBkdWUgY2x1c3RlciBzb3ZyYXBwb3N0aSB0cmEgbG9yb1xuXG4jIFZpc3VhbGl6emF6aW9uZSBkZWkgZGF0aVxuZ2dwbG90KGNsX3NvdnJhcHBvc3RpLCBhZXMoeCA9IHgsIHkgPSB5LCBjb2xvciA9IGNsdXN0ZXIpKSArXG4gIGdlb21fcG9pbnQoKSArXG4gIHRoZW1lX21pbmltYWwoKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+# Esempio 2: 
 # dataset con due cluster sovrapposti tra loro
 
 # Visualizzazione dei dati
 ggplot(cl_sovrapposti, aes(x = x, y = y, color = cluster)) +
   geom_point() +
   theme_minimal()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Calcolo dell’indice di Calinski-Harabasz con CH.IDX</p>
-<p>Valore atteso -&gt; <span class="math inline">\(0\)</span></p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5DSC5JRFgoY2xfc292cmFwcG9zdGlbLDE6Ml0sIDIpXG5gYGAifQ== -->
-<pre class="r"><code># Calcolo Calinski-Harabasz con CH.IDX
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
+
+Valore atteso -\&gt; $0$
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuIyBDYWxjb2xvIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5DSC5JRFgoY2xfc292cmFwcG9zdGlbLDE6Ml0sIDIpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+# Calcolo Calinski-Harabasz con CH.IDX
 # Valore atteso -&gt; 0
 CH.IDX(cl_sovrapposti[,1:2], 2)</code></pre>
+<p>```</p>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCmVkaXRvcl9vcHRpb25zOiANCiAgbWFya2Rvd246IA0KICAgIHdyYXA6IDcyDQotLS0NCg0KU2NpZW50eSBjaGVjayBkZWxsYSBmdW56aW9uZSBDSC5JRFggZGVsIHBhY2NoZXR0byBVbml2ZXJzYWxDVkkuIFZvZ2xpYW1vDQp2ZXJpZmljYXJlIGlsIGNvcnJldHRvIGZ1bnppb25hbWVudG8gZGVsbGEgbWV0cmljYSBkaSBDYWxpbnNraS1IYXJhYmFzeg0KaW1wbGVtZW50YXRhIG5lbGxhIGZ1bnppb25lIENILklEWC4NCg0KQXBwbGljaGlhbW8gbGEgZnVuemlvbmUgYSBkdWUgZGl2ZXJzaSBkYXRhc2V0IHBlciBjdWkgY2kgYXNwZXR0aWFtbyB1bg0KZGV0ZXJtaW5hdG8gdmFsb3JlIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6Lg0KDQoxwrAgRVNFTVBJTzogZGF0YXNldCBjb24gMiBjbHVzdGVyIGJlbiBzZXBhcmF0aSBWaXN1YWxpenphemlvbmUgZGF0YXNldA0KDQpgYGB7cn0NCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkocmVhZHIpDQpsaWJyYXJ5KFVuaXZlcnNhbENWSSkNCg0KbG9hZCgifi9DYWxpbnNraS1IYXJhYmFzei1UaGVzaXMvRGF0YS9EYXRhc2V0X0NoZWNrLlJEYXRhIikNCg0KIyBFc2VtcGlvIDE6IA0KIyBkYXRhc2V0IGNvbiBkdWUgY2x1c3RlciBiZW4gc2VwYXJhdGkgdHJhIGxvcm8NCg0KIyBWaXN1YWxpenphemlvbmUgZGVpIGRhdGkNCmdncGxvdChjbF9zZXBhcmF0aSwgYWVzKHggPSB4LCB5ID0geSwgY29sb3IgPSBjbHVzdGVyKSkgKw0KICBnZW9tX3BvaW50KCkgKw0KICB0aGVtZV9taW5pbWFsKCkNCmBgYA0KDQpDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCg0KVmFsb3JlIGF0dGVzbyAtXD4gJGluZiQNCg0KYGBge3J9DQojIENhbGNvbG8gQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KIyBWYWxvcmUgYXR0ZXNvIC0+IGluZi4NCkNILklEWChjbF9zZXBhcmF0aVssMToyXSwgMikNCmBgYA0KDQoywrAgRVNFTVBJTzogZGF0YXNldCBjb24gMiBjbHVzdGVyIHNvdnJhcHBvc3RpIFZpc3VhbGl6emF6aW9uZSBkYXRhc2V0DQoNCmBgYHtyfQ0KIyBFc2VtcGlvIDI6IA0KIyBkYXRhc2V0IGNvbiBkdWUgY2x1c3RlciBzb3ZyYXBwb3N0aSB0cmEgbG9ybw0KDQojIFZpc3VhbGl6emF6aW9uZSBkZWkgZGF0aQ0KZ2dwbG90KGNsX3NvdnJhcHBvc3RpLCBhZXMoeCA9IHgsIHkgPSB5LCBjb2xvciA9IGNsdXN0ZXIpKSArDQogIGdlb21fcG9pbnQoKSArDQogIHRoZW1lX21pbmltYWwoKQ0KYGBgDQoNCkNhbGNvbG8gZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KDQpWYWxvcmUgYXR0ZXNvIC1cPiAkMCQNCg0KYGBge3J9DQojIENhbGNvbG8gQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KIyBWYWxvcmUgYXR0ZXNvIC0+IDANCkNILklEWChjbF9zb3ZyYXBwb3N0aVssMToyXSwgMikNCmBgYA0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQNCiAgaHRtbF9kb2N1bWVudDoNCiAgICBkZl9wcmludDogcGFnZWQNCmVkaXRvcl9vcHRpb25zOg0KICBtYXJrZG93bjoNCiAgICB3cmFwOiA3Mg0KLS0tDQoNClNjaWVudHkgY2hlY2sgZGVsbGEgZnVuemlvbmUgQ0guSURYIGRlbCBwYWNjaGV0dG8gVW5pdmVyc2FsQ1ZJLiBWb2dsaWFtbw0KdmVyaWZpY2FyZSBpbCBjb3JyZXR0byBmdW56aW9uYW1lbnRvIGRlbGxhIG1ldHJpY2EgZGkgQ2FsaW5za2ktSGFyYWJhc3oNCmltcGxlbWVudGF0YSBuZWxsYSBmdW56aW9uZSBDSC5JRFguDQoNCkFwcGxpY2hpYW1vIGxhIGZ1bnppb25lIGEgZHVlIGRpdmVyc2kgZGF0YXNldCBwZXIgY3VpIGNpIGFzcGV0dGlhbW8gdW4NCmRldGVybWluYXRvIHZhbG9yZSBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzei4NCg0KMcKwIEVTRU1QSU86IGRhdGFzZXQgY29uIDIgY2x1c3RlciBiZW4gc2VwYXJhdGkgVmlzdWFsaXp6YXppb25lIGRhdGFzZXQNCg0KYGBge3J9DQpsaWJyYXJ5KGdncGxvdDIpDQpsaWJyYXJ5KHJlYWRyKQ0KbGlicmFyeShVbml2ZXJzYWxDVkkpDQoNCmxvYWQoIn4vQ2FsaW5za2ktSGFyYWJhc3otVGhlc2lzL0RhdGEvRGF0YXNldF9DaGVjay5SRGF0YSIpDQoNCiMgRXNlbXBpbyAxOiANCiMgZGF0YXNldCBjb24gZHVlIGNsdXN0ZXIgYmVuIHNlcGFyYXRpIHRyYSBsb3JvDQoNCiMgVmlzdWFsaXp6YXppb25lIGRlaSBkYXRpDQpnZ3Bsb3QoY2xfc2VwYXJhdGksIGFlcyh4ID0geCwgeSA9IHksIGNvbG9yID0gY2x1c3RlcikpICsNCiAgZ2VvbV9wb2ludCgpICsNCiAgdGhlbWVfbWluaW1hbCgpDQpgYGANCg0KQ2FsY29sbyBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjb24gQ0guSURYDQoNClZhbG9yZSBhdHRlc28gLVw+ICRpbmYkDQoNCmBgYHtyfQ0KIyBDYWxjb2xvIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiBpbmYuDQpDSC5JRFgoY2xfc2VwYXJhdGlbLDE6Ml0sIDIpDQpgYGANCg0KMsKwIEVTRU1QSU86IGRhdGFzZXQgY29uIDIgY2x1c3RlciBzb3ZyYXBwb3N0aSBWaXN1YWxpenphemlvbmUgZGF0YXNldA0KDQpgYGB7cn0NCiMgRXNlbXBpbyAyOiANCiMgZGF0YXNldCBjb24gZHVlIGNsdXN0ZXIgc292cmFwcG9zdGkgdHJhIGxvcm8NCg0KIyBWaXN1YWxpenphemlvbmUgZGVpIGRhdGkNCmdncGxvdChjbF9zb3ZyYXBwb3N0aSwgYWVzKHggPSB4LCB5ID0geSwgY29sb3IgPSBjbHVzdGVyKSkgKw0KICBnZW9tX3BvaW50KCkgKw0KICB0aGVtZV9taW5pbWFsKCkNCmBgYA0KDQpDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCg0KVmFsb3JlIGF0dGVzbyAtXD4gJDAkDQoNCmBgYHtyfQ0KIyBDYWxjb2xvIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiAwDQpDSC5JRFgoY2xfc292cmFwcG9zdGlbLDE6Ml0sIDIpDQpgYGANCg==</div>
 
 
 
