@@ -1,0 +1,311 @@
+---
+title: "R Notebook"
+output: html_notebook
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+Studio della funzione CH.IDX, quindi della metrica Calinski-Harabasz
+implementata al suo interno, tramite analisi di dataset artificiali.
+Viene utilizzata una matrice parametrica [2n, n] dove nel nostro caso
+n=5. Valutiamo tramite la metrica di Calinski-Harabasz il clustering
+effettuato con l'algoritmo K-means per un numero di clusters pari a 2.
+
+CASO BASE
+
+Si analizza come caso base da cui partirela situazione con la prima metà
+delle righe composta di soli 0 e la seconda metà composta di soli 1.
+Questa sarà la matrice base da cui partire e da modificare.
+
+Il valore atteso dell'indice di Calinski-Harabasz sarà -\> $inf$.
+
+```{r}
+library(UniversalCVI)
+
+load("~/Calinski-Harabasz-Thesis/Data/Dataset_Artificiale.RData")
+
+# CASO BASE: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1.
+
+# Visualizzazione della matrice
+print(matrice)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> inf
+ch_base <-CH.IDX(matrice, 2)
+ch_base
+```
+
+1° CASO
+
+Si analizza come primo caso la situazione con la matrice base a cui
+viene modificata una riga presa casualmente con valori compresi tra 0 e
+1.
+
+Il valore atteso dell'indice di Calinski-Harabasz sarà sicuramente
+inferiore al caso precedente e dipenderà anche dalla riga che viene
+sostituita e dai valori che la compongono. Ci aspettiamo quindi un
+valore che tenderà ad essere più vicino a $0$ che a $inf$.
+
+```{r}
+
+# CASO 1: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, una riga scelta casualmente viene sostituita con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_1)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_1 <- CH.IDX(matrice_rcr_1, 2)
+ch_1
+```
+
+2° CASO
+
+Si analizza come secondo caso la situazione con la matrice base a cui
+vengono modificate due righe prese casualmente con valori compresi tra 0
+e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 2: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, due righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_2)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_2 <- CH.IDX(matrice_rcr_2, 2)
+ch_2
+```
+
+3° CASO
+
+Si analizza come terzo caso la situazione con la matrice base a cui
+vengono modificate tre righe prese casualmente con valori compresi tra 0
+e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono. A questo punto il
+valore atteso sarà già molto vicino a $0$.
+
+```{r}
+
+# CASO 3: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, tre righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_3)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_3 <- CH.IDX(matrice_rcr_3, 2)
+ch_3
+```
+
+4° CASO
+
+Si analizza come quarto caso la situazione con la matrice base a cui
+vengono modificate quattro righe prese casualmente con valori compresi
+tra 0 e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 4: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, quattro righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_4)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_4 <- CH.IDX(matrice_rcr_4, 2)
+ch_4
+```
+
+5° CASO
+
+Si analizza come quinto caso la situazione con la matrice base a cui
+vengono modificate cinque righe prese casualmente con valori compresi
+tra 0 e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 5: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, cinque righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_5)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_5 <- CH.IDX(matrice_rcr_5, 2)
+ch_5
+```
+
+6° CASO
+
+Si analizza come sesto caso la situazione con la matrice base a cui
+vengono modificate sei righe prese casualmente con valori compresi tra 0
+e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 6: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, sei righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_6)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_6 <- CH.IDX(matrice_rcr_6, 2)
+ch_6
+```
+
+7° CASO
+
+Si analizza come settimo caso la situazione con la matrice base a cui
+vengono modificate sette righe prese casualmente con valori compresi tra
+0 e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 7: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, sette righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_7)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_7 <- CH.IDX(matrice_rcr_7, 2)
+ch_7
+```
+
+8° CASO
+
+Si analizza come ottavo caso la situazione con la matrice base a cui
+vengono modificate otto righe prese casualmente con valori compresi tra
+0 e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 8: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, otto righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_8)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_8 <- CH.IDX(matrice_rcr_8, 2)
+ch_8
+```
+
+9° CASO
+
+Si analizza come nono caso la situazione con la matrice base a cui
+vengono modificate nove righe prese casualmente con valori compresi tra
+0 e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 9: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, nove righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_9)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_9 <- CH.IDX(matrice_rcr_9, 2)
+ch_9
+```
+
+10° CASO
+
+Si analizza come decimo caso la situazione con la matrice base a cui
+vengono modificate tutte le righe con valori compresi tra 0 e 1.
+
+Il valore dell'indice di Calinski-Harabasz ci aspettiamo che sia
+inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
+che vengono sostituite e dai valori che le compongono.
+
+```{r}
+
+# CASO 9: prima metà delle righe composta di soli 0 e la seconda metà 
+# composta di soli 1, nove righe scelte casualmente vengono sostituite con valori
+# compresi tra 0 e 1.
+
+# Visualizzazione della matrice
+print(matrice_rcr_10)
+
+# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+ch_10 <- CH.IDX(matrice_rcr_10, 2)
+ch_10
+```
+
+Possiamo quindi confrontare i valori ottenuti per ogni caso analizzato:
+
+```{r}
+
+# Riga dei casi del dataframe per il confronto dei valori di Calinski_Harabasz
+casi <- c("CASO BASE", "1° CASO", "2° CASO", "3° CASO", "4° CASO", "5° CASO", "6° CASO", "7° CASO", "8° CASO", "9° CASO", "10° CASO")
+
+# Riga dei valori del dataframe per il confronto dei valori di Calinski_Harabasz
+valori <- c(ch_base[1,2], ch_1[1,2], ch_2[1,2], ch_3[1,2], ch_4[1,2], ch_5[1,2], ch_6[1,2], ch_7[1,2], ch_8[1,2], ch_9[1,2], ch_10[1,2])
+
+# Creazione e visualizzazione dataframe per il confronto dei valori di Calinski_Harabasz
+rbind(casi, valori)
+
+```
+
+verificando come in generale il valore dell'indice di Calinski_Harabasz
+tende a diminuire ed avvicinarsi allo $0$ con l'aumento delle righe
+composte da valori compresi tra 0 e 1.
+
+In generale già dal primo caso si può notare come l'indice indichi una
+situazione poco ottimale, che successivamente peggiora rapidamente come ben individuato dal valore dell'indice.

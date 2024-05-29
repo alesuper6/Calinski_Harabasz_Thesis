@@ -1,0 +1,64 @@
+---
+title: "R Notebook"
+output: html_notebook
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+Scienty check della funzione CH.IDX del pacchetto UniversalCVI. Vogliamo
+verificare il corretto funzionamento della metrica di Calinski-Harabasz
+implementata nella funzione CH.IDX.
+
+Applichiamo la funzione a due diversi dataset per cui ci aspettiamo un
+determinato valore dell'indice di Calinski-Harabasz.
+
+1° ESEMPIO: dataset con 2 cluster ben separati Visualizzazione dataset
+
+```{r}
+library(ggplot2)
+library(readr)
+library(UniversalCVI)
+
+load("~/Calinski-Harabasz-Thesis/Data/Dataset_Check.RData")
+
+# Esempio 1: 
+# dataset con due cluster ben separati tra loro
+
+# Visualizzazione dei dati
+ggplot(cl_separati, aes(x = x, y = y, color = cluster)) +
+  geom_point() +
+  theme_minimal()
+```
+
+Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+
+Valore atteso -\> $inf$
+
+```{r}
+# Calcolo Calinski-Harabasz con CH.IDX
+# Valore atteso -> inf.
+CH.IDX(cl_separati[,1:2], 2)
+```
+
+2° ESEMPIO: dataset con 2 cluster sovrapposti Visualizzazione dataset
+
+```{r}
+# Esempio 2: 
+# dataset con due cluster sovrapposti tra loro
+
+# Visualizzazione dei dati
+ggplot(cl_sovrapposti, aes(x = x, y = y, color = cluster)) +
+  geom_point() +
+  theme_minimal()
+```
+
+Calcolo dell'indice di Calinski-Harabasz con CH.IDX
+
+Valore atteso -\> $0$
+
+```{r}
+# Calcolo Calinski-Harabasz con CH.IDX
+# Valore atteso -> 0
+CH.IDX(cl_sovrapposti[,1:2], 2)
+```
