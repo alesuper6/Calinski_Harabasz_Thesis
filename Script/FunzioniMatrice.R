@@ -1,7 +1,7 @@
 ## Funzione che crea la matrice parametrica [2n, n]
 ## Con la prima metà di righe di soli 0 e l'altra metà di righe di soli 1
 
-crea_matrice <- function(n) {
+creaMatrice <- function(n) {
   # Crea una matrice vuota di dimensione 2n*n
   matr <- matrix(nrow = 2*n, ncol = n)
   
@@ -19,7 +19,7 @@ crea_matrice <- function(n) {
 ## Funzione che modifica la matrice passata
 ## Sostituisce casualmente un numero x di righe con valori compresi tra 0 e 1
 
-rimpiazza_casualmente_righe <- function(matr, x) {
+rimpiazzaCasualmenteRighe <- function(matr, x) {
   # Ottieni le dimensioni della matrice
   nrighe <- nrow(matr)
   ncolonne <- ncol(matr)
@@ -43,20 +43,26 @@ rimpiazza_casualmente_righe <- function(matr, x) {
 ## Funzione che modifica la matrice passata
 ## Sostituisce le righe selezionate con valori compresi tra 0 e 1
 
-rimpiazza_righe_selezionate <- function(matrice, righe) {
+modificaRigaSelezionata <- function(matrice, riga) {
+  
   # Ottieni le dimensioni della matrice
   nrighe <- nrow(matrice)
   ncolonne <- ncol(matrice)
   
-  # Controlla se tutte le righe selezionate sono valide
-  if (any(righe > nrighe)) {
-    stop("Alcune righe selezionate non sono valide")
-  }
-  
   # Sostituisci le righe selezionate con numeri casuali tra 0 e 1
-  matrice[righe, ] <- matrix(runif(length(righe) * ncolonne), 
-                             nrow = length(righe))
+  matrice[riga, ] <- matrix(runif(length(riga) * ncolonne), 
+                             nrow = length(riga))
   
   return(matrice)
 }
+
+##---------------------------------------------------------------------------##
+
+# Definizione di una funzione per leggere un intero da tastiera
+readInteger <- function() {
+  n <- readline(prompt="Inserisci un intero: ")
+  return(as.integer(n))
+}
+
+##---------------------------------------------------------------------------##
 
