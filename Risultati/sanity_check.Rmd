@@ -9,7 +9,7 @@ editor_options:
     wrap: 72
 ---
 
-Scienty check della funzione CH.IDX del pacchetto UniversalCVI. Vogliamo
+Sanity check della funzione CH.IDX del pacchetto UniversalCVI. Vogliamo
 verificare il corretto funzionamento della metrica di Calinski-Harabasz
 implementata nella funzione CH.IDX.
 
