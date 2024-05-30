@@ -1754,8 +1754,8 @@ display: none;
 <!-- rnb-text-begin -->
 <p>Studio della funzione CH.IDX, quindi della metrica Calinski-Harabasz
 implementata al suo interno, tramite analisi di dataset artificiali.
-Viene utilizzata una matrice parametrica [2n, n] dove nel nostro caso
-n=5. Valutiamo tramite la metrica di Calinski-Harabasz il clustering
+Viene utilizzata una matrice parametrica [2n, n].</p>
+<p>Valutiamo tramite la metrica di Calinski-Harabasz il clustering
 effettuato con l’algoritmo K-means per un numero di clusters pari a
 2.</p>
 <p>CASO BASE</p>
@@ -1765,532 +1765,105 @@ metà delle righe composta di soli 0 e la seconda metà composta di soli
 <p>Il valore atteso dell’indice di Calinski-Harabasz sarà -&gt; <span class="math inline">\(inf\)</span>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShVbml2ZXJzYWxDVkkpXG5cbmxvYWQoXCJ+L0NhbGluc2tpX0hhcmFiYXN6X1RoZXNpcy9EYXRhL0RhdGFzZXRfQXJ0aWZpY2lhbGUuUkRhdGFcIilcblxuIyBDQVNPIEJBU0U6IHByaW1hIG1ldMOgIGRlbGxlIHJpZ2hlIGNvbXBvc3RhIGRpIHNvbGkgMCBlIGxhIHNlY29uZGEgbWV0w6AgXG4jIGNvbXBvc3RhIGRpIHNvbGkgMS5cblxuIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxucHJpbnQobWF0cmljZSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShVbml2ZXJzYWxDVkkpXG5cbnNvdXJjZShcIn4vQ2FsaW5za2lfSGFyYWJhc3pfVGhlc2lzL1NjcmlwdC9GdW56aW9uaU1hdHJpY2UuUlwiKVxuXG4jIENBU08gQkFTRTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLlxuXG4jIFJpY2hpZXN0YSBkZWwgcGFyYW1ldHJvIG4gcGVyIGxhIG1hdHJpY2Vcbm4gPC0gcmVhZEludGVnZXIoKVxucHJpbnQobilcblxuIyBDcmVhemlvbmUgZSB2aXN1YWxpenphemlvbmUgbWF0cmljZSBcbm1hdHJpY2UgPC1jcmVhTWF0cmljZShuKVxubWF0cmljZVxuXG4jIENhbGNvbG8gZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWFxuIyBWYWxvcmUgYXR0ZXNvIC0+IGluZlxuY2hfYmFzZSA8LUNILklEWChtYXRyaWNlLCAyKVxuY2F0KHNwcmludGYoXCJcXG5WYWxvcmUgaW5kaWNlIENhbGluc2tpLUhhcmFiYXN6OiAlZlxcblwiLGNoX2Jhc2VbMSwyXSApKVxuYGBgIn0= -->
 <pre class="r"><code>library(UniversalCVI)
 
-load(&quot;~/Calinski_Harabasz_Thesis/Data/Dataset_Artificiale.RData&quot;)
+source(&quot;~/Calinski_Harabasz_Thesis/Script/FunzioniMatrice.R&quot;)
 
 # CASO BASE: prima metà delle righe composta di soli 0 e la seconda metà 
 # composta di soli 1.
 
-# Visualizzazione della matrice
-print(matrice)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdXG4gWzEsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDBcbiBbMixdICAgIDAgICAgMCAgICAwICAgIDAgICAgMFxuIFszLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwXG4gWzQsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDBcbiBbNSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMFxuIFs2LF0gICAgMSAgICAxICAgIDEgICAgMSAgICAxXG4gWzcsXSAgICAxICAgIDEgICAgMSAgICAxICAgIDFcbiBbOCxdICAgIDEgICAgMSAgICAxICAgIDEgICAgMVxuIFs5LF0gICAgMSAgICAxICAgIDEgICAgMSAgICAxXG5bMTAsXSAgICAxICAgIDEgICAgMSAgICAxICAgIDFcbiJ9 -->
-<pre><code>      [,1] [,2] [,3] [,4] [,5]
- [1,]    0    0    0    0    0
- [2,]    0    0    0    0    0
- [3,]    0    0    0    0    0
- [4,]    0    0    0    0    0
- [5,]    0    0    0    0    0
- [6,]    1    1    1    1    1
- [7,]    1    1    1    1    1
- [8,]    1    1    1    1    1
- [9,]    1    1    1    1    1
-[10,]    1    1    1    1    1</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiBpbmZcbmNoX2Jhc2UgPC1DSC5JRFgobWF0cmljZSwgMilcbmNoX2Jhc2VcbmBgYCJ9 -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
+# Richiesta del parametro n per la matrice
+n &lt;- readInteger()
+print(n)
+
+# Creazione e visualizzazione matrice 
+matrice &lt;-creaMatrice(n)
+matrice
+
+# Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
 # Valore atteso -&gt; inf
 ch_base &lt;-CH.IDX(matrice, 2)
-ch_base</code></pre>
+cat(sprintf(&quot;\nValore indice Calinski-Harabasz: %f\n&quot;,ch_base[1,2] ))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlF5NnJDTUJDR3g5aFdMSGdCbjZQZENJZXpQS0NJYTFGd0c5dW94WjZrdFBHeTg1VjlBblVTTTBJVFNQclBQLzBtTTFuTnQ5TjRHd05BRjRJQXp4QWxoSnYxSXZrRkNCZ0dIUWlnYjc0M1RFOVFHSE5vakQvNExodmZIeFMyd0ZEeWY5R2dHRnZZVlRzNXdXWkw3LzkrcmE0cE1RT2JzTHRkTkN0NVEwWEpqSE91ZWJxdmtjWG82U0U5VmVsQ1NZU1lHU1B5NEU3dEdhT3pORjNrU1hZOHkxUHk0Nlc3bFR5WU8xMkQwRzcycTltbkMvWnllT1R3U01oRElRV05VL0tkS0tseUxpNU9EdkV0N0ZPa1ZWMUlUWE9pMjZSYWFVNUluS21TSERzNVBOL2d5QXoyMndFQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"Inf"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>1° CASO</p>
-<p>Si analizza come primo caso la situazione con la matrice base a cui
-viene modificata una riga presa casualmente con valori compresi tra 0 e
-1.</p>
+<p>CASO ITERATIVO</p>
+<p>Si analizza iterativamente con un ciclo la situazione con la matrice
+base a cui viene modificata ad ogni passo una riga, presa casualmente
+tra quelle immutate, con valori compresi tra 0 e 1.</p>
 <p>Il valore atteso dell’indice di Calinski-Harabasz sarà sicuramente
 inferiore al caso precedente e dipenderà anche dalla riga che viene
 sostituita e dai valori che la compongono. Ci aspettiamo quindi un
 valore che tenderà ad essere più vicino a <span class="math inline">\(0\)</span> che a <span class="math inline">\(inf\)</span>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gMTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCB1bmEgcmlnYSBzY2VsdGEgY2FzdWFsbWVudGUgdmllbmUgc29zdGl0dWl0YSBjb24gdmFsb3JpXG4jIGNvbXByZXNpIHRyYSAwIGUgMS5cblxuIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxucHJpbnQobWF0cmljZV9yY3JfMSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gSVRFUkFUSVZPOiB2aWVuZSBwcmVzYSBsYSBtYXRyaWNlIGRlbCBjYXNvIHByZWNlZGVudGUgZWQgdW5hIHJpZ2Egc2NlbHRhIFxuIyAgICAgICAgICAgICAgICAgY2FzdWFsbWVudGUgdmllbmUgc29zdGl0dWl0YSBjb24gdmFsb3JpIGNvbXByZXNpIHRyYSAwIGUgMS5cblxuIyBDcmVhemlvbmUgZGF0YWZyYW1lIGl0ZXJhemlvbmkvdmFsb3JlXG5yaXN1bHRhdGkgPC0gZGF0YS5mcmFtZShpdGVyYXppb25lID0gaW50ZWdlcigpLCB2YWxvcmUgPSBudW1lcmljKCksXG4gICAgICAgICAgICAgICAgICAgICAgICBzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UpXG5cbiMgQ3JlYXppb25lIHBvb2wgZGEgY3VpIGVzdHJhcnJlIGxhIHJpZ2EgZGEgbW9kaWZpY2FyZVxubiA8LSBucm93KG1hdHJpY2UpICMgTnVtZXJvIGRpIHJpZ2hlIGRlbGxhIG1hdHJpY2VcbnBvb2wgPC0gc2FtcGxlKDE6bikgIyBDcmVhIHVuIHBvb2wgZGkgbnVtZXJpIGRhIDEgYSBuIG9yZGluYXRvIGluIG1vZG8gY2FzdWFsZVxuXG5cbiMgQ2ljbG8gaXRlcmF0aXZvIHBlciBtb2RpZmljYSBkaSB1bmEgcmlnYSBhbGxhIHZvbHRhXG5mb3IgKGkgaW4gMTpucm93KG1hdHJpY2UpKSB7XG4gIGNhdChzcHJpbnRmKFwiXFxuSXRlcmF6aW9uZSAlZDpcXG5cIiwgaSkpXG4gIFxuICAjIFBlc2NhIHVuIG51bWVybyBjYXN1YWxtZW50ZSBzZW56YSByZWltbWlzc2lvbmUgZGFsIHBvb2wgY3JlYXRvXG4gIHNlbGV6aW9uZSA8LSBwb29sW2ldIFxuICBjYXQoc3ByaW50ZihcIlxcblJpZ2EgbW9kaWZpY2F0YTogJWRcXG5cIiwgc2VsZXppb25lKSlcbiAgXG4gICMgTW9kaWZpY2EgcmlnYSBkZWxsYSBtYXRyaWNlXG4gIG1hdHJpY2UgPC0gbW9kaWZpY2FSaWdhU2VsZXppb25hdGEobWF0cmljZSwgc2VsZXppb25lKVxuICBcbiAgIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxuICBwcmludChtYXRyaWNlKVxuICBcbiAgIyBDYWxjb2xvIGUgdmlzdWFsaXp6YXppb25lIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6XG4gIHZhbG9yZV9jaCA8LSBDSC5JRFgobWF0cmljZSwgMilcbiAgY2F0KHNwcmludGYoXCJcXG5WYWxvcmUgaW5kaWNlIENhbGluc2tpLUhhcmFiYXN6OiAlZlxcblwiLHZhbG9yZV9jaFsxLDJdICkpXG4gIFxuIFxuICAjIEFnZ2lvcm5hbWVudG8gZGF0YWZyYW1lIGl0ZXJhemlvbmkvdmFsb3JlXG4gIHJpc3VsdGF0aSA8LSByYmluZChyaXN1bHRhdGksIGRhdGEuZnJhbWUoaXRlcmF6aW9uZSA9IGksIHZhbG9yZSA9IHZhbG9yZV9jaCkpXG4gXG59XG5cblxuXG5gYGAifQ== -->
 <pre class="r"><code>
-# CASO 1: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, una riga scelta casualmente viene sostituita con valori
-# compresi tra 0 e 1.
+# CASO ITERATIVO: viene presa la matrice del caso precedente ed una riga scelta 
+#                 casualmente viene sostituita con valori compresi tra 0 e 1.
 
-# Visualizzazione della matrice
-print(matrice_rcr_1)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICAgWyw0XSAgICAgIFssNV1cbiBbMSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzIsXSAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFszLF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDBcbiBbNCxdIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzUsXSAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFs2LF0gMC4xNDI5MDEyIDAuMjcyNDg4NSAwLjIyNDk5MjEgMC4wMzQwNDkxOSAwLjcyNTA2NjZcbiBbNyxdIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMDAgMS4wMDAwMDAwXG4gWzgsXSAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAwIDEuMDAwMDAwMFxuIFs5LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwMCAxLjAwMDAwMDBcblsxMCxdIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMDAgMS4wMDAwMDAwXG4ifQ== -->
-<pre><code>           [,1]      [,2]      [,3]       [,4]      [,5]
- [1,] 0.0000000 0.0000000 0.0000000 0.00000000 0.0000000
- [2,] 0.0000000 0.0000000 0.0000000 0.00000000 0.0000000
- [3,] 0.0000000 0.0000000 0.0000000 0.00000000 0.0000000
- [4,] 0.0000000 0.0000000 0.0000000 0.00000000 0.0000000
- [5,] 0.0000000 0.0000000 0.0000000 0.00000000 0.0000000
- [6,] 0.1429012 0.2724885 0.2249921 0.03404919 0.7250666
- [7,] 1.0000000 1.0000000 1.0000000 1.00000000 1.0000000
- [8,] 1.0000000 1.0000000 1.0000000 1.00000000 1.0000000
- [9,] 1.0000000 1.0000000 1.0000000 1.00000000 1.0000000
-[10,] 1.0000000 1.0000000 1.0000000 1.00000000 1.0000000</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF8xIDwtIENILklEWChtYXRyaWNlX3Jjcl8xLCAyKVxuY2hfMVxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_1 &lt;- CH.IDX(matrice_rcr_1, 2)
-ch_1</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlF6NHJDTUJER3gvU1B0S0M3NE1XWGFDOGU5Q2dvaStmRkJhK3hqVnFzU1duajdsNTlIdkc1ZkFZdjZpUW1CVk5vODgwMytVMW41bnUrR3NXckdBQTg4SDM4QmlnaCtGbCtKUk1BbjJEUUFSOGlkZjVqZW9CQ21YMWxUS0Y5WG5GMkd0NHUxN01EQnB3ZVdJUGlVOE9tMnQ0SU1sczQ5Nk5hL0tXVzZlbUVmdCtMWmlWdGJGRnJ4am1WTk4zVXlHSjBkNUN1cUdRaE9FSkVqUkU2Y0tkMmpJOGpWMTNrU2JZNzhuMHlkdEpleGJmcW42WkJlRysyMWVUVkJYa1lQRFI0eVBpMjRNeU9VOUkxSzIzbG5QMGEyY2RkNkZXa1ZWMXdhZWRFdDBtbGtOUWljU1pLNitqSjRmNEVLa3hiS05zQkFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"156.0343"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>2° CASO</p>
-<p>Si analizza come secondo caso la situazione con la matrice base a cui
-vengono modificate due righe prese casualmente con valori compresi tra 0
-e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gMjogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBkdWUgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpXG4jIGNvbXByZXNpIHRyYSAwIGUgMS5cblxuIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxucHJpbnQobWF0cmljZV9yY3JfMilcbmBgYCJ9 -->
-<pre class="r"><code>
-# CASO 2: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, due righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
+# Creazione dataframe iterazioni/valore
+risultati &lt;- data.frame(iterazione = integer(), valore = numeric(),
+                        stringsAsFactors = FALSE)
 
-# Visualizzazione della matrice
-print(matrice_rcr_2)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICBbLDJdICAgICAgWywzXSAgICAgIFssNF0gICAgICBbLDVdXG4gWzEsXSAwLjAwMDAwMDAgMC4wMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDBcbiBbMixdIDAuMDAwMDAwMCAwLjAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMFxuIFszLF0gMC4wMDAwMDAwIDAuMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwXG4gWzQsXSAwLjAwMDAwMDAgMC4wMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDBcbiBbNSxdIDAuODIwMzY5NSAwLjI4MjE4MSAwLjkwMzg0OTQgMC41MDUyMzc5IDAuOTcxNjU3NFxuIFs2LF0gMS4wMDAwMDAwIDEuMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwXG4gWzcsXSAwLjU0MDE5NTcgMC40NTExMDMgMC4zNjQ2MDI1IDAuOTM2NTQ5NSAwLjM2OTcxNDdcbiBbOCxdIDEuMDAwMDAwMCAxLjAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMFxuIFs5LF0gMS4wMDAwMDAwIDEuMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwXG5bMTAsXSAxLjAwMDAwMDAgMS4wMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDBcbiJ9 -->
-<pre><code>           [,1]     [,2]      [,3]      [,4]      [,5]
- [1,] 0.0000000 0.000000 0.0000000 0.0000000 0.0000000
- [2,] 0.0000000 0.000000 0.0000000 0.0000000 0.0000000
- [3,] 0.0000000 0.000000 0.0000000 0.0000000 0.0000000
- [4,] 0.0000000 0.000000 0.0000000 0.0000000 0.0000000
- [5,] 0.8203695 0.282181 0.9038494 0.5052379 0.9716574
- [6,] 1.0000000 1.000000 1.0000000 1.0000000 1.0000000
- [7,] 0.5401957 0.451103 0.3646025 0.9365495 0.3697147
- [8,] 1.0000000 1.000000 1.0000000 1.0000000 1.0000000
- [9,] 1.0000000 1.000000 1.0000000 1.0000000 1.0000000
-[10,] 1.0000000 1.000000 1.0000000 1.0000000 1.0000000</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF8yIDwtIENILklEWChtYXRyaWNlX3Jjcl8yLCAyKVxuY2hfMlxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_2 &lt;- CH.IDX(matrice_rcr_2, 2)
-ch_2</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlF6NDZDTUJER2gvTEhTS0pyNGl0NGxZc1hqMGJOdW1lamlkY0tWUW5ZRXFpdXorTE5KL0tOM0ozVzFvU1NGTDc1aHQ5MFp0YkwzU1RleFFEZ1F4RGdPMFFKNFhielBaNENCQVFERHdMb3F1OE4wME1VeXV3cll3YWY1eDJ2NXZmSDZPazVZTWpwbVRVb0JobzIxUW9qeU9MSCtiOWJpOS9FTWoyZDBLZGROQzFwWTR0YU04Nm9wTW1oUmhhamw0TjBSQ1Z6d1JFaWFveklnYjNhTWI0dVhIV1JqZFBUaFJkcUg2MjBYL0dqdXRNMENPMW1QNXE4dXlCL0JvOE1IakYrekRtejQ1UjB6MHBiT1dOWEkvdTRDNzJLcEtwekx1MmM2RGFKRkpKYUpFNUZhUjA5T2J6K0FXa1dqcnJiQVFBQSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"46.52034"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>3° CASO</p>
-<p>Si analizza come terzo caso la situazione con la matrice base a cui
-vengono modificate tre righe prese casualmente con valori compresi tra 0
-e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono. A questo punto il
-valore atteso sarà già molto vicino a <span class="math inline">\(0\)</span>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gMzogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCB0cmUgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpXG4jIGNvbXByZXNpIHRyYSAwIGUgMS5cblxuIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxucHJpbnQobWF0cmljZV9yY3JfMylcbmBgYCJ9 -->
-<pre class="r"><code>
-# CASO 3: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, tre righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
+# Creazione pool da cui estrarre la riga da modificare
+n &lt;- nrow(matrice) # Numero di righe della matrice
+pool &lt;- sample(1:n) # Crea un pool di numeri da 1 a n ordinato in modo casuale
 
-# Visualizzazione della matrice
-print(matrice_rcr_3)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICBbLDRdICAgICAgWyw1XVxuIFsxLF0gMC44NzA1OTI4IDAuNjYxMTE2OCAwLjQwODUzMDggMC43NDIxMDI2IDAuMzA3OTAwMlxuIFsyLF0gMC45NTA3NTEyIDAuMTA0NTc5NiAwLjgzNjQ3NzYgMC4zOTU2MDAxIDAuNzY0MzM3MVxuIFszLF0gMC44OTQ4NzAwIDAuNTU5Nzc0MSAwLjI1MzYyMDEgMC41NTc1MjY4IDAuNTExMDk5MVxuIFs0LF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMFxuIFs1LF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMFxuIFs2LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMFxuIFs3LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMFxuIFs4LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMFxuIFs5LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMFxuWzEwLF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMFxuIn0= -->
-<pre><code>           [,1]      [,2]      [,3]      [,4]      [,5]
- [1,] 0.8705928 0.6611168 0.4085308 0.7421026 0.3079002
- [2,] 0.9507512 0.1045796 0.8364776 0.3956001 0.7643371
- [3,] 0.8948700 0.5597741 0.2536201 0.5575268 0.5110991
- [4,] 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000
- [5,] 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000
- [6,] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
- [7,] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
- [8,] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
- [9,] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
-[10,] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF8zIDwtIENILklEWChtYXRyaWNlX3Jjcl8zLCAyKVxuY2hfM1xuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_3 &lt;- CH.IDX(matrice_rcr_3, 2)
-ch_3</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlFTd3JDTUJDR3g5aFdMUGdBejlGdTNPaE9VTVMxcUxpTmJkUmlUVW9iSDBmeFBCN0FBM2dZZFJJVHdSVGEvUE5QdnVuTXpDZnJmcmdPQWFBT25vZGZIeVg0eThVMEdnQjRCSU1hZU5CVTV4WFRQUlRLYkN0akJML25HL2Yzejl0OTlYQkFuOU1qcTFCME5XeXFIWXdnNDVsenYxbUtTMnlabGs3bzk3OW9rdFBLRnJWbW1GSko0MjJKTEVZdkIybUlRbWFDSTBUVUdJRUQxMHJINkp5NDZpS05rdjJKSDZLaGs2NFhmS2YrYVJxRS8yWi9tbnk3SUcrREJ3WVBHTjlsbk5seGNycGh1YTJjc3JPUmJkeUZYa1ZjbEJtWGRrNTBxMWdLU1MwU0ppSzNqcDRjWGgrZEJnSjIyd0VBQUE9PSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"19.40959"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>4° CASO</p>
-<p>Si analizza come quarto caso la situazione con la matrice base a cui
-vengono modificate quattro righe prese casualmente con valori compresi
-tra 0 e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gNDogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBxdWF0dHJvIHJpZ2hlIHNjZWx0ZSBjYXN1YWxtZW50ZSB2ZW5nb25vIHNvc3RpdHVpdGUgY29uIHZhbG9yaVxuIyBjb21wcmVzaSB0cmEgMCBlIDEuXG5cbiMgVmlzdWFsaXp6YXppb25lIGRlbGxhIG1hdHJpY2VcbnByaW50KG1hdHJpY2VfcmNyXzQpXG5gYGAifQ== -->
-<pre class="r"><code>
-# CASO 4: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, quattro righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
 
-# Visualizzazione della matrice
-print(matrice_rcr_4)</code></pre>
+# Ciclo iterativo per modifica di una riga alla volta
+for (i in 1:nrow(matrice)) {
+  cat(sprintf(&quot;\nIterazione %d:\n&quot;, i))
+  
+  # Pesca un numero casualmente senza reimmissione dal pool creato
+  selezione &lt;- pool[i] 
+  cat(sprintf(&quot;\nRiga modificata: %d\n&quot;, selezione))
+  
+  # Modifica riga della matrice
+  matrice &lt;- modificaRigaSelezionata(matrice, selezione)
+  
+  # Visualizzazione della matrice
+  print(matrice)
+  
+  # Calcolo e visualizzazione dell&#39;indice di Calinski-Harabasz
+  valore_ch &lt;- CH.IDX(matrice, 2)
+  cat(sprintf(&quot;\nValore indice Calinski-Harabasz: %f\n&quot;,valore_ch[1,2] ))
+  
+ 
+  # Aggiornamento dataframe iterazioni/valore
+  risultati &lt;- rbind(risultati, data.frame(iterazione = i, valore = valore_ch))
+ 
+}
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgICBbLDNdICAgICAgWyw0XSAgICAgICBbLDVdXG4gWzEsXSAwLjczNDM5MDggMC4yNjA2Mzc0IDAuMDU0OTQ4MTggMC45Nzg3MTk0IDAuNDQyODY0NDlcbiBbMixdIDAuNDc4OTYxNSAwLjYwNTUxOTAgMC42NTIyMTAzMyAwLjYzNjc0OTIgMC4wMTM5ODQxM1xuIFszLF0gMC40OTM0NjI5IDAuNjcxMjY1MyAwLjI4MTUyNzA5IDAuMTA3MzM5MCAwLjE0MTU5OTE0XG4gWzQsXSAwLjk4OTk0NzQgMC40MTk4NDI0IDAuNjM4MzIxODcgMC4yMzQzMDg3IDAuNDU0NTgyMzdcbiBbNSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMFxuIFs2LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAwXG4gWzcsXSAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMDBcbiBbOCxdIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwMFxuIFs5LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAwXG5bMTAsXSAxLjAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMDBcbiJ9 -->
-<pre><code>           [,1]      [,2]       [,3]      [,4]       [,5]
- [1,] 0.7343908 0.2606374 0.05494818 0.9787194 0.44286449
- [2,] 0.4789615 0.6055190 0.65221033 0.6367492 0.01398413
- [3,] 0.4934629 0.6712653 0.28152709 0.1073390 0.14159914
- [4,] 0.9899474 0.4198424 0.63832187 0.2343087 0.45458237
- [5,] 0.0000000 0.0000000 0.00000000 0.0000000 0.00000000
- [6,] 1.0000000 1.0000000 1.00000000 1.0000000 1.00000000
- [7,] 1.0000000 1.0000000 1.00000000 1.0000000 1.00000000
- [8,] 1.0000000 1.0000000 1.00000000 1.0000000 1.00000000
- [9,] 1.0000000 1.0000000 1.00000000 1.0000000 1.00000000
-[10,] 1.0000000 1.0000000 1.00000000 1.0000000 1.00000000</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF80IDwtIENILklEWChtYXRyaWNlX3Jjcl80LCAyKVxuY2hfNFxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_4 &lt;- CH.IDX(matrice_rcr_4, 2)
-ch_4</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlFUUXZDTUF5R1k5MG1UaFRCMzdHaGVQRW9LT0paRkR3SmRhczZuTzNZNnNmSlh5MGUxYlMyZ2gxc2ZmT21UNVprTVYwUHczVUlBSFh3UFB6NktNRmZMV2ZSQ01BakdOVEFnNlk2YjVqdW9WQm1SeGxqK0QzZmVIaC9pdFpqNDRBK3B5ZFdvZWhxMkZRN0drRW1jK2Qrc3hUWDJESnRuZER2ZjlFa3A1VXRhczB3cFpMR3V4SlpqRjRPMGhDRnpBUkhpS2d4QWdldWxZN1JQWFBWUlJvbGh6TS9Sb08razY4WGZLOSthanFFLzI1L21uemJJRytEQndZUEdOOW5uTmw1Y3JwbHVhMmNzb3VSSFZ5RzNrVmNsQm1YZGxCMHExZ0tTUzBTSmlLM2poNGRYaC9aZkZSQjNBRUFBQT09In0= -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"19.49595"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>5° CASO</p>
-<p>Si analizza come quinto caso la situazione con la matrice base a cui
-vengono modificate cinque righe prese casualmente con valori compresi
-tra 0 e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gNTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBjaW5xdWUgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpXG4jIGNvbXByZXNpIHRyYSAwIGUgMS5cblxuIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxucHJpbnQobWF0cmljZV9yY3JfNSlcbmBgYCJ9 -->
-<pre class="r"><code>
-# CASO 5: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, cinque righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
-
-# Visualizzazione della matrice
-print(matrice_rcr_5)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICAgIFssNF0gICAgICAgWyw1XVxuIFsxLF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFsyLF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFszLF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwMFxuIFs0LF0gMC40NDIxNzU3IDAuNDIwMzc1MSAwLjc2MDcyNTYgMC40NDQzMTYxOTcgMC4xMjU3Njk0OFxuIFs1LF0gMC45NTA0NDY5IDAuNDkyODQ3NyAwLjc2ODI0MzUgMC44MzMxMjI1MzcgMC4xNTkyMjUxM1xuIFs2LF0gMC40NDUyMjA0IDAuODU2MjU3OCAwLjkzMDk1NDkgMC44NDA4NjczMDQgMC4wODE2Nzc2N1xuIFs3LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwMDAgMS4wMDAwMDAwMFxuIFs4LF0gMC4yNjgxOTMwIDAuNjY1ODk1MCAwLjY0MjIzNjcgMC4wMDM5NDQ3MjIgMC42NzI3NzgzN1xuIFs5LF0gMC41NjIwMjIxIDAuNDY0NTg3MSAwLjc5NDY5MDUgMC41NzE0ODIzNjQgMC40ODE4NDE5NFxuWzEwLF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwMDAgMS4wMDAwMDAwMFxuIn0= -->
-<pre><code>           [,1]      [,2]      [,3]        [,4]       [,5]
- [1,] 0.0000000 0.0000000 0.0000000 0.000000000 0.00000000
- [2,] 0.0000000 0.0000000 0.0000000 0.000000000 0.00000000
- [3,] 0.0000000 0.0000000 0.0000000 0.000000000 0.00000000
- [4,] 0.4421757 0.4203751 0.7607256 0.444316197 0.12576948
- [5,] 0.9504469 0.4928477 0.7682435 0.833122537 0.15922513
- [6,] 0.4452204 0.8562578 0.9309549 0.840867304 0.08167767
- [7,] 1.0000000 1.0000000 1.0000000 1.000000000 1.00000000
- [8,] 0.2681930 0.6658950 0.6422367 0.003944722 0.67277837
- [9,] 0.5620221 0.4645871 0.7946905 0.571482364 0.48184194
-[10,] 1.0000000 1.0000000 1.0000000 1.000000000 1.00000000</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF81IDwtIENILklEWChtYXRyaWNlX3Jjcl81LCAyKVxuY2hfNVxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_5 &lt;- CH.IDX(matrice_rcr_5, 2)
-ch_5</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlF6NHJDTUJER3g5aDJhV0JGOE9vajJJSjQyZVBDTHVKWkZMekdOcXVsM2FTMDhjOEQrQjRlUGZpTzZpUW1naW0wK2VhYi9LWXpNLzlkVGVpS0FrQVhnZ0MvSVVvSWw0dHA4Z1VRRUF3NkVFQ3N6eU9tQnlpMDJkUEdON3llWnp3YVhxNm5NL1hBVUxCLzNxTG9HOWhXSzYwZ1B6UHZmdHpJUStxWVQ1TXc3M3ZSckdLdEsrcE1talBGMHI4R1dZeHVIdkloYTFWSWdSRFJZMFFlM0drOG83OFR1b3M4eWJZN1VTYmpzWmZ2MW1LamYybzdoUGR1WDVvODJ5QjNpMGNXajdqWUZJSzdlU3EyNXBXcm5QTzlsVDFjaHRsRldqZUZVRzVRZE50VVNjVWNRak5aT2NlTURyY0hLc1ZPTk53QkFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"14.05597"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>6° CASO</p>
-<p>Si analizza come sesto caso la situazione con la matrice base a cui
-vengono modificate sei righe prese casualmente con valori compresi tra 0
-e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gNjogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBzZWkgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpXG4jIGNvbXByZXNpIHRyYSAwIGUgMS5cblxuIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZVxucHJpbnQobWF0cmljZV9yY3JfNilcbmBgYCJ9 -->
-<pre class="r"><code>
-# CASO 6: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, sei righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
-
-# Visualizzazione della matrice
-print(matrice_rcr_6)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgICBbLDJdICAgICAgWywzXSAgICAgIFssNF0gICAgICBbLDVdXG4gWzEsXSAwLjAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDBcbiBbMixdIDAuNzkwNDc5OCAwLjAwNDk3NjYzNSAwLjA3ODgyOTIgMC4zNTIyOTMxIDAuMTk4ODczOFxuIFszLF0gMC4yNDMyNjY5IDAuMTQ2ODY3Njc3IDAuMzg0NjYyMSAwLjQzMDE1NjEgMC4xNjU0OTIzXG4gWzQsXSAwLjMyNTU5MzggMC43ODM2MzQ0NzEgMC4zNjUwMjgzIDAuOTMxMDIxOCAwLjYzOTAxMzhcbiBbNSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMFxuIFs2LF0gMC41NTA3NDE5IDAuNjgwNTI5MTIxIDAuNTI4MDk2OSAwLjk1ODIzODAgMC40NTcwMTM3XG4gWzcsXSAwLjM2NDc1NzggMC4wNzY3Mzc3NzkgMC42NTMyODg3IDAuNzMxMzI4NCAwLjI5MjQ1NDhcbiBbOCxdIDAuMTY0NDM2NiAwLjA5NzEzNjg5MyAwLjgyMjE4OTUgMC4zMTU5Mzc4IDAuMzI3OTkzMFxuIFs5LF0gMS4wMDAwMDAwIDEuMDAwMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAgMS4wMDAwMDAwXG5bMTAsXSAxLjAwMDAwMDAgMS4wMDAwMDAwMDAgMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDBcbiJ9 -->
-<pre><code>           [,1]        [,2]      [,3]      [,4]      [,5]
- [1,] 0.0000000 0.000000000 0.0000000 0.0000000 0.0000000
- [2,] 0.7904798 0.004976635 0.0788292 0.3522931 0.1988738
- [3,] 0.2432669 0.146867677 0.3846621 0.4301561 0.1654923
- [4,] 0.3255938 0.783634471 0.3650283 0.9310218 0.6390138
- [5,] 0.0000000 0.000000000 0.0000000 0.0000000 0.0000000
- [6,] 0.5507419 0.680529121 0.5280969 0.9582380 0.4570137
- [7,] 0.3647578 0.076737779 0.6532887 0.7313284 0.2924548
- [8,] 0.1644366 0.097136893 0.8221895 0.3159378 0.3279930
- [9,] 1.0000000 1.000000000 1.0000000 1.0000000 1.0000000
-[10,] 1.0000000 1.000000000 1.0000000 1.0000000 1.0000000</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF82IDwtIENILklEWChtYXRyaWNlX3Jjcl82LCAyKVxuY2hfNlxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_6 &lt;- CH.IDX(matrice_rcr_6, 2)
-ch_6</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlF6NHJDTUJER3gvVFBZa0VSOWpHa0JmWGlVVkFXeitLQ2VNdTJVVXRyVXRyVTlUVTgrYXhlMUVsTUJGTm84ODAzK1UxblpyWFlUS0pOQkFBZStENStBNVFRL0s1LzRpbUFUekRvZ0E5ZGRaNHgvWTFDbVgxbHpPRDl2T0xoWTN1NTNsb0hERGc5c2diRlFNT21XbUVFbVMrZCs5MWEvQ2VXNmVtRWZqK0xwaVZ0YkZGclJobVZOTm5WeUdKMGQ1QXZVY2xjY0lTSUdpTjA0RTd0R0lPV3F5NnlPRDIwdkloSFl5ZnZWWHl2Zm1vNmhNOXUzNXE4MmlBUGc0Y0dEeG5mNTV6WmVVcjZ4MHBiT1dNbkkvdTRETDJMcEtwekx1Mmc2RGFKRkpKYUpFcEZhUjA5T3R5ZlhacFpWdHdCQUFBPSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"13.99874"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>7° CASO</p>
-<p>Si analizza come settimo caso la situazione con la matrice base a cui
-vengono modificate sette righe prese casualmente con valori compresi tra
-0 e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gNzogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBzZXR0ZSByaWdoZSBzY2VsdGUgY2FzdWFsbWVudGUgdmVuZ29ubyBzb3N0aXR1aXRlIGNvbiB2YWxvcmlcbiMgY29tcHJlc2kgdHJhIDAgZSAxLlxuXG4jIFZpc3VhbGl6emF6aW9uZSBkZWxsYSBtYXRyaWNlXG5wcmludChtYXRyaWNlX3Jjcl83KVxuYGBgIn0= -->
-<pre class="r"><code>
-# CASO 7: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, sette righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
-
-# Visualizzazione della matrice
-print(matrice_rcr_7)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICAgIFssNF0gICAgICBbLDVdXG4gWzEsXSAwLjYwNDE1NzkgMC4xNjI0NzY3IDAuNjU3MDc1OSAwLjAwMzgxNDQ0NCAwLjgyMDU3NjJcbiBbMixdIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMFxuIFszLF0gMC4wMDAwMDAwIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMDAgMC4wMDAwMDAwXG4gWzQsXSAwLjI5MDk2MjAgMC43MDI2MzgzIDAuMjQyOTA2OCAwLjg2MTE3ODgxNyAwLjc4NDE0ODNcbiBbNSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMFxuIFs2LF0gMC41ODgwMjYxIDAuNjA0NDcxNCAwLjEwNzIyMzkgMC45OTE2NjQ4NTMgMC40MzMyMTk4XG4gWzcsXSAwLjc1MjkxNzIgMC41MDY5NTUxIDAuOTg0MTU3NCAwLjU5MDIyOTkxNyAwLjUyMDg1NjhcbiBbOCxdIDAuOTg3NjMwMSAwLjk0NDc4NjMgMC40OTE4MzYzIDAuOTQxMDU4MDUxIDAuNzc5MzczNVxuIFs5LF0gMC40ODE4Njg2IDAuODM3MjYyOCAwLjI3OTU3ODYgMC41OTk0NTk3NzggMC4zODUyMzA4XG5bMTAsXSAwLjE0NjM0NjcgMC4xNjIyMDIwIDAuNDQ3ODA1NSAwLjIxNTI1ODI3NiAwLjgyNTc0NjJcbiJ9 -->
-<pre><code>           [,1]      [,2]      [,3]        [,4]      [,5]
- [1,] 0.6041579 0.1624767 0.6570759 0.003814444 0.8205762
- [2,] 0.0000000 0.0000000 0.0000000 0.000000000 0.0000000
- [3,] 0.0000000 0.0000000 0.0000000 0.000000000 0.0000000
- [4,] 0.2909620 0.7026383 0.2429068 0.861178817 0.7841483
- [5,] 0.0000000 0.0000000 0.0000000 0.000000000 0.0000000
- [6,] 0.5880261 0.6044714 0.1072239 0.991664853 0.4332198
- [7,] 0.7529172 0.5069551 0.9841574 0.590229917 0.5208568
- [8,] 0.9876301 0.9447863 0.4918363 0.941058051 0.7793735
- [9,] 0.4818686 0.8372628 0.2795786 0.599459778 0.3852308
-[10,] 0.1463467 0.1622020 0.4478055 0.215258276 0.8257462</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF83IDwtIENILklEWChtYXRyaWNlX3Jjcl83LCAyKVxuY2hfN1xuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_7 &lt;- CH.IDX(matrice_rcr_7, 2)
-ch_7</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlFUUXJDTUJDRng5aFdMQ2lDVjNEYmduVGpVbERFdFNpNGpXM1VZazFLRzM5dTRjN2J1UFZZNmlRbWdpbTBlZk1tMzNSbUZ0TjFFcTVEQUdpQzUrSFhSd24rYWptTFJnQWV3YUFCSHJUVmVjVjBINFV5dThvWXcrLzV4b1A3STdrOVd3N29jM3BrTllxZWhrMjFneEZrTW5mdXR5dHhpUzNUMFFuOS9oZE5DMXJib3RZTU15cHB2SzJReGVqbElDMVJ5bHh3aElnYUkzRGdSdVVZdlJOWFhXUlJ1ai94UXpSTW5IeXo1RHYxVTlNaC9IZjcwK1RiQm5rYlBEQjR3UGd1NTh6T1U5QU5LMnpsakoyTjdPSXk5Qzdpc3NxNXRJT2lXOGRTU0dxUk1CV0ZkZlRvOFBvQStocWhNOXdCQUFBPSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"10.29441"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>8° CASO</p>
-<p>Si analizza come ottavo caso la situazione con la matrice base a cui
-vengono modificate otto righe prese casualmente con valori compresi tra
-0 e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gODogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBvdHRvIHJpZ2hlIHNjZWx0ZSBjYXN1YWxtZW50ZSB2ZW5nb25vIHNvc3RpdHVpdGUgY29uIHZhbG9yaVxuIyBjb21wcmVzaSB0cmEgMCBlIDEuXG5cbiMgVmlzdWFsaXp6YXppb25lIGRlbGxhIG1hdHJpY2VcbnByaW50KG1hdHJpY2VfcmNyXzgpXG5gYGAifQ== -->
-<pre class="r"><code>
-# CASO 8: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, otto righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
-
-# Visualizzazione della matrice
-print(matrice_rcr_8)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgICBbLDNdICAgICAgIFssNF0gICAgICBbLDVdXG4gWzEsXSAwLjg3ODY5OTMgMC4zODM2MDE3IDAuMDE0MDUxOTMgMC42NzYxMDM5OSAwLjM1Njg4MzRcbiBbMixdIDAuOTYwOTUyNiAwLjgwNTUzMTggMC45MjE4MjQ4MCAwLjA5MTQwODkyIDAuNjkzMTA1N1xuIFszLF0gMC4yMjUwMzMwIDAuNzc0OTExMCAwLjY3NTcxNzAxIDAuNTEyMjQ2ODUgMC4yMzM5ODUwXG4gWzQsXSAwLjMxMDcyNDcgMC44NjU2NjE2IDAuODI2NjQ3OTAgMC4yMjM0NzQ3MiAwLjg5ODIyMzBcbiBbNSxdIDAuMDAwMDAwMCAwLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMFxuIFs2LF0gMS4wMDAwMDAwIDEuMDAwMDAwMCAxLjAwMDAwMDAwIDEuMDAwMDAwMDAgMS4wMDAwMDAwXG4gWzcsXSAwLjM2NTk4MzUgMC43NjExMjY0IDAuNzQ3MDEyODggMC40Nzc3NzQ4NiAwLjI2NTc5OTFcbiBbOCxdIDAuNzY1NjQwOCAwLjY2MzczMzAgMC42MzY2MjU3NiAwLjY5NDc4NTk5IDAuNjAxOTEyOVxuIFs5LF0gMC4zMDY5MzgwIDAuNjcyOTQ4MyAwLjAxMTE0MDU5IDAuMDEzMzUzNzkgMC44NDEyMTAzXG5bMTAsXSAwLjc4NDM1NjcgMC42NjA1OTEzIDAuNDgxNjM5NDAgMC4xMDk4MTM4NSAwLjI1MjM2MDVcbiJ9 -->
-<pre><code>           [,1]      [,2]       [,3]       [,4]      [,5]
- [1,] 0.8786993 0.3836017 0.01405193 0.67610399 0.3568834
- [2,] 0.9609526 0.8055318 0.92182480 0.09140892 0.6931057
- [3,] 0.2250330 0.7749110 0.67571701 0.51224685 0.2339850
- [4,] 0.3107247 0.8656616 0.82664790 0.22347472 0.8982230
- [5,] 0.0000000 0.0000000 0.00000000 0.00000000 0.0000000
- [6,] 1.0000000 1.0000000 1.00000000 1.00000000 1.0000000
- [7,] 0.3659835 0.7611264 0.74701288 0.47777486 0.2657991
- [8,] 0.7656408 0.6637330 0.63662576 0.69478599 0.6019129
- [9,] 0.3069380 0.6729483 0.01114059 0.01335379 0.8412103
-[10,] 0.7843567 0.6605913 0.48163940 0.10981385 0.2523605</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF84IDwtIENILklEWChtYXRyaWNlX3Jjcl84LCAyKVxuY2hfOFxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_8 &lt;- CH.IDX(matrice_rcr_8, 2)
-ch_8</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlFYNHJDTUJER3g5aFdMQ2d1Z3Jkb1FmVEJGMEhRWFh4ZUZIeU5iYXlsTlNsdC9IT09QY3ZleXh1NE80bUpZQXB0dnZrbXYrbk1mSzkyazNBWEFrQWJQQSsvUGtyd3Q1dXZhQWJnRVF4YTRFRlhuVGRNRDFFb3M2K01CYnllWi93eCt2MzV2TThkME9mMHhCb1VBdzJiYW9VUlpMbDI3bmRyY1kwdDA5TUovYjRYVFVyYTJLTFdERk1xYVh5b2tjWG80U0FkVWNsY2NJU0lHaU53NEZidEdJTXpWMTJrVVhJODh5SWFUNTE4dStLWitxbnBFTjY3ZldueWJJUDhHVHd3ZU1CNGxuTm01eW5wbnBXMmNzb3VSdlp4R1hvWGNWWG5YTnBCMFcxaUtTUzFTSmlJMGpwNmRIajhBMVhpVDFMY0FRQUEifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"4.272173"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>9° CASO</p>
-<p>Si analizza come nono caso la situazione con la matrice base a cui
-vengono modificate nove righe prese casualmente con valori compresi tra
-0 e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gOTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBub3ZlIHJpZ2hlIHNjZWx0ZSBjYXN1YWxtZW50ZSB2ZW5nb25vIHNvc3RpdHVpdGUgY29uIHZhbG9yaVxuIyBjb21wcmVzaSB0cmEgMCBlIDEuXG5cbiMgVmlzdWFsaXp6YXppb25lIGRlbGxhIG1hdHJpY2VcbnByaW50KG1hdHJpY2VfcmNyXzkpXG5gYGAifQ== -->
-<pre class="r"><code>
-# CASO 9: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, nove righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
-
-# Visualizzazione della matrice
-print(matrice_rcr_9)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgICBbLDJdICAgICAgIFssM10gICAgICBbLDRdICAgICAgICBbLDVdXG4gWzEsXSAwLjYzNDg5MjQgMC4xMzk4ODYwNjkgMC4wODM0NjY2NCAwLjg0NDk1NTYgMC45OTA4NDM5MjRcbiBbMixdIDAuNzA5NjYwNSAwLjI4MDM4NjE3MSAwLjYzNzk0NjYwIDAuMzAyMTQ4MCAwLjk2Njg5MTc5NlxuIFszLF0gMC4wMDAwMDAwIDAuMDAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMDAwMDAwIDAuMDAwMDAwMDAwXG4gWzQsXSAwLjM2ODI0NjIgMC4xNjM1ODg3NDAgMC43NzYwODI2NyAwLjg4NTMyNjQgMC42ODgzOTk0ODRcbiBbNSxdIDAuNzAwOTA1NSAwLjAwODI4MDgyOSAwLjUzNDk0OTg5IDAuNjg4NzgyMiAwLjQ2NTg0MzkyNlxuIFs2LF0gMC43NjAxNDk2IDAuNTMwMzc5MzU0IDAuNjc0MDk5NjIgMC41MDM0MTE4IDAuMjI1MDA3MjE3XG4gWzcsXSAwLjI5NzE0ODYgMC4xODM1NDI4NzYgMC4wMTA2MjgzMyAwLjUzOTQ2NTIgMC40NDUzNjk0MDFcbiBbOCxdIDAuODM2MDQ4NSAwLjc2MzM2NzI1OCAwLjgxNTk3NzIyIDAuNzgxNTc2OCAwLjE4ODcxMDkzNFxuIFs5LF0gMC44MjM2MjI5IDAuNjA2NzI1MzA0IDAuOTAzNjE3OTYgMC43Mzg3NTIzIDAuMDA2ODA0MjYzXG5bMTAsXSAwLjMxNTY0OTYgMC4yNTk5MjMyODQgMC42MDc1NTcxNiAwLjYwNDY3MzEgMC45ODU0NDYzMDVcbiJ9 -->
-<pre><code>           [,1]        [,2]       [,3]      [,4]        [,5]
- [1,] 0.6348924 0.139886069 0.08346664 0.8449556 0.990843924
- [2,] 0.7096605 0.280386171 0.63794660 0.3021480 0.966891796
- [3,] 0.0000000 0.000000000 0.00000000 0.0000000 0.000000000
- [4,] 0.3682462 0.163588740 0.77608267 0.8853264 0.688399484
- [5,] 0.7009055 0.008280829 0.53494989 0.6887822 0.465843926
- [6,] 0.7601496 0.530379354 0.67409962 0.5034118 0.225007217
- [7,] 0.2971486 0.183542876 0.01062833 0.5394652 0.445369401
- [8,] 0.8360485 0.763367258 0.81597722 0.7815768 0.188710934
- [9,] 0.8236229 0.606725304 0.90361796 0.7387523 0.006804263
-[10,] 0.3156496 0.259923284 0.60755716 0.6046731 0.985446305</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF85IDwtIENILklEWChtYXRyaWNlX3Jjcl85LCAyKVxuY2hfOVxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_9 &lt;- CH.IDX(matrice_rcr_9, 2)
-ch_9</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd2tBR1NKQVBKT0RBQUFjUXZralAxejIxayt2Uk5MTG1KZWFtRmdNWkFtRE5VTk95b1F3bVp3ODA5WnhGK2VWNk1EMjhZQWt3UmpVME9TZXhHR1lvVEpBckpiRWtVUyt0Q0tnWHlQdUhwb1U5djZBa016OFBxSWtKNUEwMk5NMk1SV2dDQXFWNUlGZWs2Q1pubE9abDZ4cWFvc2t6RitTbGd5eUZ1cEFCMWJWd05oUEVHVXovb2RyWm9OclpVdlBTTS9OU1lmN0pTVXhLellHWm5KSmFCbVh5QVFNREhCWjZCVVdaZVNVd2p3SkZpL1ZLOGtzU1lWcTRrdk56WUNKZ3J6UDhBd0Q4dXlwRzNBRUFBQT09In0= -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"5.137656"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>10° CASO</p>
-<p>Si analizza come decimo caso la situazione con la matrice base a cui
-vengono modificate tutte le righe con valori compresi tra 0 e 1.</p>
-<p>Il valore dell’indice di Calinski-Harabasz ci aspettiamo che sia
-inferiore al caso precedente. Tenedo conto che dipende anche dalle righe
-che vengono sostituite e dai valori che le compongono.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENBU08gOTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBcbiMgY29tcG9zdGEgZGkgc29saSAxLCBub3ZlIHJpZ2hlIHNjZWx0ZSBjYXN1YWxtZW50ZSB2ZW5nb25vIHNvc3RpdHVpdGUgY29uIHZhbG9yaVxuIyBjb21wcmVzaSB0cmEgMCBlIDEuXG5cbiMgVmlzdWFsaXp6YXppb25lIGRlbGxhIG1hdHJpY2VcbnByaW50KG1hdHJpY2VfcmNyXzEwKVxuYGBgIn0= -->
-<pre class="r"><code>
-# CASO 9: prima metà delle righe composta di soli 0 e la seconda metà 
-# composta di soli 1, nove righe scelte casualmente vengono sostituite con valori
-# compresi tra 0 e 1.
-
-# Visualizzazione della matrice
-print(matrice_rcr_10)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgIFssMl0gICAgICAgWywzXSAgICAgICBbLDRdICAgICAgIFssNV1cbiBbMSxdIDAuNTI4NTkyNiAwLjE0MzQ5NzkxIDAuMDY5NzYwMzcgMC42NzYwMDk3MiAwLjE5OTc5NDg5XG4gWzIsXSAwLjAzMzQ2MjMgMC41Mjk0NTQ0MyAwLjYzMzA1MDI4IDAuMDQ2NTIxODMgMC45NTIwOTMzNFxuIFszLF0gMC41MTI3MTM3IDAuNTcyNDU1MjUgMC43NDAyODA4NiAwLjI5NTU4MTM4IDAuNzI5MDAwODRcbiBbNCxdIDAuNDk5NjY0NyAwLjkyNTg0Njc4IDAuNDgwNzY4NjQgMC4zMTUwMzMzNSAwLjA3NDE1ODY3XG4gWzUsXSAwLjU0NDk1MDYgMC4yOTgxMzg4MSAwLjQyMTc4NzY0IDAuNTUwODE0OTQgMC4xMzg0NDQ2MlxuIFs2LF0gMC4yOTI3NzA0IDAuMTIwNzc0MDIgMC42MDI3NTg5NyAwLjk2NzE4Mzc2IDAuOTA3MTkwNDhcbiBbNyxdIDAuODk0NzAzOSAwLjA5NDYxNTI4IDAuNjExNDYwNTAgMC4xOTEzMDQwMCAwLjA5NjAxNTgzXG4gWzgsXSAwLjM3NzY5MjUgMC45NzkxODA1NiAwLjY3ODAwOTYxIDAuNjk0ODEwNTQgMC43NTAyMDA5N1xuIFs5LF0gMC40NzQ2MTcwIDAuODU4NDk4NDcgMC4wOTYzMTcxNSAwLjQ2OTQ2ODYzIDAuODIxNTc5ODBcblsxMCxdIDAuNzAwNzA4NiAwLjE0MzcyNTI3IDAuNjgyODI1NzQgMC40ODYxODMwMSAwLjk0MTM1MDg5XG4ifQ== -->
-<pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]
- [1,] 0.5285926 0.14349791 0.06976037 0.67600972 0.19979489
- [2,] 0.0334623 0.52945443 0.63305028 0.04652183 0.95209334
- [3,] 0.5127137 0.57245525 0.74028086 0.29558138 0.72900084
- [4,] 0.4996647 0.92584678 0.48076864 0.31503335 0.07415867
- [5,] 0.5449506 0.29813881 0.42178764 0.55081494 0.13844462
- [6,] 0.2927704 0.12077402 0.60275897 0.96718376 0.90719048
- [7,] 0.8947039 0.09461528 0.61146050 0.19130400 0.09601583
- [8,] 0.3776925 0.97918056 0.67800961 0.69481054 0.75020097
- [9,] 0.4746170 0.85849847 0.09631715 0.46946863 0.82157980
-[10,] 0.7007086 0.14372527 0.68282574 0.48618301 0.94135089</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFhcbiMgVmFsb3JlIGF0dGVzbyAtPiAwXG5jaF8xMCA8LSBDSC5JRFgobWF0cmljZV9yY3JfMTAsIDIpXG5jaF8xMFxuYGBgIn0= -->
-<pre class="r"><code># Calcolo dell&#39;indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -&gt; 0
-ch_10 &lt;- CH.IDX(matrice_rcr_10, 2)
-ch_10</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlFUUXJDTUJDRng5aFdMQ2lpNTJoQkJIRXBLT0phRk56R05tcXhKcVdOUDF2djVXRThoR3QxRWhQQkZOcThlWk52T2pPTDZYb1Fya01BcUlQbjRkZEhDZjVxT1l0R0FCN0JvQVllTk5WNXhYUVBoVExieWhqRDcvbkczY2Y4ZUgvZUhORG45TWdxRkIwTm0yb0hJOGhrN3R4dmx1SVNXNmFsRS9yOUw1cmt0TEpGclJtbVZOSjRXeUtMMGN0QkdxS1FtZUFJRVRWRzRNQzEwakU2SjY2NlNLTmtmK0tIcUQ5MDh2V0M3OVJQVFlmdzMrMVBrMjhiNUczd3dPQUI0N3VNTXp0UFRqY3N0NVZUZGpheWpjdlF1NGlMTXVQU0RvcHVGVXNocVVYQ1JPVFcwYVBENndOcG94Q2UzQUVBQUE9PSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"4.719026"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Possiamo quindi confrontare i valori ottenuti per ogni caso
 analizzato:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIFJpZ2EgZGVpIGNhc2kgZGVsIGRhdGFmcmFtZSBwZXIgaWwgY29uZnJvbnRvIGRlaSB2YWxvcmkgZGkgQ2FsaW5za2lfSGFyYWJhc3pcbmNhc2kgPC0gYyhcIkNBU08gQkFTRVwiLCBcIjHCsCBDQVNPXCIsIFwiMsKwIENBU09cIiwgXCIzwrAgQ0FTT1wiLCBcIjTCsCBDQVNPXCIsIFwiNcKwIENBU09cIiwgXCI2wrAgQ0FTT1wiLCBcIjfCsCBDQVNPXCIsIFwiOMKwIENBU09cIiwgXCI5wrAgQ0FTT1wiLCBcIjEwwrAgQ0FTT1wiKVxuXG4jIFJpZ2EgZGVpIHZhbG9yaSBkZWwgZGF0YWZyYW1lIHBlciBpbCBjb25mcm9udG8gZGVpIHZhbG9yaSBkaSBDYWxpbnNraV9IYXJhYmFzelxudmFsb3JpIDwtIGMoY2hfYmFzZVsxLDJdLCBjaF8xWzEsMl0sIGNoXzJbMSwyXSwgY2hfM1sxLDJdLCBjaF80WzEsMl0sIGNoXzVbMSwyXSwgY2hfNlsxLDJdLCBjaF83WzEsMl0sIGNoXzhbMSwyXSwgY2hfOVsxLDJdLCBjaF8xMFsxLDJdKVxuXG4jIENyZWF6aW9uZSBlIHZpc3VhbGl6emF6aW9uZSBkYXRhZnJhbWUgcGVyIGlsIGNvbmZyb250byBkZWkgdmFsb3JpIGRpIENhbGluc2tpX0hhcmFiYXN6XG5yYmluZChjYXNpLCB2YWxvcmkpXG5gYGAifQ== -->
-<pre class="r"><code>
-# Riga dei casi del dataframe per il confronto dei valori di Calinski_Harabasz
-casi &lt;- c(&quot;CASO BASE&quot;, &quot;1° CASO&quot;, &quot;2° CASO&quot;, &quot;3° CASO&quot;, &quot;4° CASO&quot;, &quot;5° CASO&quot;, &quot;6° CASO&quot;, &quot;7° CASO&quot;, &quot;8° CASO&quot;, &quot;9° CASO&quot;, &quot;10° CASO&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxuXG4jIFZpc3VhbGl6emF6aW9uZSBkZWkgdmFsb3JpIGRpIENhbGluc2tpLUhhcmFiYXN6IHBlciBvZ25pIG1hdHJpY2VcbnByaW50KHJpc3VsdGF0aSlcblxuXG5cbiMgQ3JlYXppb25lIGRlbCBncmFmaWNvIGEgbGluZWVcbmdyYWZpY28gPC0gZ2dwbG90KGRhdGEgPSByaXN1bHRhdGksIGFlcyh4ID0gcmlzdWx0YXRpWywxXSAsIHkgPSByaXN1bHRhdGlbLDNdKSkgK1xuICBnZW9tX2xpbmUoY29sb3IgPSBcImJsdWVcIiwgc2l6ZSA9IDEpICtcbiAgdGhlbWUocGFuZWwuZ3JpZC5tYWpvciA9IGVsZW1lbnRfbGluZShjb2xvciA9IFwiZ3JleVwiKSwgIyBBZ2dpdW5nZSBsYSBncmlnbGlhIHByaW5jaXBhbGVcbiAgICAgICAgcGFuZWwuZ3JpZC5taW5vciA9IGVsZW1lbnRfYmxhbmsoKSwgIyBSaW11b3ZlIGxhIGdyaWdsaWEgc2Vjb25kYXJpYVxuICAgICAgICBwYW5lbC5iYWNrZ3JvdW5kID0gZWxlbWVudF9ibGFuaygpKSArXG4gIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSByb3VuZChzZXEobWluKHJpc3VsdGF0aSRpdGVyYXppb25lKSwgbWF4KHJpc3VsdGF0aSRpdGVyYXppb25lKSwgYnkgPSAxKSwgMSkpICtcbiAgbGFicyh0aXRsZSA9IFwiR3JhZmljbyB2YWxvcmUgQ0hcIiwgeCA9IFwiSXRlcmF6aW9uZVwiLCB5ID0gXCJWYWxvcmUgQ0hcIilcblxuIyBWaXN1YWxpenphemlvbmUgZGVsIGdyYWZpY29cbnByaW50KGdyYWZpY28pXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(ggplot2)
 
-# Riga dei valori del dataframe per il confronto dei valori di Calinski_Harabasz
-valori &lt;- c(ch_base[1,2], ch_1[1,2], ch_2[1,2], ch_3[1,2], ch_4[1,2], ch_5[1,2], ch_6[1,2], ch_7[1,2], ch_8[1,2], ch_9[1,2], ch_10[1,2])
+# Visualizzazione dei valori di Calinski-Harabasz per ogni matrice
+print(risultati)
 
-# Creazione e visualizzazione dataframe per il confronto dei valori di Calinski_Harabasz
-rbind(casi, valori)</code></pre>
+
+
+# Creazione del grafico a linee
+grafico &lt;- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) +
+  geom_line(color = &quot;blue&quot;, size = 1) +
+  theme(panel.grid.major = element_line(color = &quot;grey&quot;), # Aggiunge la griglia principale
+        panel.grid.minor = element_blank(), # Rimuove la griglia secondaria
+        panel.background = element_blank()) +
+  scale_x_continuous(breaks = round(seq(min(risultati$iterazione), max(risultati$iterazione), by = 1), 1)) +
+  labs(title = &quot;Grafico valore CH&quot;, x = &quot;Iterazione&quot;, y = &quot;Valore CH&quot;)
+
+# Visualizzazione del grafico
+print(grafico)
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgIFssMV0gICAgICAgIFssMl0gICAgICAgICAgICAgICBbLDNdICAgICAgICAgICAgICAgWyw0XSAgICAgICAgICAgICAgXG5jYXNpICAgXCJDQVNPIEJBU0VcIiBcIjHCsCBDQVNPXCIgICAgICAgICAgXCIywrAgQ0FTT1wiICAgICAgICAgIFwiM8KwIENBU09cIiAgICAgICAgIFxudmFsb3JpIFwiSW5mXCIgICAgICAgXCIxNTYuMDM0Mjk4NzQzODc2XCIgXCI0Ni41MjAzNDM5MTY4NjcyXCIgXCIxOS40MDk1ODU1MjExNjk3XCJcbiAgICAgICBbLDVdICAgICAgICAgICAgICAgWyw2XSAgICAgICAgICAgICAgWyw3XSAgICAgICAgICAgICAgIFssOF0gICAgICAgICAgICAgIFxuY2FzaSAgIFwiNMKwIENBU09cIiAgICAgICAgICBcIjXCsCBDQVNPXCIgICAgICAgICBcIjbCsCBDQVNPXCIgICAgICAgICAgXCI3wrAgQ0FTT1wiICAgICAgICAgXG52YWxvcmkgXCIxOS40OTU5NDc3ODEwMDgzXCIgXCIxNC4wNTU5NjY3MjA1MjNcIiBcIjEzLjk5ODczNzg1OTUzNjdcIiBcIjEwLjI5NDQxMjI0MjIyMjNcIlxuICAgICAgIFssOV0gICAgICAgICAgICAgICBbLDEwXSAgICAgICAgICAgICAgWywxMV0gICAgICAgICAgICAgXG5jYXNpICAgXCI4wrAgQ0FTT1wiICAgICAgICAgIFwiOcKwIENBU09cIiAgICAgICAgICBcIjEwwrAgQ0FTT1wiICAgICAgICBcbnZhbG9yaSBcIjQuMjcyMTczMjAwMTQ4MDdcIiBcIjUuMTM3NjU2MTU5NTU3ODhcIiBcIjQuNzE5MDI2MjkzNDI4MzNcIlxuIn0= -->
-<pre><code>       [,1]        [,2]               [,3]               [,4]              
-casi   &quot;CASO BASE&quot; &quot;1° CASO&quot;          &quot;2° CASO&quot;          &quot;3° CASO&quot;         
-valori &quot;Inf&quot;       &quot;156.034298743876&quot; &quot;46.5203439168672&quot; &quot;19.4095855211697&quot;
-       [,5]               [,6]              [,7]               [,8]              
-casi   &quot;4° CASO&quot;          &quot;5° CASO&quot;         &quot;6° CASO&quot;          &quot;7° CASO&quot;         
-valori &quot;19.4959477810083&quot; &quot;14.055966720523&quot; &quot;13.9987378595367&quot; &quot;10.2944122422223&quot;
-       [,9]               [,10]              [,11]             
-casi   &quot;8° CASO&quot;          &quot;9° CASO&quot;          &quot;10° CASO&quot;        
-valori &quot;4.27217320014807&quot; &quot;5.13765615955788&quot; &quot;4.71902629342833&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>verificando come in generale il valore dell’indice di
@@ -2301,7 +1874,7 @@ una situazione poco ottimale, che successivamente peggiora rapidamente
 come ben individuato dal valore dell’indice.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCmVkaXRvcl9vcHRpb25zOiANCiAgbWFya2Rvd246IA0KICAgIHdyYXA6IDcyDQotLS0NCg0KU3R1ZGlvIGRlbGxhIGZ1bnppb25lIENILklEWCwgcXVpbmRpIGRlbGxhIG1ldHJpY2EgQ2FsaW5za2ktSGFyYWJhc3oNCmltcGxlbWVudGF0YSBhbCBzdW8gaW50ZXJubywgdHJhbWl0ZSBhbmFsaXNpIGRpIGRhdGFzZXQgYXJ0aWZpY2lhbGkuDQpWaWVuZSB1dGlsaXp6YXRhIHVuYSBtYXRyaWNlIHBhcmFtZXRyaWNhIFsybiwgbl0gZG92ZSBuZWwgbm9zdHJvIGNhc28NCm49NS4gVmFsdXRpYW1vIHRyYW1pdGUgbGEgbWV0cmljYSBkaSBDYWxpbnNraS1IYXJhYmFzeiBpbCBjbHVzdGVyaW5nDQplZmZldHR1YXRvIGNvbiBsJ2FsZ29yaXRtbyBLLW1lYW5zIHBlciB1biBudW1lcm8gZGkgY2x1c3RlcnMgcGFyaSBhIDIuDQoNCkNBU08gQkFTRQ0KDQpTaSBhbmFsaXp6YSBjb21lIGNhc28gYmFzZSBkYSBjdWkgcGFydGlyZWxhIHNpdHVhemlvbmUgY29uIGxhIHByaW1hIG1ldMOgDQpkZWxsZSByaWdoZSBjb21wb3N0YSBkaSBzb2xpIDAgZSBsYSBzZWNvbmRhIG1ldMOgIGNvbXBvc3RhIGRpIHNvbGkgMS4NClF1ZXN0YSBzYXLDoCBsYSBtYXRyaWNlIGJhc2UgZGEgY3VpIHBhcnRpcmUgZSBkYSBtb2RpZmljYXJlLg0KDQpJbCB2YWxvcmUgYXR0ZXNvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IHNhcsOgIC1cPiAkaW5mJC4NCg0KYGBge3J9DQpsaWJyYXJ5KFVuaXZlcnNhbENWSSkNCg0KbG9hZCgifi9DYWxpbnNraV9IYXJhYmFzel9UaGVzaXMvRGF0YS9EYXRhc2V0X0FydGlmaWNpYWxlLlJEYXRhIikNCg0KIyBDQVNPIEJBU0U6IHByaW1hIG1ldMOgIGRlbGxlIHJpZ2hlIGNvbXBvc3RhIGRpIHNvbGkgMCBlIGxhIHNlY29uZGEgbWV0w6AgDQojIGNvbXBvc3RhIGRpIHNvbGkgMS4NCg0KIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KcHJpbnQobWF0cmljZSkNCg0KIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiBpbmYNCmNoX2Jhc2UgPC1DSC5JRFgobWF0cmljZSwgMikNCmNoX2Jhc2UNCmBgYA0KDQoxwrAgQ0FTTw0KDQpTaSBhbmFsaXp6YSBjb21lIHByaW1vIGNhc28gbGEgc2l0dWF6aW9uZSBjb24gbGEgbWF0cmljZSBiYXNlIGEgY3VpDQp2aWVuZSBtb2RpZmljYXRhIHVuYSByaWdhIHByZXNhIGNhc3VhbG1lbnRlIGNvbiB2YWxvcmkgY29tcHJlc2kgdHJhIDAgZQ0KMS4NCg0KSWwgdmFsb3JlIGF0dGVzbyBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBzYXLDoCBzaWN1cmFtZW50ZQ0KaW5mZXJpb3JlIGFsIGNhc28gcHJlY2VkZW50ZSBlIGRpcGVuZGVyw6AgYW5jaGUgZGFsbGEgcmlnYSBjaGUgdmllbmUNCnNvc3RpdHVpdGEgZSBkYWkgdmFsb3JpIGNoZSBsYSBjb21wb25nb25vLiBDaSBhc3BldHRpYW1vIHF1aW5kaSB1bg0KdmFsb3JlIGNoZSB0ZW5kZXLDoCBhZCBlc3NlcmUgcGnDuSB2aWNpbm8gYSAkMCQgY2hlIGEgJGluZiQuDQoNCmBgYHtyfQ0KDQojIENBU08gMTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCANCiMgY29tcG9zdGEgZGkgc29saSAxLCB1bmEgcmlnYSBzY2VsdGEgY2FzdWFsbWVudGUgdmllbmUgc29zdGl0dWl0YSBjb24gdmFsb3JpDQojIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KcHJpbnQobWF0cmljZV9yY3JfMSkNCg0KIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiAwDQpjaF8xIDwtIENILklEWChtYXRyaWNlX3Jjcl8xLCAyKQ0KY2hfMQ0KYGBgDQoNCjLCsCBDQVNPDQoNClNpIGFuYWxpenphIGNvbWUgc2Vjb25kbyBjYXNvIGxhIHNpdHVhemlvbmUgY29uIGxhIG1hdHJpY2UgYmFzZSBhIGN1aQ0KdmVuZ29ubyBtb2RpZmljYXRlIGR1ZSByaWdoZSBwcmVzZSBjYXN1YWxtZW50ZSBjb24gdmFsb3JpIGNvbXByZXNpIHRyYSAwDQplIDEuDQoNCklsIHZhbG9yZSBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjaSBhc3BldHRpYW1vIGNoZSBzaWENCmluZmVyaW9yZSBhbCBjYXNvIHByZWNlZGVudGUuIFRlbmVkbyBjb250byBjaGUgZGlwZW5kZSBhbmNoZSBkYWxsZSByaWdoZQ0KY2hlIHZlbmdvbm8gc29zdGl0dWl0ZSBlIGRhaSB2YWxvcmkgY2hlIGxlIGNvbXBvbmdvbm8uDQoNCmBgYHtyfQ0KDQojIENBU08gMjogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCANCiMgY29tcG9zdGEgZGkgc29saSAxLCBkdWUgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpDQojIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KcHJpbnQobWF0cmljZV9yY3JfMikNCg0KIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiAwDQpjaF8yIDwtIENILklEWChtYXRyaWNlX3Jjcl8yLCAyKQ0KY2hfMg0KYGBgDQoNCjPCsCBDQVNPDQoNClNpIGFuYWxpenphIGNvbWUgdGVyem8gY2FzbyBsYSBzaXR1YXppb25lIGNvbiBsYSBtYXRyaWNlIGJhc2UgYSBjdWkNCnZlbmdvbm8gbW9kaWZpY2F0ZSB0cmUgcmlnaGUgcHJlc2UgY2FzdWFsbWVudGUgY29uIHZhbG9yaSBjb21wcmVzaSB0cmEgMA0KZSAxLg0KDQpJbCB2YWxvcmUgZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY2kgYXNwZXR0aWFtbyBjaGUgc2lhDQppbmZlcmlvcmUgYWwgY2FzbyBwcmVjZWRlbnRlLiBUZW5lZG8gY29udG8gY2hlIGRpcGVuZGUgYW5jaGUgZGFsbGUgcmlnaGUNCmNoZSB2ZW5nb25vIHNvc3RpdHVpdGUgZSBkYWkgdmFsb3JpIGNoZSBsZSBjb21wb25nb25vLiBBIHF1ZXN0byBwdW50byBpbA0KdmFsb3JlIGF0dGVzbyBzYXLDoCBnacOgIG1vbHRvIHZpY2lubyBhICQwJC4NCg0KYGBge3J9DQoNCiMgQ0FTTyAzOiBwcmltYSBtZXTDoCBkZWxsZSByaWdoZSBjb21wb3N0YSBkaSBzb2xpIDAgZSBsYSBzZWNvbmRhIG1ldMOgIA0KIyBjb21wb3N0YSBkaSBzb2xpIDEsIHRyZSByaWdoZSBzY2VsdGUgY2FzdWFsbWVudGUgdmVuZ29ubyBzb3N0aXR1aXRlIGNvbiB2YWxvcmkNCiMgY29tcHJlc2kgdHJhIDAgZSAxLg0KDQojIFZpc3VhbGl6emF6aW9uZSBkZWxsYSBtYXRyaWNlDQpwcmludChtYXRyaWNlX3Jjcl8zKQ0KDQojIENhbGNvbG8gZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KIyBWYWxvcmUgYXR0ZXNvIC0+IDANCmNoXzMgPC0gQ0guSURYKG1hdHJpY2VfcmNyXzMsIDIpDQpjaF8zDQpgYGANCg0KNMKwIENBU08NCg0KU2kgYW5hbGl6emEgY29tZSBxdWFydG8gY2FzbyBsYSBzaXR1YXppb25lIGNvbiBsYSBtYXRyaWNlIGJhc2UgYSBjdWkNCnZlbmdvbm8gbW9kaWZpY2F0ZSBxdWF0dHJvIHJpZ2hlIHByZXNlIGNhc3VhbG1lbnRlIGNvbiB2YWxvcmkgY29tcHJlc2kNCnRyYSAwIGUgMS4NCg0KSWwgdmFsb3JlIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNpIGFzcGV0dGlhbW8gY2hlIHNpYQ0KaW5mZXJpb3JlIGFsIGNhc28gcHJlY2VkZW50ZS4gVGVuZWRvIGNvbnRvIGNoZSBkaXBlbmRlIGFuY2hlIGRhbGxlIHJpZ2hlDQpjaGUgdmVuZ29ubyBzb3N0aXR1aXRlIGUgZGFpIHZhbG9yaSBjaGUgbGUgY29tcG9uZ29uby4NCg0KYGBge3J9DQoNCiMgQ0FTTyA0OiBwcmltYSBtZXTDoCBkZWxsZSByaWdoZSBjb21wb3N0YSBkaSBzb2xpIDAgZSBsYSBzZWNvbmRhIG1ldMOgIA0KIyBjb21wb3N0YSBkaSBzb2xpIDEsIHF1YXR0cm8gcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpDQojIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KcHJpbnQobWF0cmljZV9yY3JfNCkNCg0KIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiAwDQpjaF80IDwtIENILklEWChtYXRyaWNlX3Jjcl80LCAyKQ0KY2hfNA0KYGBgDQoNCjXCsCBDQVNPDQoNClNpIGFuYWxpenphIGNvbWUgcXVpbnRvIGNhc28gbGEgc2l0dWF6aW9uZSBjb24gbGEgbWF0cmljZSBiYXNlIGEgY3VpDQp2ZW5nb25vIG1vZGlmaWNhdGUgY2lucXVlIHJpZ2hlIHByZXNlIGNhc3VhbG1lbnRlIGNvbiB2YWxvcmkgY29tcHJlc2kNCnRyYSAwIGUgMS4NCg0KSWwgdmFsb3JlIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNpIGFzcGV0dGlhbW8gY2hlIHNpYQ0KaW5mZXJpb3JlIGFsIGNhc28gcHJlY2VkZW50ZS4gVGVuZWRvIGNvbnRvIGNoZSBkaXBlbmRlIGFuY2hlIGRhbGxlIHJpZ2hlDQpjaGUgdmVuZ29ubyBzb3N0aXR1aXRlIGUgZGFpIHZhbG9yaSBjaGUgbGUgY29tcG9uZ29uby4NCg0KYGBge3J9DQoNCiMgQ0FTTyA1OiBwcmltYSBtZXTDoCBkZWxsZSByaWdoZSBjb21wb3N0YSBkaSBzb2xpIDAgZSBsYSBzZWNvbmRhIG1ldMOgIA0KIyBjb21wb3N0YSBkaSBzb2xpIDEsIGNpbnF1ZSByaWdoZSBzY2VsdGUgY2FzdWFsbWVudGUgdmVuZ29ubyBzb3N0aXR1aXRlIGNvbiB2YWxvcmkNCiMgY29tcHJlc2kgdHJhIDAgZSAxLg0KDQojIFZpc3VhbGl6emF6aW9uZSBkZWxsYSBtYXRyaWNlDQpwcmludChtYXRyaWNlX3Jjcl81KQ0KDQojIENhbGNvbG8gZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KIyBWYWxvcmUgYXR0ZXNvIC0+IDANCmNoXzUgPC0gQ0guSURYKG1hdHJpY2VfcmNyXzUsIDIpDQpjaF81DQpgYGANCg0KNsKwIENBU08NCg0KU2kgYW5hbGl6emEgY29tZSBzZXN0byBjYXNvIGxhIHNpdHVhemlvbmUgY29uIGxhIG1hdHJpY2UgYmFzZSBhIGN1aQ0KdmVuZ29ubyBtb2RpZmljYXRlIHNlaSByaWdoZSBwcmVzZSBjYXN1YWxtZW50ZSBjb24gdmFsb3JpIGNvbXByZXNpIHRyYSAwDQplIDEuDQoNCklsIHZhbG9yZSBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjaSBhc3BldHRpYW1vIGNoZSBzaWENCmluZmVyaW9yZSBhbCBjYXNvIHByZWNlZGVudGUuIFRlbmVkbyBjb250byBjaGUgZGlwZW5kZSBhbmNoZSBkYWxsZSByaWdoZQ0KY2hlIHZlbmdvbm8gc29zdGl0dWl0ZSBlIGRhaSB2YWxvcmkgY2hlIGxlIGNvbXBvbmdvbm8uDQoNCmBgYHtyfQ0KDQojIENBU08gNjogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCANCiMgY29tcG9zdGEgZGkgc29saSAxLCBzZWkgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpDQojIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KcHJpbnQobWF0cmljZV9yY3JfNikNCg0KIyBDYWxjb2xvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNvbiBDSC5JRFgNCiMgVmFsb3JlIGF0dGVzbyAtPiAwDQpjaF82IDwtIENILklEWChtYXRyaWNlX3Jjcl82LCAyKQ0KY2hfNg0KYGBgDQoNCjfCsCBDQVNPDQoNClNpIGFuYWxpenphIGNvbWUgc2V0dGltbyBjYXNvIGxhIHNpdHVhemlvbmUgY29uIGxhIG1hdHJpY2UgYmFzZSBhIGN1aQ0KdmVuZ29ubyBtb2RpZmljYXRlIHNldHRlIHJpZ2hlIHByZXNlIGNhc3VhbG1lbnRlIGNvbiB2YWxvcmkgY29tcHJlc2kgdHJhDQowIGUgMS4NCg0KSWwgdmFsb3JlIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNpIGFzcGV0dGlhbW8gY2hlIHNpYQ0KaW5mZXJpb3JlIGFsIGNhc28gcHJlY2VkZW50ZS4gVGVuZWRvIGNvbnRvIGNoZSBkaXBlbmRlIGFuY2hlIGRhbGxlIHJpZ2hlDQpjaGUgdmVuZ29ubyBzb3N0aXR1aXRlIGUgZGFpIHZhbG9yaSBjaGUgbGUgY29tcG9uZ29uby4NCg0KYGBge3J9DQoNCiMgQ0FTTyA3OiBwcmltYSBtZXTDoCBkZWxsZSByaWdoZSBjb21wb3N0YSBkaSBzb2xpIDAgZSBsYSBzZWNvbmRhIG1ldMOgIA0KIyBjb21wb3N0YSBkaSBzb2xpIDEsIHNldHRlIHJpZ2hlIHNjZWx0ZSBjYXN1YWxtZW50ZSB2ZW5nb25vIHNvc3RpdHVpdGUgY29uIHZhbG9yaQ0KIyBjb21wcmVzaSB0cmEgMCBlIDEuDQoNCiMgVmlzdWFsaXp6YXppb25lIGRlbGxhIG1hdHJpY2UNCnByaW50KG1hdHJpY2VfcmNyXzcpDQoNCiMgQ2FsY29sbyBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjb24gQ0guSURYDQojIFZhbG9yZSBhdHRlc28gLT4gMA0KY2hfNyA8LSBDSC5JRFgobWF0cmljZV9yY3JfNywgMikNCmNoXzcNCmBgYA0KDQo4wrAgQ0FTTw0KDQpTaSBhbmFsaXp6YSBjb21lIG90dGF2byBjYXNvIGxhIHNpdHVhemlvbmUgY29uIGxhIG1hdHJpY2UgYmFzZSBhIGN1aQ0KdmVuZ29ubyBtb2RpZmljYXRlIG90dG8gcmlnaGUgcHJlc2UgY2FzdWFsbWVudGUgY29uIHZhbG9yaSBjb21wcmVzaSB0cmENCjAgZSAxLg0KDQpJbCB2YWxvcmUgZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY2kgYXNwZXR0aWFtbyBjaGUgc2lhDQppbmZlcmlvcmUgYWwgY2FzbyBwcmVjZWRlbnRlLiBUZW5lZG8gY29udG8gY2hlIGRpcGVuZGUgYW5jaGUgZGFsbGUgcmlnaGUNCmNoZSB2ZW5nb25vIHNvc3RpdHVpdGUgZSBkYWkgdmFsb3JpIGNoZSBsZSBjb21wb25nb25vLg0KDQpgYGB7cn0NCg0KIyBDQVNPIDg6IHByaW1hIG1ldMOgIGRlbGxlIHJpZ2hlIGNvbXBvc3RhIGRpIHNvbGkgMCBlIGxhIHNlY29uZGEgbWV0w6AgDQojIGNvbXBvc3RhIGRpIHNvbGkgMSwgb3R0byByaWdoZSBzY2VsdGUgY2FzdWFsbWVudGUgdmVuZ29ubyBzb3N0aXR1aXRlIGNvbiB2YWxvcmkNCiMgY29tcHJlc2kgdHJhIDAgZSAxLg0KDQojIFZpc3VhbGl6emF6aW9uZSBkZWxsYSBtYXRyaWNlDQpwcmludChtYXRyaWNlX3Jjcl84KQ0KDQojIENhbGNvbG8gZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KIyBWYWxvcmUgYXR0ZXNvIC0+IDANCmNoXzggPC0gQ0guSURYKG1hdHJpY2VfcmNyXzgsIDIpDQpjaF84DQpgYGANCg0KOcKwIENBU08NCg0KU2kgYW5hbGl6emEgY29tZSBub25vIGNhc28gbGEgc2l0dWF6aW9uZSBjb24gbGEgbWF0cmljZSBiYXNlIGEgY3VpDQp2ZW5nb25vIG1vZGlmaWNhdGUgbm92ZSByaWdoZSBwcmVzZSBjYXN1YWxtZW50ZSBjb24gdmFsb3JpIGNvbXByZXNpIHRyYQ0KMCBlIDEuDQoNCklsIHZhbG9yZSBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjaSBhc3BldHRpYW1vIGNoZSBzaWENCmluZmVyaW9yZSBhbCBjYXNvIHByZWNlZGVudGUuIFRlbmVkbyBjb250byBjaGUgZGlwZW5kZSBhbmNoZSBkYWxsZSByaWdoZQ0KY2hlIHZlbmdvbm8gc29zdGl0dWl0ZSBlIGRhaSB2YWxvcmkgY2hlIGxlIGNvbXBvbmdvbm8uDQoNCmBgYHtyfQ0KDQojIENBU08gOTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCANCiMgY29tcG9zdGEgZGkgc29saSAxLCBub3ZlIHJpZ2hlIHNjZWx0ZSBjYXN1YWxtZW50ZSB2ZW5nb25vIHNvc3RpdHVpdGUgY29uIHZhbG9yaQ0KIyBjb21wcmVzaSB0cmEgMCBlIDEuDQoNCiMgVmlzdWFsaXp6YXppb25lIGRlbGxhIG1hdHJpY2UNCnByaW50KG1hdHJpY2VfcmNyXzkpDQoNCiMgQ2FsY29sbyBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjb24gQ0guSURYDQojIFZhbG9yZSBhdHRlc28gLT4gMA0KY2hfOSA8LSBDSC5JRFgobWF0cmljZV9yY3JfOSwgMikNCmNoXzkNCmBgYA0KDQoxMMKwIENBU08NCg0KU2kgYW5hbGl6emEgY29tZSBkZWNpbW8gY2FzbyBsYSBzaXR1YXppb25lIGNvbiBsYSBtYXRyaWNlIGJhc2UgYSBjdWkNCnZlbmdvbm8gbW9kaWZpY2F0ZSB0dXR0ZSBsZSByaWdoZSBjb24gdmFsb3JpIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KSWwgdmFsb3JlIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IGNpIGFzcGV0dGlhbW8gY2hlIHNpYQ0KaW5mZXJpb3JlIGFsIGNhc28gcHJlY2VkZW50ZS4gVGVuZWRvIGNvbnRvIGNoZSBkaXBlbmRlIGFuY2hlIGRhbGxlIHJpZ2hlDQpjaGUgdmVuZ29ubyBzb3N0aXR1aXRlIGUgZGFpIHZhbG9yaSBjaGUgbGUgY29tcG9uZ29uby4NCg0KYGBge3J9DQoNCiMgQ0FTTyA5OiBwcmltYSBtZXTDoCBkZWxsZSByaWdoZSBjb21wb3N0YSBkaSBzb2xpIDAgZSBsYSBzZWNvbmRhIG1ldMOgIA0KIyBjb21wb3N0YSBkaSBzb2xpIDEsIG5vdmUgcmlnaGUgc2NlbHRlIGNhc3VhbG1lbnRlIHZlbmdvbm8gc29zdGl0dWl0ZSBjb24gdmFsb3JpDQojIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KcHJpbnQobWF0cmljZV9yY3JfMTApDQoNCiMgQ2FsY29sbyBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBjb24gQ0guSURYDQojIFZhbG9yZSBhdHRlc28gLT4gMA0KY2hfMTAgPC0gQ0guSURYKG1hdHJpY2VfcmNyXzEwLCAyKQ0KY2hfMTANCmBgYA0KDQpQb3NzaWFtbyBxdWluZGkgY29uZnJvbnRhcmUgaSB2YWxvcmkgb3R0ZW51dGkgcGVyIG9nbmkgY2FzbyBhbmFsaXp6YXRvOg0KDQpgYGB7cn0NCg0KIyBSaWdhIGRlaSBjYXNpIGRlbCBkYXRhZnJhbWUgcGVyIGlsIGNvbmZyb250byBkZWkgdmFsb3JpIGRpIENhbGluc2tpX0hhcmFiYXN6DQpjYXNpIDwtIGMoIkNBU08gQkFTRSIsICIxwrAgQ0FTTyIsICIywrAgQ0FTTyIsICIzwrAgQ0FTTyIsICI0wrAgQ0FTTyIsICI1wrAgQ0FTTyIsICI2wrAgQ0FTTyIsICI3wrAgQ0FTTyIsICI4wrAgQ0FTTyIsICI5wrAgQ0FTTyIsICIxMMKwIENBU08iKQ0KDQojIFJpZ2EgZGVpIHZhbG9yaSBkZWwgZGF0YWZyYW1lIHBlciBpbCBjb25mcm9udG8gZGVpIHZhbG9yaSBkaSBDYWxpbnNraV9IYXJhYmFzeg0KdmFsb3JpIDwtIGMoY2hfYmFzZVsxLDJdLCBjaF8xWzEsMl0sIGNoXzJbMSwyXSwgY2hfM1sxLDJdLCBjaF80WzEsMl0sIGNoXzVbMSwyXSwgY2hfNlsxLDJdLCBjaF83WzEsMl0sIGNoXzhbMSwyXSwgY2hfOVsxLDJdLCBjaF8xMFsxLDJdKQ0KDQojIENyZWF6aW9uZSBlIHZpc3VhbGl6emF6aW9uZSBkYXRhZnJhbWUgcGVyIGlsIGNvbmZyb250byBkZWkgdmFsb3JpIGRpIENhbGluc2tpX0hhcmFiYXN6DQpyYmluZChjYXNpLCB2YWxvcmkpDQoNCmBgYA0KDQp2ZXJpZmljYW5kbyBjb21lIGluIGdlbmVyYWxlIGlsIHZhbG9yZSBkZWxsJ2luZGljZSBkaSBDYWxpbnNraV9IYXJhYmFzeg0KdGVuZGUgYSBkaW1pbnVpcmUgZWQgYXZ2aWNpbmFyc2kgYWxsbyAkMCQgY29uIGwnYXVtZW50byBkZWxsZSByaWdoZQ0KY29tcG9zdGUgZGEgdmFsb3JpIGNvbXByZXNpIHRyYSAwIGUgMS4NCg0KSW4gZ2VuZXJhbGUgZ2nDoCBkYWwgcHJpbW8gY2FzbyBzaSBwdcOyIG5vdGFyZSBjb21lIGwnaW5kaWNlIGluZGljaGkgdW5hDQpzaXR1YXppb25lIHBvY28gb3R0aW1hbGUsIGNoZSBzdWNjZXNzaXZhbWVudGUgcGVnZ2lvcmEgcmFwaWRhbWVudGUgY29tZSBiZW4gaW5kaXZpZHVhdG8gZGFsIHZhbG9yZSBkZWxsJ2luZGljZS4=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCmVkaXRvcl9vcHRpb25zOiANCiAgbWFya2Rvd246IA0KICAgIHdyYXA6IDcyDQotLS0NCg0KU3R1ZGlvIGRlbGxhIGZ1bnppb25lIENILklEWCwgcXVpbmRpIGRlbGxhIG1ldHJpY2EgQ2FsaW5za2ktSGFyYWJhc3oNCmltcGxlbWVudGF0YSBhbCBzdW8gaW50ZXJubywgdHJhbWl0ZSBhbmFsaXNpIGRpIGRhdGFzZXQgYXJ0aWZpY2lhbGkuDQpWaWVuZSB1dGlsaXp6YXRhIHVuYSBtYXRyaWNlIHBhcmFtZXRyaWNhIFsybiwgbl0uDQoNClZhbHV0aWFtbyB0cmFtaXRlIGxhIG1ldHJpY2EgZGkgQ2FsaW5za2ktSGFyYWJhc3ogaWwgY2x1c3RlcmluZw0KZWZmZXR0dWF0byBjb24gbCdhbGdvcml0bW8gSy1tZWFucyBwZXIgdW4gbnVtZXJvIGRpIGNsdXN0ZXJzIHBhcmkgYSAyLg0KDQpDQVNPIEJBU0UNCg0KU2kgYW5hbGl6emEgY29tZSBjYXNvIGJhc2UgZGEgY3VpIHBhcnRpcmVsYSBzaXR1YXppb25lIGNvbiBsYSBwcmltYSBtZXTDoA0KZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCBjb21wb3N0YSBkaSBzb2xpIDEuDQpRdWVzdGEgc2Fyw6AgbGEgbWF0cmljZSBiYXNlIGRhIGN1aSBwYXJ0aXJlIGUgZGEgbW9kaWZpY2FyZS4NCg0KSWwgdmFsb3JlIGF0dGVzbyBkZWxsJ2luZGljZSBkaSBDYWxpbnNraS1IYXJhYmFzeiBzYXLDoCAtXD4gJGluZiQuDQoNCg0KYGBge3J9DQpsaWJyYXJ5KFVuaXZlcnNhbENWSSkNCg0Kc291cmNlKCJ+L0NhbGluc2tpX0hhcmFiYXN6X1RoZXNpcy9TY3JpcHQvRnVuemlvbmlNYXRyaWNlLlIiKQ0KDQojIENBU08gQkFTRTogcHJpbWEgbWV0w6AgZGVsbGUgcmlnaGUgY29tcG9zdGEgZGkgc29saSAwIGUgbGEgc2Vjb25kYSBtZXTDoCANCiMgY29tcG9zdGEgZGkgc29saSAxLg0KDQojIFJpY2hpZXN0YSBkZWwgcGFyYW1ldHJvIG4gcGVyIGxhIG1hdHJpY2UNCm4gPC0gcmVhZEludGVnZXIoKQ0KcHJpbnQobikNCg0KIyBDcmVhemlvbmUgZSB2aXN1YWxpenphemlvbmUgbWF0cmljZSANCm1hdHJpY2UgPC1jcmVhTWF0cmljZShuKQ0KbWF0cmljZQ0KDQojIENhbGNvbG8gZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2ktSGFyYWJhc3ogY29uIENILklEWA0KIyBWYWxvcmUgYXR0ZXNvIC0+IGluZg0KY2hfYmFzZSA8LUNILklEWChtYXRyaWNlLCAyKQ0KY2F0KHNwcmludGYoIlxuVmFsb3JlIGluZGljZSBDYWxpbnNraS1IYXJhYmFzejogJWZcbiIsY2hfYmFzZVsxLDJdICkpDQpgYGANCg0KQ0FTTyBJVEVSQVRJVk8NCg0KU2kgYW5hbGl6emEgaXRlcmF0aXZhbWVudGUgY29uIHVuIGNpY2xvIGxhIHNpdHVhemlvbmUgY29uIGxhIG1hdHJpY2UgYmFzZSBhIGN1aQ0KdmllbmUgbW9kaWZpY2F0YSBhZCBvZ25pIHBhc3NvIHVuYSByaWdhLCBwcmVzYSBjYXN1YWxtZW50ZSB0cmEgcXVlbGxlIGltbXV0YXRlLCANCmNvbiB2YWxvcmkgY29tcHJlc2kgdHJhIDAgZSAxLg0KDQpJbCB2YWxvcmUgYXR0ZXNvIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6IHNhcsOgIHNpY3VyYW1lbnRlDQppbmZlcmlvcmUgYWwgY2FzbyBwcmVjZWRlbnRlIGUgZGlwZW5kZXLDoCBhbmNoZSBkYWxsYSByaWdhIGNoZSB2aWVuZQ0Kc29zdGl0dWl0YSBlIGRhaSB2YWxvcmkgY2hlIGxhIGNvbXBvbmdvbm8uIENpIGFzcGV0dGlhbW8gcXVpbmRpIHVuDQp2YWxvcmUgY2hlIHRlbmRlcsOgIGFkIGVzc2VyZSBwacO5IHZpY2lubyBhICQwJCBjaGUgYSAkaW5mJC4NCg0KYGBge3J9DQoNCiMgQ0FTTyBJVEVSQVRJVk86IHZpZW5lIHByZXNhIGxhIG1hdHJpY2UgZGVsIGNhc28gcHJlY2VkZW50ZSBlZCB1bmEgcmlnYSBzY2VsdGEgDQojICAgICAgICAgICAgICAgICBjYXN1YWxtZW50ZSB2aWVuZSBzb3N0aXR1aXRhIGNvbiB2YWxvcmkgY29tcHJlc2kgdHJhIDAgZSAxLg0KDQojIENyZWF6aW9uZSBkYXRhZnJhbWUgaXRlcmF6aW9uaS92YWxvcmUNCnJpc3VsdGF0aSA8LSBkYXRhLmZyYW1lKGl0ZXJhemlvbmUgPSBpbnRlZ2VyKCksIHZhbG9yZSA9IG51bWVyaWMoKSwNCiAgICAgICAgICAgICAgICAgICAgICAgIHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRSkNCg0KIyBDcmVhemlvbmUgcG9vbCBkYSBjdWkgZXN0cmFycmUgbGEgcmlnYSBkYSBtb2RpZmljYXJlDQpuIDwtIG5yb3cobWF0cmljZSkgIyBOdW1lcm8gZGkgcmlnaGUgZGVsbGEgbWF0cmljZQ0KcG9vbCA8LSBzYW1wbGUoMTpuKSAjIENyZWEgdW4gcG9vbCBkaSBudW1lcmkgZGEgMSBhIG4gb3JkaW5hdG8gaW4gbW9kbyBjYXN1YWxlDQoNCg0KIyBDaWNsbyBpdGVyYXRpdm8gcGVyIG1vZGlmaWNhIGRpIHVuYSByaWdhIGFsbGEgdm9sdGENCmZvciAoaSBpbiAxOm5yb3cobWF0cmljZSkpIHsNCiAgY2F0KHNwcmludGYoIlxuSXRlcmF6aW9uZSAlZDpcbiIsIGkpKQ0KICANCiAgIyBQZXNjYSB1biBudW1lcm8gY2FzdWFsbWVudGUgc2VuemEgcmVpbW1pc3Npb25lIGRhbCBwb29sIGNyZWF0bw0KICBzZWxlemlvbmUgPC0gcG9vbFtpXSANCiAgY2F0KHNwcmludGYoIlxuUmlnYSBtb2RpZmljYXRhOiAlZFxuIiwgc2VsZXppb25lKSkNCiAgDQogICMgTW9kaWZpY2EgcmlnYSBkZWxsYSBtYXRyaWNlDQogIG1hdHJpY2UgPC0gbW9kaWZpY2FSaWdhU2VsZXppb25hdGEobWF0cmljZSwgc2VsZXppb25lKQ0KICANCiAgIyBWaXN1YWxpenphemlvbmUgZGVsbGEgbWF0cmljZQ0KICBwcmludChtYXRyaWNlKQ0KICANCiAgIyBDYWxjb2xvIGUgdmlzdWFsaXp6YXppb25lIGRlbGwnaW5kaWNlIGRpIENhbGluc2tpLUhhcmFiYXN6DQogIHZhbG9yZV9jaCA8LSBDSC5JRFgobWF0cmljZSwgMikNCiAgY2F0KHNwcmludGYoIlxuVmFsb3JlIGluZGljZSBDYWxpbnNraS1IYXJhYmFzejogJWZcbiIsdmFsb3JlX2NoWzEsMl0gKSkNCiAgDQogDQogICMgQWdnaW9ybmFtZW50byBkYXRhZnJhbWUgaXRlcmF6aW9uaS92YWxvcmUNCiAgcmlzdWx0YXRpIDwtIHJiaW5kKHJpc3VsdGF0aSwgZGF0YS5mcmFtZShpdGVyYXppb25lID0gaSwgdmFsb3JlID0gdmFsb3JlX2NoKSkNCiANCn0NCg0KDQoNCmBgYA0KDQoNCg0KUG9zc2lhbW8gcXVpbmRpIGNvbmZyb250YXJlIGkgdmFsb3JpIG90dGVudXRpIHBlciBvZ25pIGNhc28gYW5hbGl6emF0bzoNCg0KYGBge3J9DQpsaWJyYXJ5KGdncGxvdDIpDQoNCiMgVmlzdWFsaXp6YXppb25lIGRlaSB2YWxvcmkgZGkgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIG9nbmkgbWF0cmljZQ0KcHJpbnQocmlzdWx0YXRpKQ0KDQoNCg0KIyBDcmVhemlvbmUgZGVsIGdyYWZpY28gYSBsaW5lZQ0KZ3JhZmljbyA8LSBnZ3Bsb3QoZGF0YSA9IHJpc3VsdGF0aSwgYWVzKHggPSByaXN1bHRhdGlbLDFdICwgeSA9IHJpc3VsdGF0aVssM10pKSArDQogIGdlb21fbGluZShjb2xvciA9ICJibHVlIiwgc2l6ZSA9IDEpICsNCiAgdGhlbWUocGFuZWwuZ3JpZC5tYWpvciA9IGVsZW1lbnRfbGluZShjb2xvciA9ICJncmV5IiksICMgQWdnaXVuZ2UgbGEgZ3JpZ2xpYSBwcmluY2lwYWxlDQogICAgICAgIHBhbmVsLmdyaWQubWlub3IgPSBlbGVtZW50X2JsYW5rKCksICMgUmltdW92ZSBsYSBncmlnbGlhIHNlY29uZGFyaWENCiAgICAgICAgcGFuZWwuYmFja2dyb3VuZCA9IGVsZW1lbnRfYmxhbmsoKSkgKw0KICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzID0gcm91bmQoc2VxKG1pbihyaXN1bHRhdGkkaXRlcmF6aW9uZSksIG1heChyaXN1bHRhdGkkaXRlcmF6aW9uZSksIGJ5ID0gMSksIDEpKSArDQogIGxhYnModGl0bGUgPSAiR3JhZmljbyB2YWxvcmUgQ0giLCB4ID0gIkl0ZXJhemlvbmUiLCB5ID0gIlZhbG9yZSBDSCIpDQoNCiMgVmlzdWFsaXp6YXppb25lIGRlbCBncmFmaWNvDQpwcmludChncmFmaWNvKQ0KDQpgYGANCg0KdmVyaWZpY2FuZG8gY29tZSBpbiBnZW5lcmFsZSBpbCB2YWxvcmUgZGVsbCdpbmRpY2UgZGkgQ2FsaW5za2lfSGFyYWJhc3oNCnRlbmRlIGEgZGltaW51aXJlIGVkIGF2dmljaW5hcnNpIGFsbG8gJDAkIGNvbiBsJ2F1bWVudG8gZGVsbGUgcmlnaGUNCmNvbXBvc3RlIGRhIHZhbG9yaSBjb21wcmVzaSB0cmEgMCBlIDEuDQoNCkluIGdlbmVyYWxlIGdpw6AgZGFsIHByaW1vIGNhc28gc2kgcHXDsiBub3RhcmUgY29tZSBsJ2luZGljZSBpbmRpY2hpIHVuYQ0Kc2l0dWF6aW9uZSBwb2NvIG90dGltYWxlLCBjaGUgc3VjY2Vzc2l2YW1lbnRlIHBlZ2dpb3JhIHJhcGlkYW1lbnRlIGNvbWUgYmVuIGluZGl2aWR1YXRvIGRhbCB2YWxvcmUgZGVsbCdpbmRpY2Uu</div>
 
 
 
