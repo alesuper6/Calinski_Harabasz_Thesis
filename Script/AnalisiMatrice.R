@@ -1,29 +1,13 @@
----
-title: "R Notebook"
-output: html_notebook
-editor_options: 
-  markdown: 
-    wrap: 72
----
+#!/usr/bin/env Rscript
 
-Studio della funzione CH.IDX, quindi della metrica Calinski-Harabasz
-implementata al suo interno, tramite analisi di dataset artificiali.
-Viene utilizzata una matrice parametrica [2n, n].
+args <- commandArgs(trailingOnly = TRUE)
 
-Valutiamo tramite la metrica di Calinski-Harabasz il clustering
-effettuato con l'algoritmo K-means per un numero di clusters pari a 2.
-
-CASO BASE
-
-Si analizza come caso base da cui partirela situazione con la prima metà
-delle righe composta di soli 0 e la seconda metà composta di soli 1.
-Questa sarà la matrice base da cui partire e da modificare.
-
-Il valore atteso dell'indice di Calinski-Harabasz sarà -\> $inf$.
-
-
-```{r}
+# args è ora una lista di stringhe contenente i parametri
+n <- as.integer(args[1])  # converte il primo parametro in un intero
+n <- 5
 library(UniversalCVI)
+library(ggplot2)
+
 
 source("~/Calinski_Harabasz_Thesis/Script/FunzioniMatrice.R")
 
@@ -31,10 +15,16 @@ source("~/Calinski_Harabasz_Thesis/Script/FunzioniMatrice.R")
 # composta di soli 1.
 
 # Abilita/disabilita stampa
-verbose <- FALSE
+verbose <- TRUE
 
-# Richiesta del parametro n per la matrice
-n <- readInteger()
+# controlli del parametro n per la matrice
+if(missing(n))
+  stop("Missing input argument. A parametric value is required")
+if(!is.numeric(n))
+  stop("Argument 'n' must be numeric")
+if(n<=1)
+  warning("The minimum value for consideration should be higher than 1",immediate. = TRUE)
+
 if(verbose){
   print(n)
 }
@@ -48,25 +38,11 @@ if(verbose){
 # Valore atteso -> inf
 ch_base <-CH.IDX(matrice, 2)
 cat(sprintf("\nValore indice Calinski-Harabasz: %f\n",ch_base[1,2] ))
-```
 
-CASO ITERATIVO
 
-Si analizza iterativamente con un ciclo la situazione con la matrice base a cui
-viene modificata ad ogni passo una riga, presa casualmente tra quelle immutate, 
-con valori compresi tra 0 e 1.
-
-Il valore atteso dell'indice di Calinski-Harabasz sarà sicuramente
-inferiore al caso precedente e dipenderà anche dalla riga che viene
-sostituita e dai valori che la compongono. Ci aspettiamo quindi un
-valore che tenderà ad essere più vicino a $0$ che a $inf$.
-
-```{r}
 
 # CASO ITERATIVO: viene presa la matrice del caso precedente ed una riga scelta 
 #                 casualmente viene sostituita con valori compresi tra 0 e 1.
-
-
 
 # Creazione dataframe iterazioni/valore
 risultati <- data.frame(iterazione = integer(), valore = numeric(),
@@ -102,31 +78,19 @@ for (i in 1:nrow(matrice)) {
   if(verbose){
     cat(sprintf("\nValore indice Calinski-Harabasz: %f\n",valore_ch[1,2] ))
   }
- 
+  
   # Aggiornamento dataframe iterazioni/valore
   risultati <- rbind(risultati, data.frame(iterazione = i, valore = valore_ch))
- 
+  
 }
 
-
-
-```
-
-
-
-Possiamo quindi confrontare i valori ottenuti per ogni caso analizzato:
-
-```{r}
-library(ggplot2)
 
 # Visualizzazione dei valori di Calinski-Harabasz per ogni matrice
 print(risultati)
 
-
-
 # Creazione del grafico a linee
 grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) +
-  geom_line(color = "blue", size = 1) +
+  geom_line(color = "blue", linewidth = 1) +
   ylim(0, max(risultati$valore.CH)) +
   xlim(0, 2*n) +
   theme(panel.grid.major = element_line(color = "grey"), # Aggiunge la griglia principale
@@ -138,11 +102,3 @@ grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) 
 # Visualizzazione del grafico
 print(grafico)
 
-```
-
-verificando come in generale il valore dell'indice di Calinski_Harabasz
-tende a diminuire ed avvicinarsi allo $0$ con l'aumento delle righe
-composte da valori compresi tra 0 e 1.
-
-In generale già dal primo caso si può notare come l'indice indichi una
-situazione poco ottimale, che successivamente peggiora rapidamente come ben individuato dal valore dell'indice.
