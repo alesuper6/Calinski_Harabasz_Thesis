@@ -4,7 +4,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # args è ora una lista di stringhe contenente i parametri
 n <- as.integer(args[1])  # converte il primo parametro in un intero
-n <- 5
+
 library(UniversalCVI)
 library(ggplot2)
 
@@ -15,7 +15,7 @@ source("~/Calinski_Harabasz_Thesis/Script/FunzioniMatrice.R")
 # composta di soli 1.
 
 # Abilita/disabilita stampa
-verbose <- TRUE
+verbose <- FALSE
 
 # controlli del parametro n per la matrice
 if(missing(n))
