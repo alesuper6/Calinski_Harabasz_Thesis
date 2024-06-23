@@ -66,3 +66,39 @@ readInteger <- function() {
 
 ##---------------------------------------------------------------------------##
 
+#Visualizzazione grafico della manipolazione della matrice
+visualizzaGrafico <- function(grafico) {
+  # Percorso della directory di download
+  download_dir <- "~/Calinski_Harabasz_Thesis/Risultati/GraficiDatasetArtificiali" 
+  
+  # Nome base del file
+  base_name <- "grafico"
+  
+  # Estensione del file
+  ext <- ".pdf"
+  
+  # Indice per il nome del file
+  i <- 1
+  
+  # Nome del file completo
+  file_name <- file.path(download_dir, paste0(base_name, i, ext))
+  
+  # Controlla se il file esiste già
+  while(file.exists(file_name)) {
+    # Se il file esiste, incrementa l'indice e crea un nuovo nome del file
+    i <- i + 1
+    file_name <- file.path(download_dir, paste0(base_name, i, ext))
+  }
+  
+  # Salva il grafico in un file PDF con il nuovo nome
+  ggsave(paste0(base_name, i, ext), plot = grafico, device = NULL, path = "~/Calinski_Harabasz_Thesis/Risultati/GraficiDatasetArtificiali")
+  
+  # Percorso del file in formato Unix
+  unix_path <- file_name
+  
+  # Converti il percorso del file in formato Windows
+  windows_path <- normalizePath(unix_path, winslash = "\\")
+  
+  # Apri il file PDF 
+  system2("open" , windows_path)
+}

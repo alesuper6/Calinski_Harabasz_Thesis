@@ -100,5 +100,5 @@ grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) 
   labs(title = "Grafico valore CH", x = "# righe manipolate", y = "Calinski-Harabasz index")
 
 # Visualizzazione del grafico
-print(grafico)
+visualizzaGrafico(grafico)
 
