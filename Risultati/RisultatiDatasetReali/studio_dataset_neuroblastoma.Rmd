@@ -85,7 +85,7 @@ if(length(list_eps)==length(list_minPts)){
     clustering <- dbscan(dataset, eps, minPts)
     
     # Aggiornamento dataframe coi risultati
-    risultati <- rbind(risultati, data.frame(caso=1, valore=calinhara(dataset, clustering$cluster)))
+    risultati <- rbind(risultati, data.frame(caso=i, valore=calinhara(dataset, clustering$cluster)))
     
     # Stampa risultato
     cat(sprintf("\nIndice Calinski-Harabasz per eps=%g e minPts=%g: %f\n",eps , minPts, risultati[i,2] ))
