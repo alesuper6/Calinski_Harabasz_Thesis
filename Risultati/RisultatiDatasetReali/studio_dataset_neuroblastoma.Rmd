@@ -18,23 +18,37 @@ Iperparametri:
 ```{r}
 library(UniversalCVI)
 library(readr)
+library(fpc)
 
 # Lettura e pulizia del dataset da dati NA
 dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/10_7717_peerj_5665_dataYM2018_neuroblastoma.csv"))
 
+# Creazione lista con i valori di k
+k <- c(2,3,5)
+
 # Clustering con K-means e validazione del clustering con CH.IDX
 df <- CH.IDX(dataset, 5)
+for (i in k) {
+  
+  # Stampa risultati
+  cat(sprintf("\nIndice Calinski-Harabasz per k=%i: %f\n",i, df[i-1,2] ))
 
-# Stampa risultati
-cat(sprintf("\nIndice Calinski-Harabasz per k=2: %f\n",df[1,2] ))
+}
 
-cat(sprintf("\nIndice Calinski-Harabasz per k=3: %f\n",df[2,2] ))
 
-cat(sprintf("\nIndice Calinski-Harabasz per k=5: %f\n",df[4,2] ))
+for (i in k) {
+  cl <- kmeans(dataset, i, , 100)
+  print(calinhara(dataset, cl$cluster))
+}
+ 
+
+
 
 ```
 
 Quindi verifichiamo che applicando l'algoritmo di clustering K-means, la metrica di Calinski-Harabasz individua come miglior configurazione quella con il valore di k=5 rispetto a quelle scelte.
+
+------------------------------------------------------------------------
 
 Algoritmo di clustering: DBSCAN
 
@@ -48,39 +62,44 @@ Iperparametri:
 
 ```{r}
 library(dbscan)
-library(fpc)
 
 # Creazione dataframe iterazioni/valore
 risultati <- data.frame(caso = integer(), valore = numeric(),
                         stringsAsFactors = FALSE)
 
-# Clustering con DBSCAN con eps=2 e minPts=3
-clustering <- dbscan(dataset, 2, 3)
+# Creazione lista con i valori di eps
+list_eps <- c(2, 2, 1.5)
 
-risultati <- rbind(risultati, data.frame(caso=1, valore=calinhara(dataset, clustering$cluster)))
+# Creazione lista con i valori di minPts
+list_minPts <- c(3, 4, 3)
 
-# Stampa risultato
-cat(sprintf("\nIndice Calinski-Harabasz per eps=2 e minPts=3: %f\n",risultati[1,2] ))
+# Controllo lunghezza liste
+if(length(list_eps)==length(list_minPts)){
+  
+  # Ciclo per la validazione del clustering
+  for (i in 1:length(list_eps)) { 
+    eps <- list_eps[i]          #estrae il valore di eps
+    minPts <- list_minPts[i]    #estrae il valore di minPts
+    
+    # Clustering con DBSCAN 
+    clustering <- dbscan(dataset, eps, minPts)
+    
+    # Aggiornamento dataframe coi risultati
+    risultati <- rbind(risultati, data.frame(caso=1, valore=calinhara(dataset, clustering$cluster)))
+    
+    # Stampa risultato
+    cat(sprintf("\nIndice Calinski-Harabasz per eps=%g e minPts=%g: %f\n",eps , minPts, risultati[i,2] ))
+  }
+} else {
+  print("Le liste devono avere la stessa lunghezza")  
+}
 
-# Clustering con DBSCAN con eps=2 e minPts=4
-clustering <- dbscan(dataset, 2, 4)
-
-risultati <- rbind(risultati, data.frame(caso=2, valore=calinhara(dataset, clustering$cluster)))
-
-# Stampa risultato
-cat(sprintf("\nIndice Calinski-Harabasz per eps=2 e minPts=4: %f\n",risultati[2,2] ))
-
-# Clustering con DBSCAN con eps=1.5 e minPts=3
-clustering <- dbscan(dataset, 1.5, 3)
-
-risultati <- rbind(risultati, data.frame(caso=3, valore=calinhara(dataset, clustering$cluster)))
-
-# Stampa risultato
-cat(sprintf("\nIndice Calinski-Harabasz per eps=1.5 e minPts=3: %f\n",risultati[3,2] ))
 
 ```
 
 Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=1.5 e minPts= 3 rispetto a quelle scelte.
+
+------------------------------------------------------------------------
 
 Algoritmo di clustering: Hierarchical clustering
 
