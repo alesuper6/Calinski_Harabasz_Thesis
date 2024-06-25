@@ -63,10 +63,10 @@ risultati <- data.frame(caso = integer(), valore = numeric(),
                         stringsAsFactors = FALSE)
 
 # Creazione lista con i valori di eps
-list_eps <- c( , , )
+list_eps <- c(20, 25, 20)
 
 # Creazione lista con i valori di minPts
-list_minPts <- c( , , )
+list_minPts <- c(10, 10, 11)
 
 # Controllo lunghezza liste
 if(length(list_eps)==length(list_minPts)){
@@ -93,7 +93,7 @@ if(length(list_eps)==length(list_minPts)){
 
 ```
 
-Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=3 e minPts= 13 rispetto a quelle scelte.
+Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=?? e minPts= ?? rispetto a quelle scelte.
 
 ------------------------------------------------------------------------
 
@@ -137,4 +137,4 @@ Quindi verifichiamo che applicando l'algoritmo di clustering Hierarchical cluste
 
 CONCLUSIONI:
 
-L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di DBSCAN come algoritmo di clustering con configurazione di iperparametri 𝜀=1.5 e minPts= 3.
+L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di ?? come algoritmo di clustering con configurazione di iperparametri ??.

@@ -35,7 +35,8 @@ for (i in k) {
 
 }
 
-
+# Calcolo con la funzione calinhara di fpc l'indice di Calinski-Harabasz
+# Per verificare che corrispona ai valori ottenuti con CH.IDX
 for (i in k) {
   cl <- kmeans(dataset, i, , 100)
   print(calinhara(dataset, cl$cluster))
@@ -54,11 +55,11 @@ Algoritmo di clustering: DBSCAN
 
 Iperparametri:
 
--   𝜀= , minPts= 
+-   𝜀=5 , minPts=14
 
--   𝜀= , minPts= 
+-   𝜀=6 , minPts=14 
 
--   𝜀= , minPts= 
+-   𝜀=5 , minPts=16 
 
 ```{r}
 library(dbscan)
@@ -68,10 +69,10 @@ risultati <- data.frame(caso = integer(), valore = numeric(),
                         stringsAsFactors = FALSE)
 
 # Creazione lista con i valori di eps
-list_eps <- c(, , )
+list_eps <- c(3, 3.5, 3)
 
 # Creazione lista con i valori di minPts
-list_minPts <- c(, , )
+list_minPts <- c(10, 10, 11)
 
 # Controllo lunghezza liste
 if(length(list_eps)==length(list_minPts)){
