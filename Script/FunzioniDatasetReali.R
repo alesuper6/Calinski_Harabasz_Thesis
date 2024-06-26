@@ -9,7 +9,7 @@ AnalisiDatasetReale <- function(dataset){
   k <- c(2,3,5)
   
   # Clustering con K-means e validazione del clustering con CH.IDX
-  df <- CH.IDX(dataset, 5)
+  df <- CH.IDX(dataset, max(k))
   for (i in k) {
     # Stampa risultati
     cat(sprintf("\nIndice Calinski-Harabasz per k=%i: %f\n",i, df[i-1,2] ))

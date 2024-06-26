@@ -28,7 +28,7 @@ dataset <- na.omit(read_csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/journa
 k <- c(2,3,5)
 
 # Clustering con K-means e validazione del clustering con CH.IDX
-df <- CH.IDX(dataset, 5)
+df <- CH.IDX(dataset, max(k))
 for (i in k) {
   
   # Stampa risultati
