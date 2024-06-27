@@ -67,12 +67,15 @@ readInteger <- function() {
 ##---------------------------------------------------------------------------##
 
 #Visualizzazione grafico della manipolazione della matrice
-visualizzaGrafico <- function(grafico) {
+visualizzaGrafico <- function(grafico, n) {
   # Percorso della directory di download
   download_dir <- "~/Calinski_Harabasz_Thesis/Risultati/GraficiDatasetArtificiali" 
   
+  # Flag per la stampa del nome file
+  flag=FALSE
+  
   # Nome base del file
-  base_name <- "grafico"
+  base_name <- "graficoN="
   
   # Estensione del file
   ext <- ".pdf"
@@ -81,17 +84,22 @@ visualizzaGrafico <- function(grafico) {
   i <- 1
   
   # Nome del file completo
-  file_name <- file.path(download_dir, paste0(base_name, i, ext))
+  file_name <- file.path(download_dir, paste0(base_name, n, ext))
   
   # Controlla se il file esiste già
   while(file.exists(file_name)) {
     # Se il file esiste, incrementa l'indice e crea un nuovo nome del file
     i <- i + 1
-    file_name <- file.path(download_dir, paste0(base_name, i, ext))
+    file_name <- file.path(download_dir, paste0(base_name, n, '(', i, ')', ext))
+    flag= TRUE
   }
   
   # Salva il grafico in un file PDF con il nuovo nome
-  ggsave(paste0(base_name, i, ext), plot = grafico, device = NULL, path = "~/Calinski_Harabasz_Thesis/Risultati/GraficiDatasetArtificiali")
+  if(flag){
+    ggsave(paste0(base_name, n, '(', i, ')', ext), plot = grafico, device = NULL, path = "~/Calinski_Harabasz_Thesis/Risultati/GraficiDatasetArtificiali")
+  } else{
+    ggsave(paste0(base_name, n, ext), plot = grafico, device = NULL, path = "~/Calinski_Harabasz_Thesis/Risultati/GraficiDatasetArtificiali")
+  }
   
   # Percorso del file in formato Unix
   unix_path <- file_name

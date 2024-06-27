@@ -49,8 +49,8 @@ risultati <- data.frame(iterazione = integer(), valore = numeric(),
                         stringsAsFactors = FALSE)
 
 # Creazione pool da cui estrarre la riga da modificare
-n <- nrow(matrice) # Numero di righe della matrice
-pool <- sample(1:n) # Crea un pool di numeri da 1 a n ordinato in modo casuale
+m <- nrow(matrice) # Numero di righe della matrice
+pool <- sample(1:m) # Crea un pool di numeri da 1 a n ordinato in modo casuale
 
 
 # Ciclo iterativo per modifica di una riga alla volta
@@ -100,5 +100,5 @@ grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) 
   labs(title = "Grafico valore CH", x = "# righe manipolate", y = "Calinski-Harabasz index")
 
 # Visualizzazione del grafico
-visualizzaGrafico(grafico)
+visualizzaGrafico(grafico, n)
 
