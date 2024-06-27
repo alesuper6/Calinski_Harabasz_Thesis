@@ -5,9 +5,8 @@ args <- commandArgs(trailingOnly = TRUE)
 # args è ora una lista di stringhe contenente i parametri
 n <- as.integer(args[1])  # converte il primo parametro in un intero
 
-library(UniversalCVI)
 library(ggplot2)
-
+library(fpc)
 
 source("~/Calinski_Harabasz_Thesis/Script/FunzioniMatrice.R")
 
@@ -34,19 +33,25 @@ if(verbose){
   matrice
 }
 
-# Calcolo dell'indice di Calinski-Harabasz con CH.IDX
-# Valore atteso -> inf
-ch_base <-CH.IDX(matrice, 2)
-cat(sprintf("\nValore indice Calinski-Harabasz: %f\n",ch_base[1,2] ))
 
+# Clustering con K-means
+cl <- kmeans(matrice, 2, , 100)
+
+# Calcolo dell'indice di Calinski-Harabasz con calinhara
+# Valore atteso -> inf
+CH <- calinhara(matrice, cl$cluster)
+cat(sprintf("\nValore indice Calinski-Harabasz: %f\n", CH))
 
 
 # CASO ITERATIVO: viene presa la matrice del caso precedente ed una riga scelta 
 #                 casualmente viene sostituita con valori compresi tra 0 e 1.
 
+
+
 # Creazione dataframe iterazioni/valore
 risultati <- data.frame(iterazione = integer(), valore = numeric(),
                         stringsAsFactors = FALSE)
+
 
 # Creazione pool da cui estrarre la riga da modificare
 m <- nrow(matrice) # Numero di righe della matrice
@@ -73,14 +78,16 @@ for (i in 1:nrow(matrice)) {
     print(matrice)
   }
   
-  # Calcolo e visualizzazione dell'indice di Calinski-Harabasz
-  valore_ch <- CH.IDX(matrice, 2)
-  if(verbose){
-    cat(sprintf("\nValore indice Calinski-Harabasz: %f\n",valore_ch[1,2] ))
-  }
+  
+  # Clustering con K-means
+  cl <- kmeans(matrice, 2, , 100)
+  
+  # Calcolo dell'indice di Calinski-Harabasz con calinhara
+  CH <- calinhara(matrice, cl$cluster)
+  cat(sprintf("\nValore indice Calinski-Harabasz: %f\n", CH))
   
   # Aggiornamento dataframe iterazioni/valore
-  risultati <- rbind(risultati, data.frame(iterazione = i, valore = valore_ch))
+  risultati <- rbind(risultati, data.frame(iterazione = i, valore = CH))
   
 }
 
@@ -88,10 +95,12 @@ for (i in 1:nrow(matrice)) {
 # Visualizzazione dei valori di Calinski-Harabasz per ogni matrice
 print(risultati)
 
+
+
 # Creazione del grafico a linee
-grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) +
+grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,2])) +
   geom_line(color = "blue", linewidth = 1) +
-  ylim(0, max(risultati$valore.CH)) +
+  ylim(0, max(risultati$valore)) +
   xlim(0, 2*n) +
   theme(panel.grid.major = element_line(color = "grey"), # Aggiunge la griglia principale
         panel.grid.minor = element_blank(), # Rimuove la griglia secondaria
@@ -99,6 +108,9 @@ grafico <- ggplot(data = risultati, aes(x = risultati[,1] , y = risultati[,3])) 
   scale_x_continuous(breaks = round(seq(min(risultati$iterazione), max(risultati$iterazione), by = 1), 1)) +
   labs(title = "Grafico valore CH", x = "# righe manipolate", y = "Calinski-Harabasz index")
 
+
 # Visualizzazione del grafico
 visualizzaGrafico(grafico, n)
+
+
 
