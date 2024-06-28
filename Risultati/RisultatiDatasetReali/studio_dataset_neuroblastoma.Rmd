@@ -24,23 +24,28 @@ library(fpc)
 dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/10_7717_peerj_5665_dataYM2018_neuroblastoma.csv"))
 
 # Creazione lista con i valori di k
-k <- c(2,3,5)
+  k <- c(2,3,5)
+ 
+# Creazione lista per i valori di Calinski-Harabasz
+CH <- c()
 
-# Clustering con K-means e validazione del clustering con CH.IDX
-df <- CH.IDX(dataset, max(k))
 for (i in k) {
   
-  # Stampa risultati
-  cat(sprintf("\nIndice Calinski-Harabasz per k=%i: %f\n",i, df[i-1,2] ))
-
-}
-
-# Calcolo con la funzione calinhara di fpc l'indice di Calinski-Harabasz
-# Per verificare che corrispona ai valori ottenuti con CH.IDX
-for (i in k) {
+  # Clustering con K-means
   cl <- kmeans(dataset, i, , 100)
-  print(calinhara(dataset, cl$cluster))
+  
+  # Validazione con Calinski-Harabasz tramite calinhara
+  valore <- calinhara(dataset, cl$cluster)
+  
+  # Aggiungiamo il valore alla lista
+  CH <- c(CH, valore)
+  
 }
+
+# Creazione dataframe /valore
+risultati <- data.frame(k = k, val.CH = CH)
+
+print(risultati)
  
 
 
@@ -55,11 +60,11 @@ Algoritmo di clustering: DBSCAN
 
 Iperparametri:
 
--   𝜀=5 , minPts=14
+-   𝜀=3 , minPts=10
 
--   𝜀=6 , minPts=14 
+-   𝜀=3.5 , minPts=10 
 
--   𝜀=5 , minPts=16 
+-   𝜀=3 , minPts=11
 
 ```{r}
 library(dbscan)
@@ -98,7 +103,7 @@ if(length(list_eps)==length(list_minPts)){
 
 ```
 
-Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=?? e minPts=??  rispetto a quelle scelte.
+Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=3 e minPts=11  rispetto a quelle scelte.
 
 ------------------------------------------------------------------------
 

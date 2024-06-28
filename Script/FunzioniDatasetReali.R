@@ -1,5 +1,4 @@
 library(dbscan)
-library(UniversalCVI)
 library(fpc) 
 
 AnalisiDatasetReale <- function(dataset){
@@ -7,13 +6,28 @@ AnalisiDatasetReale <- function(dataset){
   # K-means
   # Creazione lista con i valori di k
   k <- c(2,3,5)
+   
+  # Creazione lista per i valori di Calinski-Harabasz
+  CH <- c()
   
-  # Clustering con K-means e validazione del clustering con CH.IDX
-  df <- CH.IDX(dataset, max(k))
   for (i in k) {
-    # Stampa risultati
-    cat(sprintf("\nIndice Calinski-Harabasz per k=%i: %f\n",i, df[i-1,2] ))
+    
+    # Clustering con K-means
+    cl <- kmeans(dataset, i, , 100)
+    
+    # Validazione con Calinski-Harabasz tramite calinhara
+    valore <- calinhara(dataset, cl$cluster)
+    
+    # Aggiungiamo il valore alla lista
+    CH <- c(CH, valore)
+    
   }
+  
+  # Creazione dataframe iterazione/valore
+  risultati <- data.frame(k = k, val.CH = CH)
+  
+  # Stampa dataframe dei risultati
+  print(risultati)
   
   
   # DBSCAN
