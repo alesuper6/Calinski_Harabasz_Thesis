@@ -4,11 +4,12 @@ library(fpc)
 AnalisiDatasetReale <- function(dataset){
   
   # K-means
+  
   # Creazione lista con i valori di k
   k <- c(2,3,5)
-   
+  
   # Creazione lista per i valori di Calinski-Harabasz
-  CH <- c()
+  CH.kmeans <- c()
   
   for (i in k) {
     
@@ -19,27 +20,30 @@ AnalisiDatasetReale <- function(dataset){
     valore <- calinhara(dataset, cl$cluster)
     
     # Aggiungiamo il valore alla lista
-    CH <- c(CH, valore)
+    CH.kmeans <- c(CH.kmeans, valore)
     
   }
   
-  # Creazione dataframe iterazione/valore
-  risultati <- data.frame(k = k, val.CH = CH)
+  # Creazione dataframe /valore
+  risultati.kmeans <- data.frame(k = k, val.CH = CH.kmeans)
   
-  # Stampa dataframe dei risultati
-  print(risultati)
+  # Stampa risultati
+  cat(print("Risultati ottenuti tramite l'algoritmo K-means"))
+  print(risultati.kmeans)
+  
+  
   
   
   # DBSCAN
-  # Creazione dataframe iterazioni/valore
-  risultati <- data.frame(caso = integer(), valore = numeric(),
-                          stringsAsFactors = FALSE)
   
   # Creazione lista con i valori di eps
-  list_eps <- c( , , )
+  list_eps <- c(3, 3.3, 3)
   
   # Creazione lista con i valori di minPts
-  list_minPts <- c( , , )
+  list_minPts <- c(10, 10, 11)
+  
+  # Creazione lista per i valori di Calinski-Harabasz
+  CH.dbscan <- c()
   
   # Controllo lunghezza liste
   if(length(list_eps)==length(list_minPts)){
@@ -52,37 +56,61 @@ AnalisiDatasetReale <- function(dataset){
       # Clustering con DBSCAN 
       clustering <- dbscan(dataset, eps, minPts)
       
-      # Aggiornamento dataframe coi risultati
-      risultati <- rbind(risultati, data.frame(caso=1, valore=calinhara(dataset, clustering$cluster)))
-      
-      # Stampa risultato
-      cat(sprintf("\nIndice Calinski-Harabasz per eps=%g e minPts=%g: %f\n",eps , minPts, risultati[i,2] ))
+      # Aggiornamento lista coi risultati
+      CH.dbscan <- c(CH.dbscan, calinhara(dataset, clustering$cluster))
     }
+    
+    # Creazione dataframe iterazione\valore
+    risultati.dbscan <- data.frame(eps = list_eps, minPts = list_minPts, val.CH = CH.dbscan)
+    
+    # Stampa dataframe 
+    cat(print("Risultati ottenuti tramite l'algoritmo DBSCAN"))
+    print(risultati.dbscan)
+    
   } else {
     print("Le liste devono avere la stessa lunghezza")  
   }
   
   
+  
+  
   #Hierarchical-clustering
-  # Clustering con complete-linkage e validazione del clustering con CH.IDX
-  cmplt_link <- CH.IDX(dataset, 10, 2, "hclust_complete")
   
-  # Stampa risultati
-  cat(sprintf("\nIndice Calinski-Harabasz per complete-linkage: \n"))
-  print(cmplt_link)
+  # Creazione lista con i valori di method
+  method <- c("complete", "average", "single")
   
-  # Clustering con average-linkage e validazione del clustering con CH.IDX
-  avrg_link <- CH.IDX(dataset, 10, 2, "hclust_average")
+  # Creazione dataframe per i risultati
+  risultati.hier <- data.frame(k = 2:10)
   
-  # Stampa risultati
-  cat(sprintf("\nIndice Calinski-Harabasz per average-linkage: \n"))
-  avrg_link
+  # Ciclo per clustering tramite hierarchical clustering e validazione con calinhara
+  for(i in method){
+    
+    # Creazione lista per i valori di Calinski-Harabasz 
+    CH.hier<- c()
+    
+    # Clustering con complete-linkage
+    H.model <- hclust(dist(dataset), i)
+    
+    # Ciclo per la validazione del clustering con calinhara
+    for (j in 2:10) {
+      cluster <- cutree(H.model, k = j)  #Taglio dell'albero risultante dal clustering
+      CH.hier <- c(CH.hier, calinhara(dataset, cluster))  #Aggiornamento lista coi risultati
+    }
+    
+    # Aggiornamento dataframe risultati
+    if(i == "complete"){
+      risultati.hier$complete <- CH.hier 
+    }
+    if(i == "average"){
+      risultati.hier$average <- CH.hier 
+    }
+    if(i == "single"){
+      risultati.hier$single <- CH.hier 
+    }
+  }
   
-  # Clustering con single-linkage e validazione del clustering con CH.IDX
-  sngl_link <- CH.IDX(dataset, 10, 2, "hclust_single")
-  
-  # Stampa risultati
-  cat(sprintf("\nIndice Calinski-Harabasz per single-linkage: \n"))
-  sngl_link
+  # Stampa del dataframe dei risultati
+  cat(print("Risultati ottenuti tramite l'algoritmo Hierarchical-clustering"))
+  print(risultati.hier)
   
 }
