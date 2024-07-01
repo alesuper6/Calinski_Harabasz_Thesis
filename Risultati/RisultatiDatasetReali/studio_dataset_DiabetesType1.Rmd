@@ -16,10 +16,8 @@ Iperparametri:
 -   k=5
  
 ```{r}
-library(UniversalCVI)
 library(readr)
 library(fpc) 
-
 
 # Lettura e pulizia del dataset da dati NA
 dataset <- na.omit(read_csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/Takashi2019_diabetes_type1_dataset_preprocessed.csv"))
@@ -27,14 +25,26 @@ dataset <- na.omit(read_csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/Takash
 # Creazione lista con i valori di k
 k <- c(2,3,5)
 
-# Clustering con K-means e validazione del clustering con CH.IDX
-df <- CH.IDX(dataset, max(k))
+# Creazione lista per i valori di Calinski-Harabasz
+CH.kmeans <- c()
+
 for (i in k) {
   
-  # Stampa risultati
-  cat(sprintf("\nIndice Calinski-Harabasz per k=%i: %f\n",i, df[i-1,2] ))
-
+  # Clustering con K-means
+  cl <- kmeans(dataset, i, , 100)
+  
+  # Validazione con Calinski-Harabasz tramite calinhara
+  valore <- calinhara(dataset, cl$cluster)
+  
+  # Aggiungiamo il valore alla lista
+  CH.kmeans <- c(CH.kmeans, valore)
+  
 }
+
+# Creazione dataframe /valore
+risultati.kmeans <- data.frame(k = k, val.CH = CH.kmeans)
+
+print(risultati.kmeans)
 
 ```
 
@@ -55,17 +65,15 @@ Iperparametri:
 -   𝜀= , minPts= 
 
 ```{r}
-library(dbscan)
-
-# Creazione dataframe iterazioni/valore
-risultati <- data.frame(caso = integer(), valore = numeric(),
-                        stringsAsFactors = FALSE)
 
 # Creazione lista con i valori di eps
-list_eps <- c( , , )
+list_eps <- c(80, 88, 80)
 
 # Creazione lista con i valori di minPts
-list_minPts <- c( , , )
+list_minPts <- c(15, 15, 17)
+
+# Creazione lista per i valori di Calinski-Harabasz
+CH.dbscan <- c()
 
 # Controllo lunghezza liste
 if(length(list_eps)==length(list_minPts)){
@@ -77,13 +85,17 @@ if(length(list_eps)==length(list_minPts)){
     
     # Clustering con DBSCAN 
     clustering <- dbscan(dataset, eps, minPts)
-  
-    # Aggiornamento dataframe coi risultati
-    risultati <- rbind(risultati, data.frame(caso=1, valore=calinhara(dataset, clustering$cluster)))
     
-    # Stampa risultato
-    cat(sprintf("\nIndice Calinski-Harabasz per eps=%g e minPts=%g: %f\n",eps , minPts, risultati[i,2] ))
+    # Aggiornamento lista coi risultati
+    CH.dbscan <- c(CH.dbscan, calinhara(dataset, clustering$cluster))
   }
+  
+  # Creazione dataframe iterazione\valore
+  risultati.dbscan <- data.frame(eps = list_eps, minPts = list_minPts, val.CH = CH.dbscan)
+  
+  # Stampa dataframe 
+  print(risultati.dbscan)
+  
 } else {
   print("Le liste devono avere la stessa lunghezza")  
 }
@@ -107,30 +119,46 @@ Iperparametri:
 
 ```{r}
 
-# Clustering con complete-linkage e validazione del clustering con CH.IDX
-cmplt_link <- CH.IDX(dataset, 10, 2, "hclust_complete")
+# Creazione lista con i valori di method
+method <- c("complete", "average", "single")
 
-# Stampa risultati
-cat(sprintf("\nIndice Calinski-Harabasz per complete-linkage: \n"))
-print(cmplt_link)
+# Creazione dataframe per i risultati
+risultati.hier <- data.frame(k = 2:10)
 
-# Clustering con average-linkage e validazione del clustering con CH.IDX
-avrg_link <- CH.IDX(dataset, 10, 2, "hclust_average")
+# Ciclo per clustering tramite hierarchical clustering e validazione con calinhara
+for(i in method){
+  
+  # Creazione lista per i valori di Calinski-Harabasz 
+  CH.hier<- c()
+  
+  # Clustering con complete-linkage
+  H.model <- hclust(dist(dataset), i)
+  
+  # Ciclo per la validazione del clustering con calinhara
+  for (j in 2:10) {
+    cluster <- cutree(H.model, k = j)  #Taglio dell'albero risultante dal clustering
+    CH.hier <- c(CH.hier, calinhara(dataset, cluster))  #Aggiornamento lista coi risultati
+  }
+  
+  # Aggiornamento dataframe risultati
+  if(i == "complete"){
+    risultati.hier$complete <- CH.hier 
+  }
+  if(i == "average"){
+    risultati.hier$average <- CH.hier 
+  }
+  if(i == "single"){
+    risultati.hier$single <- CH.hier 
+  }
+}
 
-# Stampa risultati
-cat(sprintf("\nIndice Calinski-Harabasz per average-linkage: \n"))
-avrg_link
-
-# Clustering con single-linkage e validazione del clustering con CH.IDX
-sngl_link <- CH.IDX(dataset, 10, 2, "hclust_single")
-
-# Stampa risultati
-cat(sprintf("\nIndice Calinski-Harabasz per single-linkage: \n"))
-sngl_link
+# Stampa del dataframe dei risultati
+print(risultati.hier)
 
 ```
 
-Quindi verifichiamo che applicando l'algoritmo di clustering Hierarchical clustering, la metrica di Calinski-Harabasz individua come miglior configurazione quella con tipo average-linkage rispetto alle altre opzioni.
+Per scegliere la configurazione migliore ci limitiamo ad analizzare il clustering per le configurazioni che vanno da 2 a 10 cluster cercando un ottimo locale con il valore di k minimo.
+Per l'algoritmo di clustering Hierarchical clustering, la metrica di Calinski-Harabasz individua come miglior configurazione quella con tipo average-linkage rispetto alle altre opzioni con ottimo locale per k=2.
 
 CONCLUSIONI:
 

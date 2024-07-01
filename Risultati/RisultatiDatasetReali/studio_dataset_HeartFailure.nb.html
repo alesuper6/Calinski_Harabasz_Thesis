@@ -1763,9 +1763,8 @@ depression_heart_failure</h1>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShVbml2ZXJzYWxDVkkpXG5saWJyYXJ5KHJlYWRyKVxubGlicmFyeShmcGMpIFxuXG5cbiMgTGV0dHVyYSBlIHB1bGl6aWEgZGVsIGRhdGFzZXQgZGEgZGF0aSBOQVxuZGF0YXNldCA8LSBuYS5vbWl0KHJlYWRfY3N2KFwifi9DYWxpbnNraV9IYXJhYmFzel9UaGVzaXMvRGF0YS9EYXRhc2V0UmVhbGkvam91cm5hbC5wb25lLjAxNTg1NzBfUzJGaWxlX2RlcHJlc3Npb25faGVhcnRfZmFpbHVyZS5jc3ZcIikpXG5gYGAifQ== -->
-<pre class="r"><code>library(UniversalCVI)
-library(readr)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbmxpYnJhcnkoZnBjKSBcblxuXG4jIExldHR1cmEgZSBwdWxpemlhIGRlbCBkYXRhc2V0IGRhIGRhdGkgTkFcbmRhdGFzZXQgPC0gbmEub21pdChyZWFkX2NzdihcIn4vQ2FsaW5za2lfSGFyYWJhc3pfVGhlc2lzL0RhdGEvRGF0YXNldFJlYWxpL2pvdXJuYWwucG9uZS4wMTU4NTcwX1MyRmlsZV9kZXByZXNzaW9uX2hlYXJ0X2ZhaWx1cmUuY3N2XCIpKVxuYGBgIn0= -->
+<pre class="r"><code>library(readr)
 library(fpc) 
 
 
@@ -1781,86 +1780,43 @@ dbl (16): id, Age (years), Male (1=Yes, 0=No), PHQ-9, Systolic BP (mm Hg), Estim
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmVhemlvbmUgbGlzdGEgY29uIGkgdmFsb3JpIGRpIGtcbmsgPC0gYygyOjIwKVxuXG4jIENsdXN0ZXJpbmcgY29uIEstbWVhbnMgZSB2YWxpZGF6aW9uZSBkZWwgY2x1c3RlcmluZyBjb24gQ0guSURYXG5kZiA8LSBDSC5JRFgoZGF0YXNldCwgbWF4KGspKVxuZm9yIChpIGluIGspIHtcbiAgXG4gICMgU3RhbXBhIHJpc3VsdGF0aVxuICBjYXQoc3ByaW50ZihcIlxcbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgaz0laTogJWZcXG5cIixpLCBkZltpLTEsMl0gKSlcblxufVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmVhemlvbmUgbGlzdGEgY29uIGkgdmFsb3JpIGRpIGtcbmsgPC0gYygyLCAzLCA1KVxuXG4jIENyZWF6aW9uZSBsaXN0YSBwZXIgaSB2YWxvcmkgZGkgQ2FsaW5za2ktSGFyYWJhc3pcbkNILmttZWFucyA8LSBjKClcblxuZm9yIChpIGluIGspIHtcbiAgXG4gICMgQ2x1c3RlcmluZyBjb24gSy1tZWFuc1xuICBjbCA8LSBrbWVhbnMoZGF0YXNldCwgaSwgLCAxMDApXG4gIFxuICAjIFZhbGlkYXppb25lIGNvbiBDYWxpbnNraS1IYXJhYmFzeiB0cmFtaXRlIGNhbGluaGFyYVxuICB2YWxvcmUgPC0gY2FsaW5oYXJhKGRhdGFzZXQsIGNsJGNsdXN0ZXIpXG4gIFxuICAjIEFnZ2l1bmdpYW1vIGlsIHZhbG9yZSBhbGxhIGxpc3RhXG4gIENILmttZWFucyA8LSBjKENILmttZWFucywgdmFsb3JlKVxuICBcbn1cblxuIyBDcmVhemlvbmUgZGF0YWZyYW1lIC92YWxvcmVcbnJpc3VsdGF0aS5rbWVhbnMgPC0gZGF0YS5mcmFtZShrID0gaywgdmFsLkNIID0gQ0gua21lYW5zKVxuXG5wcmludChyaXN1bHRhdGkua21lYW5zKVxuYGBgIn0= -->
 <pre class="r"><code># Creazione lista con i valori di k
-k &lt;- c(2:20)
+k &lt;- c(2, 3, 5)
 
-# Clustering con K-means e validazione del clustering con CH.IDX
-df &lt;- CH.IDX(dataset, max(k))
+# Creazione lista per i valori di Calinski-Harabasz
+CH.kmeans &lt;- c()
+
 for (i in k) {
   
-  # Stampa risultati
-  cat(sprintf(&quot;\nIndice Calinski-Harabasz per k=%i: %f\n&quot;,i, df[i-1,2] ))
-
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9MjogNDExLjY5NTk1OVxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9MzogNDQ3Ljk2NjYwMVxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9NDogNDQyLjE4MDIzOVxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9NTogNDUxLjc3NTMxOVxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9NjogNDQxLjQxOTEyN1xuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9NzogNDQxLjY3NTE2NlxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9ODogNDMyLjMzNDM4MFxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9OTogNDI4LjA2NDY1NFxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9MTA6IDQyNi41NjYxMDZcblxuSW5kaWNlIENhbGluc2tpLUhhcmFiYXN6IHBlciBrPTExOiA0MjMuMDA3MjcyXG5cbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgaz0xMjogNDEyLjU4MDYzNFxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9MTM6IDQwNC43Nzk1MjBcblxuSW5kaWNlIENhbGluc2tpLUhhcmFiYXN6IHBlciBrPTE0OiAzOTguMjg1OTg3XG5cbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgaz0xNTogMzk3LjA0ODcxMlxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9MTY6IDM5MS41NjM3MDNcblxuSW5kaWNlIENhbGluc2tpLUhhcmFiYXN6IHBlciBrPTE3OiAzODYuMTc5MTA0XG5cbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgaz0xODogMzg4LjcxNjQxMlxuXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGs9MTk6IDM4Ni44NTIyNzJcblxuSW5kaWNlIENhbGluc2tpLUhhcmFiYXN6IHBlciBrPTIwOiAzNzkuNjU1NTg3XG4ifQ== -->
-<pre><code>
-Indice Calinski-Harabasz per k=2: 411.695959
-
-Indice Calinski-Harabasz per k=3: 447.966601
-
-Indice Calinski-Harabasz per k=4: 442.180239
-
-Indice Calinski-Harabasz per k=5: 451.775319
-
-Indice Calinski-Harabasz per k=6: 441.419127
-
-Indice Calinski-Harabasz per k=7: 441.675166
-
-Indice Calinski-Harabasz per k=8: 432.334380
-
-Indice Calinski-Harabasz per k=9: 428.064654
-
-Indice Calinski-Harabasz per k=10: 426.566106
-
-Indice Calinski-Harabasz per k=11: 423.007272
-
-Indice Calinski-Harabasz per k=12: 412.580634
-
-Indice Calinski-Harabasz per k=13: 404.779520
-
-Indice Calinski-Harabasz per k=14: 398.285987
-
-Indice Calinski-Harabasz per k=15: 397.048712
-
-Indice Calinski-Harabasz per k=16: 391.563703
-
-Indice Calinski-Harabasz per k=17: 386.179104
-
-Indice Calinski-Harabasz per k=18: 388.716412
-
-Indice Calinski-Harabasz per k=19: 386.852272
-
-Indice Calinski-Harabasz per k=20: 379.655587</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChpIGluIGspIHtcbiAgY2wgPC0ga21lYW5zKGRhdGFzZXQsIGksICwgMTAwKVxuICBwcmludChjYWxpbmhhcmEoZGF0YXNldCwgY2wkY2x1c3RlcikpXG59XG5gYGAifQ== -->
-<pre class="r"><code>for (i in k) {
+  # Clustering con K-means
   cl &lt;- kmeans(dataset, i, , 100)
-  print(calinhara(dataset, cl$cluster))
-}</code></pre>
+  
+  # Validazione con Calinski-Harabasz tramite calinhara
+  valore &lt;- calinhara(dataset, cl$cluster)
+  
+  # Aggiungiamo il valore alla lista
+  CH.kmeans &lt;- c(CH.kmeans, valore)
+  
+}
+
+# Creazione dataframe /valore
+risultati.kmeans &lt;- data.frame(k = k, val.CH = CH.kmeans)
+
+print(risultati.kmeans)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDQxMS42OTZcblsxXSA0NDcuOTY2NlxuWzFdIDQ0Mi4xODAyXG5bMV0gNDUxLjc3NTNcblsxXSA0NDEuNDE5MVxuWzFdIDQ0MS42NzUyXG5bMV0gNDMyLjM4NDRcblsxXSA0MjYuNjM5NVxuWzFdIDQyNi41ODQxXG5bMV0gNDIzLjAyNjZcblsxXSA0MTIuNTMwOVxuWzFdIDQwNC42NzQ2XG5bMV0gMzk2Ljc3NDNcblsxXSAzOTYuMTM5NVxuWzFdIDM4OS45Mzc1XG5bMV0gMzg5LjM2OTJcblsxXSAzODUuMjE2NFxuWzFdIDM3OC43MjMzXG5bMV0gMzgxLjk2MTZcbiJ9 -->
-<pre><code>[1] 411.696
-[1] 447.9666
-[1] 442.1802
-[1] 451.7753
-[1] 441.4191
-[1] 441.6752
-[1] 432.3844
-[1] 426.6395
-[1] 426.5841
-[1] 423.0266
-[1] 412.5309
-[1] 404.6746
-[1] 396.7743
-[1] 396.1395
-[1] 389.9375
-[1] 389.3692
-[1] 385.2164
-[1] 378.7233
-[1] 381.9616</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd2tBR1NKQVBwTU9CQVFJY09LQzBDQU1NUU9RcmR5c3RFMzZyNkZEOXY5em84YlQxRGpVMjZWdTFMK3hHTTVnMUx6RTN0UmpJRUFBYkRyVXRHOHBnSzB2TTBYUDJRTlBEV1pSZnJnZlR4d3ZTMXdDeG1CbmQ4T1NjeEdLWTRUQkJycFRFa2tTOXRDS2dmaUR2SDVvVzl2eUNrc3o4UEtBbUpwQjMyZEEwTXhhaENmQ1g1b0Zja3FLYm5GR2FsNjFyaENiTlhKQ1hEcklUTEFRQnZGQTJNeEtiQ2VJS3B2OVE3V3d3LzZmbXBXZm1wY0s4azVPWWxKb0RNemtsdFF6SzVBT0dCemc0OUFxS012TktZUDRFaWhicmxlU1hKTUswY0NYbjU4QkV3RDVuK0FjQTFDRVNBZ01DQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["val.CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"411.6960"},{"1":"3","2":"447.9666"},{"1":"5","2":"451.7753"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbk5BXG5OQVxuYGBgIn0= -->
+<pre class="r"><code>NA
+NA
+NA</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Quindi verifichiamo che applicando l’algoritmo di clustering K-means,
@@ -1870,24 +1826,22 @@ quella con il valore di k=5 rispetto a quelle scelte.</p>
 <p>Algoritmo di clustering: DBSCAN</p>
 <p>Iperparametri:</p>
 <ul>
-<li><p>𝜀= , minPts=</p></li>
-<li><p>𝜀= , minPts=</p></li>
-<li><p>𝜀= , minPts=</p></li>
+<li><p>𝜀= 80, minPts=15</p></li>
+<li><p>𝜀= 88, minPts=15</p></li>
+<li><p>𝜀= 80, minPts=17</p></li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkYnNjYW4pXG5cbiMgQ3JlYXppb25lIGRhdGFmcmFtZSBpdGVyYXppb25pL3ZhbG9yZVxucmlzdWx0YXRpIDwtIGRhdGEuZnJhbWUoY2FzbyA9IGludGVnZXIoKSwgdmFsb3JlID0gbnVtZXJpYygpLFxuICAgICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFKVxuXG4jIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgZXBzXG5saXN0X2VwcyA8LSBjKCAsICwgKVxuXG4jIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgbWluUHRzXG5saXN0X21pblB0cyA8LSBjKCAsICwgKVxuXG4jIENvbnRyb2xsbyBsdW5naGV6emEgbGlzdGVcbmlmKGxlbmd0aChsaXN0X2Vwcyk9PWxlbmd0aChsaXN0X21pblB0cykpe1xuICBcbiAgIyBDaWNsbyBwZXIgbGEgdmFsaWRhemlvbmUgZGVsIGNsdXN0ZXJpbmdcbiAgZm9yIChpIGluIDE6bGVuZ3RoKGxpc3RfZXBzKSkgeyBcbiAgICBlcHMgPC0gbGlzdF9lcHNbaV0gICAgICAgICAgI2VzdHJhZSBpbCB2YWxvcmUgZGkgZXBzXG4gICAgbWluUHRzIDwtIGxpc3RfbWluUHRzW2ldICAgICNlc3RyYWUgaWwgdmFsb3JlIGRpIG1pblB0c1xuICAgIFxuICAgICMgQ2x1c3RlcmluZyBjb24gREJTQ0FOIFxuICAgIGNsdXN0ZXJpbmcgPC0gZGJzY2FuKGRhdGFzZXQsIGVwcywgbWluUHRzKVxuICBcbiAgICAjIEFnZ2lvcm5hbWVudG8gZGF0YWZyYW1lIGNvaSByaXN1bHRhdGlcbiAgICByaXN1bHRhdGkgPC0gcmJpbmQocmlzdWx0YXRpLCBkYXRhLmZyYW1lKGNhc289MSwgdmFsb3JlPWNhbGluaGFyYShkYXRhc2V0LCBjbHVzdGVyaW5nJGNsdXN0ZXIpKSlcbiAgICBcbiAgICAjIFN0YW1wYSByaXN1bHRhdG9cbiAgICBjYXQoc3ByaW50ZihcIlxcbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgZXBzPSVnIGUgbWluUHRzPSVnOiAlZlxcblwiLGVwcyAsIG1pblB0cywgcmlzdWx0YXRpW2ksMl0gKSlcbiAgfVxufSBlbHNlIHtcbiAgcHJpbnQoXCJMZSBsaXN0ZSBkZXZvbm8gYXZlcmUgbGEgc3Rlc3NhIGx1bmdoZXp6YVwiKSAgXG59XG5cbmBgYCJ9 -->
-<pre class="r"><code>library(dbscan)
-
-# Creazione dataframe iterazioni/valore
-risultati &lt;- data.frame(caso = integer(), valore = numeric(),
-                        stringsAsFactors = FALSE)
-
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgZXBzXG5saXN0X2VwcyA8LSBjKDgwLCA4OCwgODApXG5cbiMgQ3JlYXppb25lIGxpc3RhIGNvbiBpIHZhbG9yaSBkaSBtaW5QdHNcbmxpc3RfbWluUHRzIDwtIGMoMTUsIDE1LCAxNylcblxuIyBDcmVhemlvbmUgbGlzdGEgcGVyIGkgdmFsb3JpIGRpIENhbGluc2tpLUhhcmFiYXN6XG5DSC5kYnNjYW4gPC0gYygpXG5cbiMgQ29udHJvbGxvIGx1bmdoZXp6YSBsaXN0ZVxuaWYobGVuZ3RoKGxpc3RfZXBzKT09bGVuZ3RoKGxpc3RfbWluUHRzKSl7XG4gIFxuICAjIENpY2xvIHBlciBsYSB2YWxpZGF6aW9uZSBkZWwgY2x1c3RlcmluZ1xuICBmb3IgKGkgaW4gMTpsZW5ndGgobGlzdF9lcHMpKSB7IFxuICAgIGVwcyA8LSBsaXN0X2Vwc1tpXSAgICAgICAgICAjZXN0cmFlIGlsIHZhbG9yZSBkaSBlcHNcbiAgICBtaW5QdHMgPC0gbGlzdF9taW5QdHNbaV0gICAgI2VzdHJhZSBpbCB2YWxvcmUgZGkgbWluUHRzXG4gICAgXG4gICAgIyBDbHVzdGVyaW5nIGNvbiBEQlNDQU4gXG4gICAgY2x1c3RlcmluZyA8LSBkYnNjYW4oZGF0YXNldCwgZXBzLCBtaW5QdHMpXG4gICAgXG4gICAgIyBBZ2dpb3JuYW1lbnRvIGxpc3RhIGNvaSByaXN1bHRhdGlcbiAgICBDSC5kYnNjYW4gPC0gYyhDSC5kYnNjYW4sIGNhbGluaGFyYShkYXRhc2V0LCBjbHVzdGVyaW5nJGNsdXN0ZXIpKVxuICB9XG4gIFxuICAjIENyZWF6aW9uZSBkYXRhZnJhbWUgaXRlcmF6aW9uZVxcdmFsb3JlXG4gIHJpc3VsdGF0aS5kYnNjYW4gPC0gZGF0YS5mcmFtZShlcHMgPSBsaXN0X2VwcywgbWluUHRzID0gbGlzdF9taW5QdHMsIHZhbC5DSCA9IENILmRic2NhbilcbiAgXG4gICMgU3RhbXBhIGRhdGFmcmFtZSBcbiAgcHJpbnQocmlzdWx0YXRpLmRic2NhbilcbiAgXG59IGVsc2Uge1xuICBwcmludChcIkxlIGxpc3RlIGRldm9ubyBhdmVyZSBsYSBzdGVzc2EgbHVuZ2hlenphXCIpICBcbn1cbmBgYCJ9 -->
+<pre class="r"><code>
 # Creazione lista con i valori di eps
-list_eps &lt;- c( , , )
+list_eps &lt;- c(80, 88, 80)
 
 # Creazione lista con i valori di minPts
-list_minPts &lt;- c( , , )
+list_minPts &lt;- c(15, 15, 17)
+
+# Creazione lista per i valori di Calinski-Harabasz
+CH.dbscan &lt;- c()
 
 # Controllo lunghezza liste
 if(length(list_eps)==length(list_minPts)){
@@ -1899,23 +1853,36 @@ if(length(list_eps)==length(list_minPts)){
     
     # Clustering con DBSCAN 
     clustering &lt;- dbscan(dataset, eps, minPts)
-  
-    # Aggiornamento dataframe coi risultati
-    risultati &lt;- rbind(risultati, data.frame(caso=1, valore=calinhara(dataset, clustering$cluster)))
     
-    # Stampa risultato
-    cat(sprintf(&quot;\nIndice Calinski-Harabasz per eps=%g e minPts=%g: %f\n&quot;,eps , minPts, risultati[i,2] ))
+    # Aggiornamento lista coi risultati
+    CH.dbscan &lt;- c(CH.dbscan, calinhara(dataset, clustering$cluster))
   }
+  
+  # Creazione dataframe iterazione\valore
+  risultati.dbscan &lt;- data.frame(eps = list_eps, minPts = list_minPts, val.CH = CH.dbscan)
+  
+  # Stampa dataframe 
+  print(risultati.dbscan)
+  
 } else {
   print(&quot;Le liste devono avere la stessa lunghezza&quot;)  
-}
-</code></pre>
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbMyDDlyAzXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd21DVkRBeDhJTm9oaEFFTUhNS2dOSlFQbDllRGlzTm9RelQ1NlFGUHcvZnR1TzJ3MUdvMXEvVUpDWWNGb2U2SC9WeEMwQ3htelV2TVRTMEdNZ1FnemdRTE1xY1dGRU9aYkxtWmVRRWxjRjVaWW82ZXN3ZWFHWnhGK2VWNk1ITjRnWmlwQWVJUVpuVExrbk1TaTJHV3dRUzVVaEpMRXZYU2lvRDZnYngvYUZyWTh3dEtNdlB6Z0pxWVFNSERocWFac1FoTlFLQTBEK1NTRk4za2pOSzhiRjFEUXpSNTVvSzhkSkNsWUNFSTRJV3ltVkhaSUdjdy9ZZHFaNE1GUUdwZWVtWmVLc3cvT1lsSnFUa3drMU5TeTZCTVBtQ0FnTU5EcjZBb002OEU1bEdnYUxGZVNYNUpJa3dMVjNKK0Rrd0U3SFdHZndES0RnMkROQUlBQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["eps"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["minPts"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["val.CH"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"80","2":"15","3":"1492.224"},{"1":"88","2":"15","3":"2717.334"},{"1":"80","2":"17","3":"2090.640"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Quindi verifichiamo che applicando l’algoritmo di clustering DBSCAN,
 la metrica di Calinski-Harabasz individua come miglior configurazione
-quella con i valori di 𝜀=?? e minPts= ?? rispetto a quelle scelte.</p>
+quella con i valori di 𝜀=88 e minPts=15 rispetto a quelle scelte.</p>
 <hr />
 <p>Algoritmo di clustering: Hierarchical clustering</p>
 <p>Iperparametri:</p>
@@ -1926,69 +1893,48 @@ quella con i valori di 𝜀=?? e minPts= ?? rispetto a quelle scelte.</p>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENsdXN0ZXJpbmcgY29uIGNvbXBsZXRlLWxpbmthZ2UgZSB2YWxpZGF6aW9uZSBkZWwgY2x1c3RlcmluZyBjb24gQ0guSURYXG5jbXBsdF9saW5rIDwtIENILklEWChkYXRhc2V0LCAxMCwgMiwgXCJoY2x1c3RfY29tcGxldGVcIilcblxuIyBTdGFtcGEgcmlzdWx0YXRpXG5jYXQoc3ByaW50ZihcIlxcbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgY29tcGxldGUtbGlua2FnZTogXFxuXCIpKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgbWV0aG9kXG5tZXRob2QgPC0gYyhcImNvbXBsZXRlXCIsIFwiYXZlcmFnZVwiLCBcInNpbmdsZVwiKVxuXG4jIENyZWF6aW9uZSBkYXRhZnJhbWUgcGVyIGkgcmlzdWx0YXRpXG5yaXN1bHRhdGkuaGllciA8LSBkYXRhLmZyYW1lKGsgPSAyOjEwKVxuXG4jIENpY2xvIHBlciBjbHVzdGVyaW5nIHRyYW1pdGUgaGllcmFyY2hpY2FsIGNsdXN0ZXJpbmcgZSB2YWxpZGF6aW9uZSBjb24gY2FsaW5oYXJhXG5mb3IoaSBpbiBtZXRob2Qpe1xuICBcbiAgIyBDcmVhemlvbmUgbGlzdGEgcGVyIGkgdmFsb3JpIGRpIENhbGluc2tpLUhhcmFiYXN6IFxuICBDSC5oaWVyPC0gYygpXG4gIFxuICAjIENsdXN0ZXJpbmcgY29uIGNvbXBsZXRlLWxpbmthZ2VcbiAgSC5tb2RlbCA8LSBoY2x1c3QoZGlzdChkYXRhc2V0KSwgaSlcbiAgXG4gICMgQ2ljbG8gcGVyIGxhIHZhbGlkYXppb25lIGRlbCBjbHVzdGVyaW5nIGNvbiBjYWxpbmhhcmFcbiAgZm9yIChqIGluIDI6MTApIHtcbiAgICBjbHVzdGVyIDwtIGN1dHJlZShILm1vZGVsLCBrID0gaikgICNUYWdsaW8gZGVsbCdhbGJlcm8gcmlzdWx0YW50ZSBkYWwgY2x1c3RlcmluZ1xuICAgIENILmhpZXIgPC0gYyhDSC5oaWVyLCBjYWxpbmhhcmEoZGF0YXNldCwgY2x1c3RlcikpICAjQWdnaW9ybmFtZW50byBsaXN0YSBjb2kgcmlzdWx0YXRpXG4gIH1cbiAgXG4gICMgQWdnaW9ybmFtZW50byBkYXRhZnJhbWUgcmlzdWx0YXRpXG4gIGlmKGkgPT0gXCJjb21wbGV0ZVwiKXtcbiAgICByaXN1bHRhdGkuaGllciRjb21wbGV0ZSA8LSBDSC5oaWVyIFxuICB9XG4gIGlmKGkgPT0gXCJhdmVyYWdlXCIpe1xuICAgIHJpc3VsdGF0aS5oaWVyJGF2ZXJhZ2UgPC0gQ0guaGllciBcbiAgfVxuICBpZihpID09IFwic2luZ2xlXCIpe1xuICAgIHJpc3VsdGF0aS5oaWVyJHNpbmdsZSA8LSBDSC5oaWVyIFxuICB9XG59XG5cbiMgU3RhbXBhIGRlbCBkYXRhZnJhbWUgZGVpIHJpc3VsdGF0aVxucHJpbnQocmlzdWx0YXRpLmhpZXIpXG5gYGAifQ== -->
 <pre class="r"><code>
-# Clustering con complete-linkage e validazione del clustering con CH.IDX
-cmplt_link &lt;- CH.IDX(dataset, 10, 2, &quot;hclust_complete&quot;)
+# Creazione lista con i valori di method
+method &lt;- c(&quot;complete&quot;, &quot;average&quot;, &quot;single&quot;)
 
-# Stampa risultati
-cat(sprintf(&quot;\nIndice Calinski-Harabasz per complete-linkage: \n&quot;))</code></pre>
+# Creazione dataframe per i risultati
+risultati.hier &lt;- data.frame(k = 2:10)
+
+# Ciclo per clustering tramite hierarchical clustering e validazione con calinhara
+for(i in method){
+  
+  # Creazione lista per i valori di Calinski-Harabasz 
+  CH.hier&lt;- c()
+  
+  # Clustering con complete-linkage
+  H.model &lt;- hclust(dist(dataset), i)
+  
+  # Ciclo per la validazione del clustering con calinhara
+  for (j in 2:10) {
+    cluster &lt;- cutree(H.model, k = j)  #Taglio dell&#39;albero risultante dal clustering
+    CH.hier &lt;- c(CH.hier, calinhara(dataset, cluster))  #Aggiornamento lista coi risultati
+  }
+  
+  # Aggiornamento dataframe risultati
+  if(i == &quot;complete&quot;){
+    risultati.hier$complete &lt;- CH.hier 
+  }
+  if(i == &quot;average&quot;){
+    risultati.hier$average &lt;- CH.hier 
+  }
+  if(i == &quot;single&quot;){
+    risultati.hier$single &lt;- CH.hier 
+  }
+}
+
+# Stampa del dataframe dei risultati
+print(risultati.hier)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGNvbXBsZXRlLWxpbmthZ2U6IFxuIn0= -->
-<pre><code>
-Indice Calinski-Harabasz per complete-linkage: </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoY21wbHRfbGluaylcbmBgYCJ9 -->
-<pre class="r"><code>print(cmplt_link)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6OSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbOSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd2tBR1NKQVBpRGtkR0NEQWdRTktDMEJwRVNndEFhVmxvTFFDbEZhQzBpb01NQUF4TC9HMDltdHhveENIVWpZOXNTNzdiSWZpYTd2S1ZTMldPQlI4MXNqeDBXeDJLTzdSVVBuMExNcWgrUDNUTFBQN09RNkZUOWcyUkZuS09SUkc5eWZHZVhjNGxNWjh1cnkxN1JlYXcxbnpFbk5UaTRFTUFiRGpvYjdKaGpLWW5EM1ExSE1XNVpmcndmVHdncFEwUUJ6SmlXNXdjazVpTWN4Z21DQlhTbUpKb2w1YUVWQS9rUGNQVFF0N2ZrRkpabjRlVUJNVEtDalowRFF6RnFFSjhKZm1nVnlTb3B1Y1VacVhyV3VFSnMxY2tKY09zaE1zQkFHOFVEWW5FcHNKNGdxbS8xRHRiRkR0YktsNTZabDVxVER2NUNRbXBlYkFURTVKTFlNeStZRGhBUTRPdllLaXpMd1NtRCtCb3NWNkpma2xpVEF0WE1uNU9UQVJzTThaL2dFQXVpTjlBMThDQUFBPSJ9 -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6OSwibmNvbCI6NCwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbOSDDlyA0XSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd2tBR1VCa0RMeENEQkpuQU9pRmlJSzFzUU13T3hCeFFlWkRKZkNDMlErSnA3ZGZpUmtFT3BXeDZZbDMybVE3RjEzYVZxMW9zZGlqNHJKSGpvOW5zVU55am9mTHBXWVJEOGZ1bldlYjNjeHdLbjdCdGlMS1VjeWlNN2srTTgyNTNLSTM1ZEhscjJ3KzRlWlVyYk92LytwNTNxTGJLTG1JTjdISW9pVnF3b0k4cDM2R2d6Ly9sdmlVOERzVTNiUGJ1THdXYVkrRjg5T01wWTRlU2czS3JtSXpESEVwdVBIRDlmL0tNUTdGbVNMYXg4VEtZZWZiUER2UUd1SHhPczM5dlVobDU5azJZL2JPd1BRRjNzaXp0LzR2OGZIdnV0cVQ5cjkvY1diVWhuZzRTSGNXS0pUdS9PNGg1L2Zsd2twL1pRVXpBZHJQMUFoMEhrWnBzb3h2bS9HaUJ4cHFYbUp0YURHUUlnQU1KR3BMWlVBWkhjbjV1UVU1cVNTcVV6NTVZbGxxVW1BN2pzaFZuNXFYbnBLSVp5Vm1VWDY0SE14WVVEMHdOREdEQWlXNTNjazVpTWN4dW1DQlhTbUpKb2w1YUVWQS9rUGNQVFF0N2ZrRkpabjRlVUJPVE1EUTJrVFV6RnFFSjhKZm1nVnlTb3B1Y1VacVhyV3VNSnMxY2tKY09UUVNNRURlQ0hjd0lUUnd3Tmd2RUZVei9vZHJaWVA1UHpVdlB6SU9GQm10T1lsSnFEc3prbE5ReUtKTVBHQjdnNE5BcktNck1LNEg1RXloYXJGZVNYNUlJMDhLVm5KOERFd0g3bk9FZkFIdXFrUVArQWdBQSJ9 -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"142.3491"},{"1":"3","2":"336.3863"},{"1":"4","2":"317.4205"},{"1":"5","2":"271.1974"},{"1":"6","2":"312.7598"},{"1":"7","2":"318.9935"},{"1":"8","2":"286.2516"},{"1":"9","2":"277.7225"},{"1":"10","2":"341.8093"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[9]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENsdXN0ZXJpbmcgY29uIGF2ZXJhZ2UtbGlua2FnZSBlIHZhbGlkYXppb25lIGRlbCBjbHVzdGVyaW5nIGNvbiBDSC5JRFhcbmF2cmdfbGluayA8LSBDSC5JRFgoZGF0YXNldCwgMTAsIDIsIFwiaGNsdXN0X2F2ZXJhZ2VcIilcblxuIyBTdGFtcGEgcmlzdWx0YXRpXG5jYXQoc3ByaW50ZihcIlxcbkluZGljZSBDYWxpbnNraS1IYXJhYmFzeiBwZXIgYXZlcmFnZS1saW5rYWdlOiBcXG5cIikpXG5gYGAifQ== -->
-<pre class="r"><code>
-# Clustering con average-linkage e validazione del clustering con CH.IDX
-avrg_link &lt;- CH.IDX(dataset, 10, 2, &quot;hclust_average&quot;)
-
-# Stampa risultati
-cat(sprintf(&quot;\nIndice Calinski-Harabasz per average-linkage: \n&quot;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGF2ZXJhZ2UtbGlua2FnZTogXG4ifQ== -->
-<pre><code>
-Indice Calinski-Harabasz per average-linkage: </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXZyZ19saW5rXG5gYGAifQ== -->
-<pre class="r"><code>avrg_link</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6OSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbOSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd2tBR1NKQVBpRGtkR0NEQWdRTktDMEJwRVNndEFhVmxvTFFDbEZhQzBpb01NQUF4cjNLRmJmMWYzN01PMVZiWlJheUJuUTRsVVFzVzlERVZPQlQwK2IvY3Q0VGJvZmlHemQ3OXBUa09oUmJPUnorZU1uSW9PU2kzaXNrNDFLSGt4Z1BYL3lmUE9SUnJobVFiRzY5QWN6aHJYbUp1YWpHUUlRQjJQTlEzMlZBR2s3TUhtbnJPb3Z4eVBaZ2VYcENTQm9nak9kRU5UczVKTElZWkRCUGtTa2tzU2RSTEt3THFCL0wrb1dsaHp5OG95Y3pQQTJwaUFnVWxHNXBteGlJMEFmN1NQSkJMVW5TVE0wcnpzbldOMEtTWkMvTFNRWGFDaFNDQUY4cm1SR0l6UVZ6QjlCK3FuUTJxblMwMUx6MHpMeFhtblp6RXBOUWNtTWtwcVdWUUpoOHdQTURCb1ZkUWxKbFhBdk1uVUxSWXJ5Uy9KQkdtaFNzNVB3Y21Bdlk1d3o4QXp2OWR6VjhDQUFBPSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"410.5150"},{"1":"3","2":"435.6512"},{"1":"4","2":"325.6642"},{"1":"5","2":"264.8945"},{"1":"6","2":"317.5148"},{"1":"7","2":"275.5165"},{"1":"8","2":"332.0700"},{"1":"9","2":"333.5548"},{"1":"10","2":"306.5831"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[9]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIENsdXN0ZXJpbmcgY29uIHNpbmdsZS1saW5rYWdlIGUgdmFsaWRhemlvbmUgZGVsIGNsdXN0ZXJpbmcgY29uIENILklEWFxuc25nbF9saW5rIDwtIENILklEWChkYXRhc2V0LCAxMCwgMiwgXCJoY2x1c3Rfc2luZ2xlXCIpXG5cbiMgU3RhbXBhIHJpc3VsdGF0aVxuY2F0KHNwcmludGYoXCJcXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIHNpbmdsZS1saW5rYWdlOiBcXG5cIikpXG5gYGAifQ== -->
-<pre class="r"><code>
-# Clustering con single-linkage e validazione del clustering con CH.IDX
-sngl_link &lt;- CH.IDX(dataset, 10, 2, &quot;hclust_single&quot;)
-
-# Stampa risultati
-cat(sprintf(&quot;\nIndice Calinski-Harabasz per single-linkage: \n&quot;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIHNpbmdsZS1saW5rYWdlOiBcbiJ9 -->
-<pre><code>
-Indice Calinski-Harabasz per single-linkage: </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc25nbF9saW5rXG5gYGAifQ== -->
-<pre class="r"><code>sngl_link</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6OSwibmNvbCI6Miwic3VtbWFyeSI6eyJEZXNjcmlwdGlvbiI6WyJkZiBbOSDDlyAyXSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoQVpLc1FDWURhMmlJbTY0RkF3TUxFNUREeU1EQ3dBbWlLNERTd2tBR1NKQVBpRGtkR0NEQWdRTktDMEJwRVNndEFhVmxvTFFDbEZhQzBpb01NQUEyei83WmdkNEFsMC83N2QrYlZFYWVmVk5uL3l4c1Q4Q2RMR2Y3L3lJLzM1NjdyV0QvNnpkM1ZtMUl0SU5FUjdGaXljNi9EbUplZno2YzVHZHpFQk93M1d5OVFNZEJwQ2JiNklhNU1KckRXZk1TYzFPTGdRd0JzT09odnNtR01waWNQZERVY3hibGwrdkI5UENDbERSQUhNbUpibkJ5VG1JeHpHQ1lJRmRLWWttaVhsb1JVRCtROXc5TkMzdCtRVWxtZmg1UUV4TW9LTm5RTkRNV29RbndsK2FCWEpLaW01eFJtcGV0YTRRbXpWeVFsdzZ5RXl3RUFieFFOaWNTbXduaUNxYi9VTzFzVU8xc3FYbnBtWG1wTU8va0pDYWw1c0JNVGtrdGd6TDVnT0VCRGc2OWdxTE12QktZUDRHaXhYb2wrU1dKTUMxY3lmazVNQkd3enhuK0FRQ3AwdWo5WHdJQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["k"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CH"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"0.7110049"},{"1":"3","2":"0.9751555"},{"1":"4","2":"0.6980878"},{"1":"5","2":"1.9426212"},{"1":"6","2":"1.6862902"},{"1":"7","2":"6.1332517"},{"1":"8","2":"5.5732305"},{"1":"9","2":"5.5158604"},{"1":"10","2":"5.1215027"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[9]},"pages":{}}}
+{"columns":[{"label":["k"],"name":[1],"type":["int"],"align":["right"]},{"label":["complete"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["average"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["single"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2","2":"142.3491","3":"410.5150","4":"0.7110049"},{"1":"3","2":"336.3863","3":"435.6512","4":"0.9751555"},{"1":"4","2":"317.4205","3":"325.6642","4":"0.6980878"},{"1":"5","2":"271.1974","3":"264.8945","4":"1.9426212"},{"1":"6","2":"312.7598","3":"317.5148","4":"1.6862902"},{"1":"7","2":"318.9935","3":"275.5165","4":"6.1332517"},{"1":"8","2":"286.2516","3":"332.0700","4":"5.5732305"},{"1":"9","2":"277.7225","3":"333.5548","4":"5.5158604"},{"1":"10","2":"341.8093","3":"306.5831","4":"5.1215027"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[9]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -1997,17 +1943,19 @@ Indice Calinski-Harabasz per single-linkage: </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Quindi verifichiamo che applicando l’algoritmo di clustering
-Hierarchical clustering, la metrica di Calinski-Harabasz individua come
-miglior configurazione quella con tipo average-linkage rispetto alle
-altre opzioni.</p>
+<p>Per scegliere la configurazione migliore ci limitiamo ad analizzare
+il clustering per le configurazioni che vanno da 2 a 10 cluster cercando
+un ottimo locale con il valore di k minimo. Per l’algoritmo di
+clustering Hierarchical clustering, la metrica di Calinski-Harabasz
+individua come miglior configurazione quella con tipo average-linkage
+rispetto alle altre opzioni con ottimo locale per k=3.</p>
 <p>CONCLUSIONI:</p>
 <p>L’analisi effettuata tramite la metrica di Calinski-Harabasz indica
-come miglior risultato la combinazione di ?? come algoritmo di
-clustering con configurazione di iperparametri ??.</p>
+come miglior risultato la combinazione di DBSCAN come algoritmo di
+clustering con configurazione di iperparametri 𝜀=88 e minPts=15.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFOQUxJU0kgREFUQVNFVCBkZXByZXNzaW9uX2hlYXJ0X2ZhaWx1cmUiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KQU5BTElTSSBEQVRBU0VUIGRlcHJlc3Npb25faGVhcnRfZmFpbHVyZS5jc3YNCg0KQWxnb3JpdG1vIGRpIGNsdXN0ZXJpbmc6IEstbWVhbnMNCg0KSXBlcnBhcmFtZXRyaToNCg0KLSAgIGs9Mg0KDQotICAgaz0zDQoNCi0gICBrPTUNCg0KYGBge3J9DQpsaWJyYXJ5KFVuaXZlcnNhbENWSSkNCmxpYnJhcnkocmVhZHIpDQpsaWJyYXJ5KGZwYykgDQoNCg0KIyBMZXR0dXJhIGUgcHVsaXppYSBkZWwgZGF0YXNldCBkYSBkYXRpIE5BDQpkYXRhc2V0IDwtIG5hLm9taXQocmVhZF9jc3YoIn4vQ2FsaW5za2lfSGFyYWJhc3pfVGhlc2lzL0RhdGEvRGF0YXNldFJlYWxpL2pvdXJuYWwucG9uZS4wMTU4NTcwX1MyRmlsZV9kZXByZXNzaW9uX2hlYXJ0X2ZhaWx1cmUuY3N2IikpDQoNCiMgQ3JlYXppb25lIGxpc3RhIGNvbiBpIHZhbG9yaSBkaSBrDQprIDwtIGMoMjoyMCkNCg0KIyBDbHVzdGVyaW5nIGNvbiBLLW1lYW5zIGUgdmFsaWRhemlvbmUgZGVsIGNsdXN0ZXJpbmcgY29uIENILklEWA0KZGYgPC0gQ0guSURYKGRhdGFzZXQsIG1heChrKSkNCmZvciAoaSBpbiBrKSB7DQogIA0KICAjIFN0YW1wYSByaXN1bHRhdGkNCiAgY2F0KHNwcmludGYoIlxuSW5kaWNlIENhbGluc2tpLUhhcmFiYXN6IHBlciBrPSVpOiAlZlxuIixpLCBkZltpLTEsMl0gKSkNCg0KfQ0KDQoNCg0KYGBgDQoNClF1aW5kaSB2ZXJpZmljaGlhbW8gY2hlIGFwcGxpY2FuZG8gbCdhbGdvcml0bW8gZGkgY2x1c3RlcmluZyBLLW1lYW5zLCBsYSBtZXRyaWNhIGRpIENhbGluc2tpLUhhcmFiYXN6IGluZGl2aWR1YSBjb21lIG1pZ2xpb3IgY29uZmlndXJhemlvbmUgcXVlbGxhIGNvbiBpbCB2YWxvcmUgZGkgaz01IHJpc3BldHRvIGEgcXVlbGxlIHNjZWx0ZS4NCg0KDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQpBbGdvcml0bW8gZGkgY2x1c3RlcmluZzogREJTQ0FODQoNCklwZXJwYXJhbWV0cmk6DQoNCi0gICDwnZyAPSAsIG1pblB0cz0gDQoNCi0gICDwnZyAPSAsIG1pblB0cz0gDQoNCi0gICDwnZyAPSAsIG1pblB0cz0gDQoNCmBgYHtyfQ0KbGlicmFyeShkYnNjYW4pDQoNCiMgQ3JlYXppb25lIGRhdGFmcmFtZSBpdGVyYXppb25pL3ZhbG9yZQ0KcmlzdWx0YXRpIDwtIGRhdGEuZnJhbWUoY2FzbyA9IGludGVnZXIoKSwgdmFsb3JlID0gbnVtZXJpYygpLA0KICAgICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEZBTFNFKQ0KDQojIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgZXBzDQpsaXN0X2VwcyA8LSBjKCAsICwgKQ0KDQojIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgbWluUHRzDQpsaXN0X21pblB0cyA8LSBjKCAsICwgKQ0KDQojIENvbnRyb2xsbyBsdW5naGV6emEgbGlzdGUNCmlmKGxlbmd0aChsaXN0X2Vwcyk9PWxlbmd0aChsaXN0X21pblB0cykpew0KICANCiAgIyBDaWNsbyBwZXIgbGEgdmFsaWRhemlvbmUgZGVsIGNsdXN0ZXJpbmcNCiAgZm9yIChpIGluIDE6bGVuZ3RoKGxpc3RfZXBzKSkgeyANCiAgICBlcHMgPC0gbGlzdF9lcHNbaV0gICAgICAgICAgI2VzdHJhZSBpbCB2YWxvcmUgZGkgZXBzDQogICAgbWluUHRzIDwtIGxpc3RfbWluUHRzW2ldICAgICNlc3RyYWUgaWwgdmFsb3JlIGRpIG1pblB0cw0KICAgIA0KICAgICMgQ2x1c3RlcmluZyBjb24gREJTQ0FOIA0KICAgIGNsdXN0ZXJpbmcgPC0gZGJzY2FuKGRhdGFzZXQsIGVwcywgbWluUHRzKQ0KICANCiAgICAjIEFnZ2lvcm5hbWVudG8gZGF0YWZyYW1lIGNvaSByaXN1bHRhdGkNCiAgICByaXN1bHRhdGkgPC0gcmJpbmQocmlzdWx0YXRpLCBkYXRhLmZyYW1lKGNhc289MSwgdmFsb3JlPWNhbGluaGFyYShkYXRhc2V0LCBjbHVzdGVyaW5nJGNsdXN0ZXIpKSkNCiAgICANCiAgICAjIFN0YW1wYSByaXN1bHRhdG8NCiAgICBjYXQoc3ByaW50ZigiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGVwcz0lZyBlIG1pblB0cz0lZzogJWZcbiIsZXBzICwgbWluUHRzLCByaXN1bHRhdGlbaSwyXSApKQ0KICB9DQp9IGVsc2Ugew0KICBwcmludCgiTGUgbGlzdGUgZGV2b25vIGF2ZXJlIGxhIHN0ZXNzYSBsdW5naGV6emEiKSAgDQp9DQoNCmBgYA0KDQpRdWluZGkgdmVyaWZpY2hpYW1vIGNoZSBhcHBsaWNhbmRvIGwnYWxnb3JpdG1vIGRpIGNsdXN0ZXJpbmcgREJTQ0FOLCBsYSBtZXRyaWNhIGRpIENhbGluc2tpLUhhcmFiYXN6IGluZGl2aWR1YSBjb21lIG1pZ2xpb3IgY29uZmlndXJhemlvbmUgcXVlbGxhIGNvbiBpIHZhbG9yaSBkaSDwnZyAPT8/IGUgbWluUHRzPSA/PyByaXNwZXR0byBhIHF1ZWxsZSBzY2VsdGUuDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KDQpBbGdvcml0bW8gZGkgY2x1c3RlcmluZzogSGllcmFyY2hpY2FsIGNsdXN0ZXJpbmcNCg0KSXBlcnBhcmFtZXRyaToNCg0KLSAgIGNvbXBsZXRlLWxpbmthZ2UNCg0KLSAgIGF2ZXJhZ2UtbGlua2FnZQ0KDQotICAgc2luZ2xlLWxpbmthZ2UNCg0KYGBge3J9DQoNCiMgQ2x1c3RlcmluZyBjb24gY29tcGxldGUtbGlua2FnZSBlIHZhbGlkYXppb25lIGRlbCBjbHVzdGVyaW5nIGNvbiBDSC5JRFgNCmNtcGx0X2xpbmsgPC0gQ0guSURYKGRhdGFzZXQsIDEwLCAyLCAiaGNsdXN0X2NvbXBsZXRlIikNCg0KIyBTdGFtcGEgcmlzdWx0YXRpDQpjYXQoc3ByaW50ZigiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIGNvbXBsZXRlLWxpbmthZ2U6IFxuIikpDQpwcmludChjbXBsdF9saW5rKQ0KDQojIENsdXN0ZXJpbmcgY29uIGF2ZXJhZ2UtbGlua2FnZSBlIHZhbGlkYXppb25lIGRlbCBjbHVzdGVyaW5nIGNvbiBDSC5JRFgNCmF2cmdfbGluayA8LSBDSC5JRFgoZGF0YXNldCwgMTAsIDIsICJoY2x1c3RfYXZlcmFnZSIpDQoNCiMgU3RhbXBhIHJpc3VsdGF0aQ0KY2F0KHNwcmludGYoIlxuSW5kaWNlIENhbGluc2tpLUhhcmFiYXN6IHBlciBhdmVyYWdlLWxpbmthZ2U6IFxuIikpDQphdnJnX2xpbmsNCg0KIyBDbHVzdGVyaW5nIGNvbiBzaW5nbGUtbGlua2FnZSBlIHZhbGlkYXppb25lIGRlbCBjbHVzdGVyaW5nIGNvbiBDSC5JRFgNCnNuZ2xfbGluayA8LSBDSC5JRFgoZGF0YXNldCwgMTAsIDIsICJoY2x1c3Rfc2luZ2xlIikNCg0KIyBTdGFtcGEgcmlzdWx0YXRpDQpjYXQoc3ByaW50ZigiXG5JbmRpY2UgQ2FsaW5za2ktSGFyYWJhc3ogcGVyIHNpbmdsZS1saW5rYWdlOiBcbiIpKQ0Kc25nbF9saW5rDQoNCmBgYA0KDQpRdWluZGkgdmVyaWZpY2hpYW1vIGNoZSBhcHBsaWNhbmRvIGwnYWxnb3JpdG1vIGRpIGNsdXN0ZXJpbmcgSGllcmFyY2hpY2FsIGNsdXN0ZXJpbmcsIGxhIG1ldHJpY2EgZGkgQ2FsaW5za2ktSGFyYWJhc3ogaW5kaXZpZHVhIGNvbWUgbWlnbGlvciBjb25maWd1cmF6aW9uZSBxdWVsbGEgY29uIHRpcG8gYXZlcmFnZS1saW5rYWdlIHJpc3BldHRvIGFsbGUgYWx0cmUgb3B6aW9uaS4NCg0KQ09OQ0xVU0lPTkk6DQoNCkwnYW5hbGlzaSBlZmZldHR1YXRhIHRyYW1pdGUgbGEgbWV0cmljYSBkaSBDYWxpbnNraS1IYXJhYmFzeiBpbmRpY2EgY29tZSBtaWdsaW9yIHJpc3VsdGF0byBsYSBjb21iaW5hemlvbmUgZGkgPz8gY29tZSBhbGdvcml0bW8gZGkgY2x1c3RlcmluZyBjb24gY29uZmlndXJhemlvbmUgZGkgaXBlcnBhcmFtZXRyaSA/Py4NCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFOQUxJU0kgREFUQVNFVCBkZXByZXNzaW9uX2hlYXJ0X2ZhaWx1cmUiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KQU5BTElTSSBEQVRBU0VUIGRlcHJlc3Npb25faGVhcnRfZmFpbHVyZS5jc3YNCg0KQWxnb3JpdG1vIGRpIGNsdXN0ZXJpbmc6IEstbWVhbnMNCg0KSXBlcnBhcmFtZXRyaToNCg0KLSAgIGs9Mg0KDQotICAgaz0zDQoNCi0gICBrPTUNCg0KYGBge3J9DQpsaWJyYXJ5KHJlYWRyKQ0KbGlicmFyeShmcGMpIA0KDQoNCiMgTGV0dHVyYSBlIHB1bGl6aWEgZGVsIGRhdGFzZXQgZGEgZGF0aSBOQQ0KZGF0YXNldCA8LSBuYS5vbWl0KHJlYWRfY3N2KCJ+L0NhbGluc2tpX0hhcmFiYXN6X1RoZXNpcy9EYXRhL0RhdGFzZXRSZWFsaS9qb3VybmFsLnBvbmUuMDE1ODU3MF9TMkZpbGVfZGVwcmVzc2lvbl9oZWFydF9mYWlsdXJlLmNzdiIpKQ0KDQojIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgaw0KayA8LSBjKDIsIDMsIDUpDQoNCiMgQ3JlYXppb25lIGxpc3RhIHBlciBpIHZhbG9yaSBkaSBDYWxpbnNraS1IYXJhYmFzeg0KQ0gua21lYW5zIDwtIGMoKQ0KDQpmb3IgKGkgaW4gaykgew0KICANCiAgIyBDbHVzdGVyaW5nIGNvbiBLLW1lYW5zDQogIGNsIDwtIGttZWFucyhkYXRhc2V0LCBpLCAsIDEwMCkNCiAgDQogICMgVmFsaWRhemlvbmUgY29uIENhbGluc2tpLUhhcmFiYXN6IHRyYW1pdGUgY2FsaW5oYXJhDQogIHZhbG9yZSA8LSBjYWxpbmhhcmEoZGF0YXNldCwgY2wkY2x1c3RlcikNCiAgDQogICMgQWdnaXVuZ2lhbW8gaWwgdmFsb3JlIGFsbGEgbGlzdGENCiAgQ0gua21lYW5zIDwtIGMoQ0gua21lYW5zLCB2YWxvcmUpDQogIA0KfQ0KDQojIENyZWF6aW9uZSBkYXRhZnJhbWUgL3ZhbG9yZQ0KcmlzdWx0YXRpLmttZWFucyA8LSBkYXRhLmZyYW1lKGsgPSBrLCB2YWwuQ0ggPSBDSC5rbWVhbnMpDQoNCnByaW50KHJpc3VsdGF0aS5rbWVhbnMpDQoNCg0KDQpgYGANCg0KUXVpbmRpIHZlcmlmaWNoaWFtbyBjaGUgYXBwbGljYW5kbyBsJ2FsZ29yaXRtbyBkaSBjbHVzdGVyaW5nIEstbWVhbnMsIGxhIG1ldHJpY2EgZGkgQ2FsaW5za2ktSGFyYWJhc3ogaW5kaXZpZHVhIGNvbWUgbWlnbGlvciBjb25maWd1cmF6aW9uZSBxdWVsbGEgY29uIGlsIHZhbG9yZSBkaSBrPTUgcmlzcGV0dG8gYSBxdWVsbGUgc2NlbHRlLg0KDQoNCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCkFsZ29yaXRtbyBkaSBjbHVzdGVyaW5nOiBEQlNDQU4NCg0KSXBlcnBhcmFtZXRyaToNCg0KLSAgIPCdnIA9IDgwLCBtaW5QdHM9MTUgDQoNCi0gICDwnZyAPSA4OCwgbWluUHRzPTE1DQoNCi0gICDwnZyAPSA4MCwgbWluUHRzPTE3IA0KDQpgYGB7cn0NCg0KIyBDcmVhemlvbmUgbGlzdGEgY29uIGkgdmFsb3JpIGRpIGVwcw0KbGlzdF9lcHMgPC0gYyg4MCwgODgsIDgwKQ0KDQojIENyZWF6aW9uZSBsaXN0YSBjb24gaSB2YWxvcmkgZGkgbWluUHRzDQpsaXN0X21pblB0cyA8LSBjKDE1LCAxNSwgMTcpDQoNCiMgQ3JlYXppb25lIGxpc3RhIHBlciBpIHZhbG9yaSBkaSBDYWxpbnNraS1IYXJhYmFzeg0KQ0guZGJzY2FuIDwtIGMoKQ0KDQojIENvbnRyb2xsbyBsdW5naGV6emEgbGlzdGUNCmlmKGxlbmd0aChsaXN0X2Vwcyk9PWxlbmd0aChsaXN0X21pblB0cykpew0KICANCiAgIyBDaWNsbyBwZXIgbGEgdmFsaWRhemlvbmUgZGVsIGNsdXN0ZXJpbmcNCiAgZm9yIChpIGluIDE6bGVuZ3RoKGxpc3RfZXBzKSkgeyANCiAgICBlcHMgPC0gbGlzdF9lcHNbaV0gICAgICAgICAgI2VzdHJhZSBpbCB2YWxvcmUgZGkgZXBzDQogICAgbWluUHRzIDwtIGxpc3RfbWluUHRzW2ldICAgICNlc3RyYWUgaWwgdmFsb3JlIGRpIG1pblB0cw0KICAgIA0KICAgICMgQ2x1c3RlcmluZyBjb24gREJTQ0FOIA0KICAgIGNsdXN0ZXJpbmcgPC0gZGJzY2FuKGRhdGFzZXQsIGVwcywgbWluUHRzKQ0KICAgIA0KICAgICMgQWdnaW9ybmFtZW50byBsaXN0YSBjb2kgcmlzdWx0YXRpDQogICAgQ0guZGJzY2FuIDwtIGMoQ0guZGJzY2FuLCBjYWxpbmhhcmEoZGF0YXNldCwgY2x1c3RlcmluZyRjbHVzdGVyKSkNCiAgfQ0KICANCiAgIyBDcmVhemlvbmUgZGF0YWZyYW1lIGl0ZXJhemlvbmVcdmFsb3JlDQogIHJpc3VsdGF0aS5kYnNjYW4gPC0gZGF0YS5mcmFtZShlcHMgPSBsaXN0X2VwcywgbWluUHRzID0gbGlzdF9taW5QdHMsIHZhbC5DSCA9IENILmRic2NhbikNCiAgDQogICMgU3RhbXBhIGRhdGFmcmFtZSANCiAgcHJpbnQocmlzdWx0YXRpLmRic2NhbikNCiAgDQp9IGVsc2Ugew0KICBwcmludCgiTGUgbGlzdGUgZGV2b25vIGF2ZXJlIGxhIHN0ZXNzYSBsdW5naGV6emEiKSAgDQp9DQoNCmBgYA0KDQpRdWluZGkgdmVyaWZpY2hpYW1vIGNoZSBhcHBsaWNhbmRvIGwnYWxnb3JpdG1vIGRpIGNsdXN0ZXJpbmcgREJTQ0FOLCBsYSBtZXRyaWNhIGRpIENhbGluc2tpLUhhcmFiYXN6IGluZGl2aWR1YSBjb21lIG1pZ2xpb3IgY29uZmlndXJhemlvbmUgcXVlbGxhIGNvbiBpIHZhbG9yaSBkaSDwnZyAPTg4IGUgbWluUHRzPTE1IHJpc3BldHRvIGEgcXVlbGxlIHNjZWx0ZS4NCg0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCkFsZ29yaXRtbyBkaSBjbHVzdGVyaW5nOiBIaWVyYXJjaGljYWwgY2x1c3RlcmluZw0KDQpJcGVycGFyYW1ldHJpOg0KDQotICAgY29tcGxldGUtbGlua2FnZQ0KDQotICAgYXZlcmFnZS1saW5rYWdlDQoNCi0gICBzaW5nbGUtbGlua2FnZQ0KDQpgYGB7cn0NCg0KIyBDcmVhemlvbmUgbGlzdGEgY29uIGkgdmFsb3JpIGRpIG1ldGhvZA0KbWV0aG9kIDwtIGMoImNvbXBsZXRlIiwgImF2ZXJhZ2UiLCAic2luZ2xlIikNCg0KIyBDcmVhemlvbmUgZGF0YWZyYW1lIHBlciBpIHJpc3VsdGF0aQ0KcmlzdWx0YXRpLmhpZXIgPC0gZGF0YS5mcmFtZShrID0gMjoxMCkNCg0KIyBDaWNsbyBwZXIgY2x1c3RlcmluZyB0cmFtaXRlIGhpZXJhcmNoaWNhbCBjbHVzdGVyaW5nIGUgdmFsaWRhemlvbmUgY29uIGNhbGluaGFyYQ0KZm9yKGkgaW4gbWV0aG9kKXsNCiAgDQogICMgQ3JlYXppb25lIGxpc3RhIHBlciBpIHZhbG9yaSBkaSBDYWxpbnNraS1IYXJhYmFzeiANCiAgQ0guaGllcjwtIGMoKQ0KICANCiAgIyBDbHVzdGVyaW5nIGNvbiBjb21wbGV0ZS1saW5rYWdlDQogIEgubW9kZWwgPC0gaGNsdXN0KGRpc3QoZGF0YXNldCksIGkpDQogIA0KICAjIENpY2xvIHBlciBsYSB2YWxpZGF6aW9uZSBkZWwgY2x1c3RlcmluZyBjb24gY2FsaW5oYXJhDQogIGZvciAoaiBpbiAyOjEwKSB7DQogICAgY2x1c3RlciA8LSBjdXRyZWUoSC5tb2RlbCwgayA9IGopICAjVGFnbGlvIGRlbGwnYWxiZXJvIHJpc3VsdGFudGUgZGFsIGNsdXN0ZXJpbmcNCiAgICBDSC5oaWVyIDwtIGMoQ0guaGllciwgY2FsaW5oYXJhKGRhdGFzZXQsIGNsdXN0ZXIpKSAgI0FnZ2lvcm5hbWVudG8gbGlzdGEgY29pIHJpc3VsdGF0aQ0KICB9DQogIA0KICAjIEFnZ2lvcm5hbWVudG8gZGF0YWZyYW1lIHJpc3VsdGF0aQ0KICBpZihpID09ICJjb21wbGV0ZSIpew0KICAgIHJpc3VsdGF0aS5oaWVyJGNvbXBsZXRlIDwtIENILmhpZXIgDQogIH0NCiAgaWYoaSA9PSAiYXZlcmFnZSIpew0KICAgIHJpc3VsdGF0aS5oaWVyJGF2ZXJhZ2UgPC0gQ0guaGllciANCiAgfQ0KICBpZihpID09ICJzaW5nbGUiKXsNCiAgICByaXN1bHRhdGkuaGllciRzaW5nbGUgPC0gQ0guaGllciANCiAgfQ0KfQ0KDQojIFN0YW1wYSBkZWwgZGF0YWZyYW1lIGRlaSByaXN1bHRhdGkNCnByaW50KHJpc3VsdGF0aS5oaWVyKQ0KDQpgYGANCg0KUGVyIHNjZWdsaWVyZSBsYSBjb25maWd1cmF6aW9uZSBtaWdsaW9yZSBjaSBsaW1pdGlhbW8gYWQgYW5hbGl6emFyZSBpbCBjbHVzdGVyaW5nIHBlciBsZSBjb25maWd1cmF6aW9uaSBjaGUgdmFubm8gZGEgMiBhIDEwIGNsdXN0ZXIgY2VyY2FuZG8gdW4gb3R0aW1vIGxvY2FsZSBjb24gaWwgdmFsb3JlIGRpIGsgbWluaW1vLg0KUGVyIGwnYWxnb3JpdG1vIGRpIGNsdXN0ZXJpbmcgSGllcmFyY2hpY2FsIGNsdXN0ZXJpbmcsIGxhIG1ldHJpY2EgZGkgQ2FsaW5za2ktSGFyYWJhc3ogaW5kaXZpZHVhIGNvbWUgbWlnbGlvciBjb25maWd1cmF6aW9uZSBxdWVsbGEgY29uIHRpcG8gYXZlcmFnZS1saW5rYWdlIHJpc3BldHRvIGFsbGUgYWx0cmUgb3B6aW9uaSBjb24gb3R0aW1vIGxvY2FsZSBwZXIgaz0zLg0KDQpDT05DTFVTSU9OSToNCg0KTCdhbmFsaXNpIGVmZmV0dHVhdGEgdHJhbWl0ZSBsYSBtZXRyaWNhIGRpIENhbGluc2tpLUhhcmFiYXN6IGluZGljYSBjb21lIG1pZ2xpb3IgcmlzdWx0YXRvIGxhIGNvbWJpbmF6aW9uZSBkaSBEQlNDQU4gY29tZSBhbGdvcml0bW8gZGkgY2x1c3RlcmluZyBjb24gY29uZmlndXJhemlvbmUgZGkgaXBlcnBhcmFtZXRyaSDwnZyAPTg4IGUgbWluUHRzPTE1Lg0K</div>
 
 
 
