@@ -114,3 +114,18 @@ AnalisiDatasetReale <- function(dataset){
   print(risultati.hier)
   
 }
+
+##---------------------------------------------------------------------------##
+
+localOpt <- function(list){
+  max <- 0
+  for (i in list) {
+    if(max<i){
+      max <- i
+    }else{
+      return(max)
+    }
+  }
+  
+  
+}
