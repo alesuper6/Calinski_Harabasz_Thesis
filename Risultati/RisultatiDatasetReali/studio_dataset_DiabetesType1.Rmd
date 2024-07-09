@@ -9,32 +9,44 @@ Algoritmo di clustering: K-means
 
 Iperparametri:
 
--   k=2
+-   k=2 , distance="euclidean" , nstart=2
 
--   k=3
+-   k=3 , distance="manhattan" , nstart=20
 
--   k=5
+-   k=5 , distance="euclidean" , nstart=100
  
 ```{r}
 library(readr)
-library(fpc) 
+library(fpc)
+library(cluster)
+
+source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
 
 # Lettura e pulizia del dataset da dati NA
-dataset <- na.omit(read_csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/Takashi2019_diabetes_type1_dataset_preprocessed.csv"))
+dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/Takashi2019_diabetes_type1_dataset_preprocessed.csv"))
 
 # Creazione lista con i valori di k
 k <- c(2,3,5)
 
+# Creazione lista con valori di method
+method <- c("euclidean", "manhattan", "euclidean")
+
+# Creazione lista con valori di nstart
+nstart <- c(2,20,100)
+ 
 # Creazione lista per i valori di Calinski-Harabasz
 CH.kmeans <- c()
 
-for (i in k) {
+for (i in 1:length(k)) {
+  
+  # Calcolo della matrice di distanza dei dati
+  diss <- dist(dataset, method = method[i])
   
   # Clustering con K-means
-  cl <- kmeans(dataset, i, , 100)
+  obj <- pam(diss, k[i], nstart = nstart[i])
   
   # Validazione con Calinski-Harabasz tramite calinhara
-  valore <- calinhara(dataset, cl$cluster)
+  valore <- calinhara(dataset, obj$cluster)
   
   # Aggiungiamo il valore alla lista
   CH.kmeans <- c(CH.kmeans, valore)
@@ -42,9 +54,13 @@ for (i in k) {
 }
 
 # Creazione dataframe /valore
-risultati.kmeans <- data.frame(k = k, val.CH = CH.kmeans)
+risultati.kmeans <- data.frame(k = k, distance = method, nstart = nstart, val.CH = CH.kmeans)
 
 print(risultati.kmeans)
+
+# Calcolo del valore migliore di Calinski-Harabasz
+kmeansOpt <- max(risultati.kmeans$val.CH)
+cat(sprintf("\nValore di Calinski-Harabasz migliore per K-means : %f\n",kmeansOpt))
 
 ```
 
@@ -58,19 +74,19 @@ Algoritmo di clustering: DBSCAN
 
 Iperparametri:
 
--   𝜀= , minPts= 
+-   𝜀=20 , minPts=5 
 
--   𝜀= , minPts= 
+-   𝜀=22 , minPts=5 
 
--   𝜀= , minPts= 
+-   𝜀=20 , minPts=6 
 
 ```{r}
 
 # Creazione lista con i valori di eps
-list_eps <- c(80, 88, 80)
+list_eps <- c(20, 22, 20)
 
 # Creazione lista con i valori di minPts
-list_minPts <- c(15, 15, 17)
+list_minPts <- c(5, 5, 6)
 
 # Creazione lista per i valori di Calinski-Harabasz
 CH.dbscan <- c()
@@ -100,9 +116,14 @@ if(length(list_eps)==length(list_minPts)){
   print("Le liste devono avere la stessa lunghezza")  
 }
 
+# Calcolo del valore migliore di Calinski-Harabasz
+dbscanOpt <- max(risultati.dbscan$val.CH)
+cat(sprintf("\nValore di Calinski-Harabasz migliore per DBSCAN : %f\n",dbscanOpt))
+
 ```
 
-Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=?? e minPts= ?? rispetto a quelle scelte.
+Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=20 e minPts= 5 rispetto a quelle scelte.
+Le due configurazioni che raggiungono il valore di Calinski-Harabasz infinito sono meglio dal punto di vista della metrica ma poco indicative in un contesto di confronto.
 
 ------------------------------------------------------------------------
 
@@ -155,13 +176,23 @@ for(i in method){
 # Stampa del dataframe dei risultati
 print(risultati.hier)
 
+# Calcolo del valore migliore di Calinski-Harabasz
+
+cmplt <- localOpt(risultati.hier$complete)    #Calcolo ottimo locale per complete-link
+avrg <- localOpt(risultati.hier$average)      #Calcolo ottimo locale per average-link
+sngl <- localOpt(risultati.hier$single)       #Calcolo ottimo locale per single-link
+hclustOpt <- max(c(cmplt,avrg,sngl))
+cat(sprintf("\nValore di Calinski-Harabasz migliore per DBSCAN : %f\n",hclustOpt))
+
 ```
 
 Per scegliere la configurazione migliore ci limitiamo ad analizzare il clustering per le configurazioni che vanno da 2 a 10 cluster cercando un ottimo locale con il valore di k minimo.
 Per l'algoritmo di clustering Hierarchical clustering, la metrica di Calinski-Harabasz individua come miglior configurazione quella con tipo average-linkage rispetto alle altre opzioni con ottimo locale per k=2.
 
 CONCLUSIONI:
-
-L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di ?? come algoritmo di clustering con configurazione di iperparametri ??.
+```{r}
+cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analizzate : %f\n",max(c(kmeansOpt,dbscanOpt,hclustOpt))))
+```
+L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di DBSCAN come algoritmo di clustering con configurazione di iperparametri 𝜀=20 e minPts= 5.
 
 

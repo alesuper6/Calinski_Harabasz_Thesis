@@ -178,7 +178,7 @@ cmplt <- localOpt(risultati.hier$complete)    #Calcolo ottimo locale per complet
 avrg <- localOpt(risultati.hier$average)      #Calcolo ottimo locale per average-link
 sngl <- localOpt(risultati.hier$single)       #Calcolo ottimo locale per single-link
 hclustOpt <- max(c(cmplt,avrg,sngl))
-cat(sprintf("\nValore di Calinski-Harabasz migliore per DBSCAN : %f\n",hclustOpt))
+cat(sprintf("\nValore di Calinski-Harabasz migliore per Hierarchical-clustering : %f\n",hclustOpt))
 
 
 
