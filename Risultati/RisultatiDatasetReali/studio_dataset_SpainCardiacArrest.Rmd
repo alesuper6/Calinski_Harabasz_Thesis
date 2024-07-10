@@ -23,7 +23,7 @@ library(cluster)
 source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
 
 # Lettura e pulizia del dataset da dati NA
-dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/journal.pone.0175818_S1Dataset_Spain_cardiac_arrest_EDITED..csv"))
+dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/Spain_cardiac_arrest.csv"))
 
 # Creazione lista con i valori di k
 k <- c(2,3,5)
