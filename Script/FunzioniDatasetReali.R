@@ -1,23 +1,35 @@
 library(dbscan)
 library(fpc) 
+library(cluster)
+
 
 AnalisiDatasetReale <- function(dataset){
   
   # K-means
+  print("Analisi del dataset con l'algoritmo di clustering K-means per gli iperparametri k, distance e nstart")
   
   # Creazione lista con i valori di k
   k <- c(2,3,5)
   
+  # Creazione lista con valori di method
+  method <- c("euclidean", "manhattan", "euclidean")
+  
+  # Creazione lista con valori di nstart
+  nstart <- c(2,20,100)
+  
   # Creazione lista per i valori di Calinski-Harabasz
   CH.kmeans <- c()
   
-  for (i in k) {
+  for (i in 1:length(k)) {
+    
+    # Calcolo della matrice di distanza dei dati
+    diss <- dist(dataset, method = method[i])
     
     # Clustering con K-means
-    cl <- kmeans(dataset, i, , 100)
+    obj <- pam(diss, k[i], nstart = nstart[i])
     
     # Validazione con Calinski-Harabasz tramite calinhara
-    valore <- calinhara(dataset, cl$cluster)
+    valore <- calinhara(dataset, obj$cluster)
     
     # Aggiungiamo il valore alla lista
     CH.kmeans <- c(CH.kmeans, valore)
@@ -25,16 +37,20 @@ AnalisiDatasetReale <- function(dataset){
   }
   
   # Creazione dataframe /valore
-  risultati.kmeans <- data.frame(k = k, val.CH = CH.kmeans)
+  risultati.kmeans <- data.frame(k = k, distance = method, nstart = nstart, val.CH = CH.kmeans)
   
-  # Stampa risultati
-  cat(print("Risultati ottenuti tramite l'algoritmo K-means"))
   print(risultati.kmeans)
+  
+  # Calcolo del valore migliore di Calinski-Harabasz
+  kmeansOpt <- max(risultati.kmeans$val.CH)
+  cat(sprintf("\nValore di Calinski-Harabasz migliore per K-means : %f\n",kmeansOpt))
+  
   
   
   
   
   # DBSCAN
+  print("Analisi del dataset con l'algoritmo di clustering DBSCAN per gli iperparametri eps e minPts")
   
   # Creazione lista con i valori di eps
   list_eps <- c(3, 3.3, 3)
@@ -71,10 +87,15 @@ AnalisiDatasetReale <- function(dataset){
     print("Le liste devono avere la stessa lunghezza")  
   }
   
+  # Calcolo del valore migliore di Calinski-Harabasz
+  dbscanOpt <- max(risultati.dbscan$val.CH)
+  cat(sprintf("\nValore di Calinski-Harabasz migliore per DBSCAN : %f\n",dbscanOpt))
+  
   
   
   
   #Hierarchical-clustering
+  print("Analisi del dataset con l'algoritmo di clustering Hierarchical-clustering per iperparametro linkage")
   
   # Creazione lista con i valori di method
   method <- c("complete", "average", "single")
@@ -113,6 +134,17 @@ AnalisiDatasetReale <- function(dataset){
   cat(print("Risultati ottenuti tramite l'algoritmo Hierarchical-clustering"))
   print(risultati.hier)
   
+  # Calcolo del valore migliore di Calinski-Harabasz
+  
+  cmplt <- localOpt(risultati.hier$complete)    #Calcolo ottimo locale per complete-link
+  avrg <- localOpt(risultati.hier$average)      #Calcolo ottimo locale per average-link
+  sngl <- localOpt(risultati.hier$single)       #Calcolo ottimo locale per single-link
+  hclustOpt <- max(c(cmplt,avrg,sngl))
+  cat(sprintf("\nValore di Calinski-Harabasz migliore per Hierarchical-clustering : %f\n",hclustOpt))
+  
+  
+  # Confronto finale
+  cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analizzate : %f\n",max(c(kmeansOpt,dbscanOpt,hclustOpt))))
 }
 
 ##---------------------------------------------------------------------------##
