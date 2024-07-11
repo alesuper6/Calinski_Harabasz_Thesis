@@ -83,10 +83,10 @@ Iperparametri:
 ```{r}
 
 # Creazione lista con i valori di eps
-list_eps <- c(20, 22, 20)
+list_eps <- c(20, 25,30)
 
 # Creazione lista con i valori di minPts
-list_minPts <- c(5, 5, 6)
+list_minPts <- c(2, 2, 2)
 
 # Creazione lista per i valori di Calinski-Harabasz
 CH.dbscan <- c()
