@@ -6,6 +6,14 @@ output: html_notebook
 ANALISI DATASET neuroblastoma.csv
 
 ```{r}
+library(readr)
+library(fpc)
+library(cluster)
+
+source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
+
+# Lettura e pulizia del dataset da dati NA
+dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/neuroblastoma.csv"))
 
 # Creazione dataframe per i risultati
 risultati <- data.frame(matrix(ncol = 8, nrow = 0))
@@ -21,19 +29,11 @@ Iperparametri:
 
 -   k = (2, 3, 5)
 
--   distance = ("euclidean", "manhattan", "mahalanobis")
+-   distance = ("euclidean", "manhattan")
 
 -   nstart = (2, 20, 100)
 
 ```{r}
-library(readr)
-library(fpc)
-library(cluster)
-
-source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
-
-# Lettura e pulizia del dataset da dati NA
-dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/neuroblastoma.csv"))
 
 # Creazione lista con i valori di k
 list_k <- c(2,3,5)
@@ -75,6 +75,7 @@ print(risultati)
 ```
 
 Quindi verifichiamo che applicando l'algoritmo di clustering K-means, la metrica di Calinski-Harabasz individua come miglior configurazione quella con il valore di k=5, distance="euclidean" ed nstart indifferente rispetto a quelle scelte.
+La distanza euclidea risulta in questo dataset sempre la scelta migliore come valore del rispettivo iperparametro. 
 
 ------------------------------------------------------------------------
 
@@ -82,9 +83,9 @@ Algoritmo di clustering: DBSCAN
 
 Iperparametri:
 
--   𝜀 = (3, 3.3, ) 
+-   𝜀 = (3, 3.3, 3.6) 
 
--   minPts = (10, 11, )
+-   minPts = (10, 11, 12)
 
 
 ```{r}
@@ -211,7 +212,7 @@ for(i in list_linkage){
     row_sel <- risultati.hier[risultati.hier$single==sngl , ]
     
     # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "complete", CH = row_sel$single)
+      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "single", CH = row_sel$single)
       
       # Aggiunta della riga al dataframe risultati
       risultati <- rbind(risultati, new_row)
@@ -221,11 +222,6 @@ for(i in list_linkage){
 # Stampa del dataframe dei risultati
 print(risultati)
 
-
-
-
-
-
 ```
 
 Per scegliere la configurazione migliore ci limitiamo ad analizzare il clustering per le configurazioni che vanno da 2 a 10 cluster cercando un ottimo locale con il valore di k minimo. Per l'algoritmo di clustering Hierarchical clustering, la metrica di Calinski-Harabasz individua come miglior configurazione quella con tipo complete-linkage rispetto alle altre opzioni con ottimo locale per k=4.
@@ -233,10 +229,13 @@ Per scegliere la configurazione migliore ci limitiamo ad analizzare il clusterin
 CONCLUSIONI:
 
 ```{r}
+
+# Stampa miglior valore di Calinski-Harabasz per le configurazioni analizzate 
 cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analizzate : %f\n",max(risultati$CH)))
 
+# Stampa della configurazione con il valore trovato
 (risultati[risultati$CH==max(risultati$CH), ])
 
 ```
 
-L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di DBSCAN come algoritmo di clustering con configurazione di iperparametri eps=3.0 e minPts=11. Notiamo inoltre come per K-means e DBSCAN il numero di cluster ottimali coincida(k=5) mentre per Hierarchical-clustering risulti diverso(k=4)
+L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di DBSCAN come algoritmo di clustering con configurazione di iperparametri eps=3.0 e minPts=12. Notiamo inoltre come per K-means e DBSCAN il numero di cluster ottimali coincida(k=5) mentre per Hierarchical-clustering risulti diverso(k=4)
