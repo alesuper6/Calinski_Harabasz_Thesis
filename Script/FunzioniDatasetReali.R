@@ -1,110 +1,95 @@
-library(dbscan)
 library(fpc) 
 library(cluster)
 
 
-AnalisiDatasetReale <- function(dataset){
+AnalisiDatasetReale <- function(dataset, nome){
+  
+  # Creazione dataframe per i risultati
+  risultati <- data.frame(matrix(ncol = 8, nrow = 0))
+  colnames(risultati) <- c("metodo" , "k" , "distance" , "nstart" , "eps" , "minPts" , "linkage" , "CH")
+  
+  
+  
+  
   
   # K-means
-  print("Analisi del dataset con l'algoritmo di clustering K-means per gli iperparametri k, distance e nstart")
-  
+
   # Creazione lista con i valori di k
-  k <- c(2,3,5)
+  list_k <- c(2,3,5)
   
-  # Creazione lista con valori di method
-  method <- c("euclidean", "manhattan", "euclidean")
+  # Creazione lista con valori di distance
+  list_distance <- c("euclidean", "manhattan")
   
   # Creazione lista con valori di nstart
-  nstart <- c(2,20,100)
+  list_nstart <- c(2,20,100)
   
-  # Creazione lista per i valori di Calinski-Harabasz
-  CH.kmeans <- c()
   
-  for (i in 1:length(k)) {
-    
-    # Calcolo della matrice di distanza dei dati
-    diss <- dist(dataset, method = method[i])
-    
-    # Clustering con K-means
-    obj <- pam(diss, k[i], nstart = nstart[i])
-    
-    # Validazione con Calinski-Harabasz tramite calinhara
-    valore <- calinhara(dataset, obj$cluster)
-    
-    # Aggiungiamo il valore alla lista
-    CH.kmeans <- c(CH.kmeans, valore)
-    
+  
+  for (i in 1:length(list_k)) {
+    for (j in 1:length(list_distance)){
+      for (n in 1:length(list_nstart)) {
+        
+        # Calcolo della matrice di distanza dei dati
+        diss <- dist(dataset, method = list_distance[j])
+        
+        # Clustering con K-means
+        obj <- pam(diss, list_k[i], nstart = list_nstart[n])
+        
+        # Validazione con Calinski-Harabasz tramite calinhara
+        valore <- calinhara(dataset, obj$cluster)
+        
+        # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "K-means", k = list_k[i], distance = list_distance[j], nstart = list_nstart[n], eps = NA, minPts = NA, linkage = NA, CH = valore)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+      }
+    }
   }
-  
-  # Creazione dataframe /valore
-  risultati.kmeans <- data.frame(k = k, distance = method, nstart = nstart, val.CH = CH.kmeans)
-  
-  print(risultati.kmeans)
-  
-  # Calcolo del valore migliore di Calinski-Harabasz
-  kmeansOpt <- max(risultati.kmeans$val.CH)
-  cat(sprintf("\nValore di Calinski-Harabasz migliore per K-means : %f\n",kmeansOpt))
   
   
   
   
   
   # DBSCAN
-  print("Analisi del dataset con l'algoritmo di clustering DBSCAN per gli iperparametri eps e minPts")
-  
+
   # Creazione lista con i valori di eps
-  list_eps <- c(3, 3.3, 3)
+  list_eps <- valoriEps(nome)
   
   # Creazione lista con i valori di minPts
-  list_minPts <- c(10, 10, 11)
+  list_minPts <- valoriMinPts(nome)
   
-  # Creazione lista per i valori di Calinski-Harabasz
-  CH.dbscan <- c()
-  
-  # Controllo lunghezza liste
-  if(length(list_eps)==length(list_minPts)){
-    
-    # Ciclo per la validazione del clustering
-    for (i in 1:length(list_eps)) { 
-      eps <- list_eps[i]          #estrae il valore di eps
-      minPts <- list_minPts[i]    #estrae il valore di minPts
+  # Ciclo per la validazione del clustering
+  for (i in 1:length(list_eps)) { 
+    for (j in 1:length(list_minPts)) {
       
       # Clustering con DBSCAN 
-      clustering <- dbscan(dataset, eps, minPts)
+      clustering <- dbscan(dataset, list_eps[i], list_minPts[j])
       
-      # Aggiornamento lista coi risultati
-      CH.dbscan <- c(CH.dbscan, calinhara(dataset, clustering$cluster))
+      # Validazione con Calinski-Harabasz tramite calinhara
+      valore <- calinhara(dataset, clustering$cluster)
+      
+      # Creazione riga della tabella risultati 
+      new_row <- data.frame(metodo = "DBSCAN", k = NA, distance = NA, nstart = NA, eps = list_eps[i], minPts = list_minPts[j], linkage = NA, CH = valore)
+      
+      # Aggiunta della riga al dataframe risultati
+      risultati <- rbind(risultati, new_row)
     }
-    
-    # Creazione dataframe iterazione\valore
-    risultati.dbscan <- data.frame(eps = list_eps, minPts = list_minPts, val.CH = CH.dbscan)
-    
-    # Stampa dataframe 
-    cat(print("Risultati ottenuti tramite l'algoritmo DBSCAN"))
-    print(risultati.dbscan)
-    
-  } else {
-    print("Le liste devono avere la stessa lunghezza")  
   }
-  
-  # Calcolo del valore migliore di Calinski-Harabasz
-  dbscanOpt <- max(risultati.dbscan$val.CH)
-  cat(sprintf("\nValore di Calinski-Harabasz migliore per DBSCAN : %f\n",dbscanOpt))
   
   
   
   
   #Hierarchical-clustering
-  print("Analisi del dataset con l'algoritmo di clustering Hierarchical-clustering per iperparametro linkage")
   
   # Creazione lista con i valori di method
-  method <- c("complete", "average", "single")
+  list_linkage <- c("complete", "average", "single")
   
   # Creazione dataframe per i risultati
   risultati.hier <- data.frame(k = 2:10)
   
   # Ciclo per clustering tramite hierarchical clustering e validazione con calinhara
-  for(i in method){
+  for(i in list_linkage){
     
     # Creazione lista per i valori di Calinski-Harabasz 
     CH.hier<- c()
@@ -114,40 +99,94 @@ AnalisiDatasetReale <- function(dataset){
     
     # Ciclo per la validazione del clustering con calinhara
     for (j in 2:10) {
-      cluster <- cutree(H.model, k = j)  #Taglio dell'albero risultante dal clustering
-      CH.hier <- c(CH.hier, calinhara(dataset, cluster))  #Aggiornamento lista coi risultati
+      
+      #Taglio dell'albero risultante dal clustering
+      cluster <- cutree(H.model, k = j) 
+      
+      #Aggiornamento lista coi risultati
+      CH.hier <- c(CH.hier, calinhara(dataset, cluster))  
     }
     
     # Aggiornamento dataframe risultati
     if(i == "complete"){
+      
+      # Aggiornamento dataframe Hierarchical-clustering
       risultati.hier$complete <- CH.hier 
+      
+      # Calcolo ottimo locale per complete-link
+      cmplt <- localOpt(risultati.hier$complete)    
+      
+      # Selezione riga con ottimo locale
+      row_sel <- risultati.hier[risultati.hier$complete==cmplt , ]
+      
+      # Creazione riga della tabella risultati 
+      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "complete", CH = row_sel$complete)
+      
+      # Aggiunta della riga al dataframe risultati
+      risultati <- rbind(risultati, new_row)
     }
+    
     if(i == "average"){
+      
+      # Aggiornamento dataframe Hierarchical-clustering
       risultati.hier$average <- CH.hier 
+      
+      # Calcolo ottimo locale per average-link
+      avrg <- localOpt(risultati.hier$average)    
+      
+      # Selezione riga con ottimo locale
+      row_sel <- risultati.hier[risultati.hier$average==avrg , ]
+      
+      # Creazione riga della tabella risultati 
+      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "average", CH = row_sel$average)
+      
+      # Aggiunta della riga al dataframe risultati
+      risultati <- rbind(risultati, new_row)
     }
+    
     if(i == "single"){
+      
+      # Aggiornamento dataframe Hierarchical-clustering
       risultati.hier$single <- CH.hier 
+      
+      # Calcolo ottimo locale per single-link
+      sngl <- localOpt(risultati.hier$single) 
+      
+      # Selezione riga con ottimo locale
+      row_sel <- risultati.hier[risultati.hier$single==sngl , ]
+      
+      # Creazione riga della tabella risultati 
+      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "single", CH = row_sel$single)
+      
+      # Aggiunta della riga al dataframe risultati
+      risultati <- rbind(risultati, new_row)
     }
   }
   
-  # Stampa del dataframe dei risultati
-  cat(print("Risultati ottenuti tramite l'algoritmo Hierarchical-clustering"))
-  print(risultati.hier)
   
-  # Calcolo del valore migliore di Calinski-Harabasz
   
-  cmplt <- localOpt(risultati.hier$complete)    #Calcolo ottimo locale per complete-link
-  avrg <- localOpt(risultati.hier$average)      #Calcolo ottimo locale per average-link
-  sngl <- localOpt(risultati.hier$single)       #Calcolo ottimo locale per single-link
-  hclustOpt <- max(c(cmplt,avrg,sngl))
-  cat(sprintf("\nValore di Calinski-Harabasz migliore per Hierarchical-clustering : %f\n",hclustOpt))
   
   
   # Confronto finale
-  cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analizzate : %f\n",max(c(kmeansOpt,dbscanOpt,hclustOpt))))
+  
+  # Stampa nome dataset
+  cat(sprintf("\nDataset analizzato : %s\n",nome))
+  
+  # Stampa risultati
+  print(risultati)
+  
+  # Stampa miglior valore di Calinski-Harabasz per le configurazioni analizzate 
+  cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analizzate : %f\n",max(risultati$CH)))
+  
+  # Stampa della configurazione con il valore trovato
+  (risultati[risultati$CH==max(risultati$CH), ])
 }
 
+
+
 ##---------------------------------------------------------------------------##
+
+
 
 localOpt <- function(list){
   max <- 0
@@ -158,6 +197,78 @@ localOpt <- function(list){
       return(max)
     }
   }
+}
+
+
+
+
+##---------------------------------------------------------------------------##
+
+
+
+valoriEps <- function(nome) {
   
+  # Funzione che assegna i valori di eps in base al nome del dataset
+  
+  if(nome=="neuroblastoma" || nome=="Spain_cardiac_arrest"){
+    return(c(3, 3.3, 3.6))
+  }
+  
+  if(nome=="Sepsis_SIRS"){
+    return(c(18, 19.8, 21.6))
+  }
+  
+  if(nome=="depression_heart_failure"){
+    return(c(80, 88, 96))
+  }
+  
+  if(nome=="diabetes_type1"){
+    return(c(20))
+  }
+  
+}
+
+
+
+##---------------------------------------------------------------------------##
+
+
+
+valoriMinPts <- function(dataset){
+  
+  # Funzione che assegna i valori di minPts in base al nome del dataset
+  
+  if(nome=="neuroblastoma"){
+    return(c(10, 11, 12))
+  }
+  
+  if(nome=="Spain_cardiac_arrest"){
+    return(c(6, 7, 8))
+  }
+  
+  if(nome=="Sepsis_SIRS"){
+    return(c(8, 9, 10))
+  }
+  
+  if(nome=="depression_heart_failure"){
+    return(c(14, 15, 16))
+  }
+  
+  if(nome=="diabetes_type1"){
+    return(c(2, 5))
+  }
+  
+}
+
+
+
+##---------------------------------------------------------------------------##
+
+
+nomeDataset <- function(percorso_completo){
+  
+  # Funzione che restituisce il nome del dataset passato alla funzione
+  nome_file <- basename(percorso_completo)
+  return(nome_file)
   
 }
