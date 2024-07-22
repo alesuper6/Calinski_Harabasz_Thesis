@@ -210,19 +210,19 @@ valoriEps <- function(nome) {
   
   # Funzione che assegna i valori di eps in base al nome del dataset
   
-  if(nome=="neuroblastoma" || nome=="Spain_cardiac_arrest"){
+  if(nome=="neuroblastoma.csv" || nome=="Spain_cardiac_arrest.csv"){
     return(c(3, 3.3, 3.6))
   }
   
-  if(nome=="Sepsis_SIRS"){
+  if(nome=="Sepsis_SIRS.csv"){
     return(c(18, 19.8, 21.6))
   }
   
-  if(nome=="depression_heart_failure"){
+  if(nome=="depression_heart_failure.csv"){
     return(c(80, 88, 96))
   }
   
-  if(nome=="diabetes_type1"){
+  if(nome=="diabetes_type1.csv"){
     return(c(20))
   }
   
@@ -234,27 +234,27 @@ valoriEps <- function(nome) {
 
 
 
-valoriMinPts <- function(dataset){
+valoriMinPts <- function(nome){
   
   # Funzione che assegna i valori di minPts in base al nome del dataset
   
-  if(nome=="neuroblastoma"){
+  if(nome=="neuroblastoma.csv"){
     return(c(10, 11, 12))
   }
   
-  if(nome=="Spain_cardiac_arrest"){
+  if(nome=="Spain_cardiac_arrest.csv"){
     return(c(6, 7, 8))
   }
   
-  if(nome=="Sepsis_SIRS"){
+  if(nome=="Sepsis_SIRS.csv"){
     return(c(8, 9, 10))
   }
   
-  if(nome=="depression_heart_failure"){
+  if(nome=="depression_heart_failure.csv"){
     return(c(14, 15, 16))
   }
   
-  if(nome=="diabetes_type1"){
+  if(nome=="diabetes_type1.csv"){
     return(c(2, 5))
   }
   

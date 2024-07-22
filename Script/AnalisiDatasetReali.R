@@ -14,6 +14,7 @@ source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
 
 # Lettura nome del dataset
 nome <- nomeDataset(args[1])
+cat(sprintf("Il dataset analizzato è : %s", nome))
 
 # Lettura e pulizia del dataset da dati NA
 dataset <- na.omit(read_csv(args[1]))
