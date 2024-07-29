@@ -1,8 +1,25 @@
 library(fpc) 
 library(cluster)
+library(readr)
 
+AnalisiDatasetReali <- function(data){
+  source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
+  
+  # Lettura nome del dataset
+  nome <- nomeDataset(data)
+  cat(sprintf("Il dataset analizzato è : %s", nome))
+  
+  # Lettura e pulizia del dataset da dati NA
+  dataset <- na.omit(read_csv(data))
+  
+  print("Analisi dei risultati di clustering del dataset reale passato tramite la metrica di Calinski-Harabasz")
+  print("Vengono utilizzati K-means, DBSCAN e Hierarchical-clustering come algoritmi di clustering")
+  
+  # Chiama la funzione per l'analisi del dataset
+  CalcoloTabellaCH(dataset, nome)
+}
 
-AnalisiDatasetReale <- function(dataset, nome){
+CalcoloTabellaCH <- function(dataset, nome){
   
   # Creazione dataframe per i risultati
   risultati <- data.frame(matrix(ncol = 8, nrow = 0))
