@@ -2,6 +2,10 @@ library(fpc)
 library(cluster)
 library(readr)
 
+
+
+# Funzione per la lettura del dataset, interfaccia per l'analisi
+
 AnalisiDatasetReali <- function(data){
   source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
   
@@ -18,6 +22,12 @@ AnalisiDatasetReali <- function(data){
   # Chiama la funzione per l'analisi del dataset
   CalcoloTabellaCH(dataset, nome)
 }
+
+##---------------------------------------------------------------------------##
+
+
+
+# Funzione che itera le combinazioni di iperp. per i diversi algoritmi per il calcolo della tabella 
 
 CalcoloTabellaCH <- function(dataset, nome){
   
@@ -205,6 +215,8 @@ CalcoloTabellaCH <- function(dataset, nome){
 
 
 
+# Funzione per il calcolo dell'ottimo locale con valore di k minimo per hier. clustering
+
 localOpt <- function(list){
   max <- 0
   for (i in list) {
@@ -223,9 +235,9 @@ localOpt <- function(list){
 
 
 
+# Funzione che assegna i valori di eps in base al nome del dataset
+
 valoriEps <- function(nome) {
-  
-  # Funzione che assegna i valori di eps in base al nome del dataset
   
   if(nome=="neuroblastoma.csv" || nome=="Spain_cardiac_arrest.csv"){
     return(c(3, 3.3, 3.6))
@@ -251,9 +263,9 @@ valoriEps <- function(nome) {
 
 
 
+# Funzione che assegna i valori di minPts in base al nome del dataset
+
 valoriMinPts <- function(nome){
-  
-  # Funzione che assegna i valori di minPts in base al nome del dataset
   
   if(nome=="neuroblastoma.csv"){
     return(c(10, 11, 12))
@@ -282,9 +294,11 @@ valoriMinPts <- function(nome){
 ##---------------------------------------------------------------------------##
 
 
+
+# Funzione che restituisce il nome del dataset passato alla funzione
+
 nomeDataset <- function(percorso_completo){
   
-  # Funzione che restituisce il nome del dataset passato alla funzione
   nome_file <- basename(percorso_completo)
   return(nome_file)
   
