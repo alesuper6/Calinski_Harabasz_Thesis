@@ -16,9 +16,9 @@ source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
 dataset <- na.omit(read.csv("~/Calinski_Harabasz_Thesis/Data/DatasetReali/diabetes_type1.csv"))
 
 # Creazione dataframe per i risultati
-risultati <- data.frame(matrix(ncol = 8, nrow = 0))
+risultati <- data.frame(matrix(ncol = 9, nrow = 0))
 
-colnames(risultati) <- c("metodo" , "k" , "distance" , "nstart" , "eps" , "minPts" , "linkage" , "CH")
+colnames(risultati) <- c("metodo" , "k" , "distance" , "nstart" , "eps" , "minPts" , "k_out" , "linkage" , "CH")
 
 ```
 
@@ -58,7 +58,7 @@ for (i in 1:length(list_k)) {
       valore <- calinhara(dataset, obj$cluster)
       
       # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "K-means", k = list_k[i], distance = list_distance[j], nstart = list_nstart[n], eps = NA, minPts = NA, linkage = NA, CH = valore)
+      new_row <- data.frame(metodo = "K-means", k = list_k[i], distance = list_distance[j], nstart = list_nstart[n], eps = NA, minPts = NA, k_out = NA, linkage = NA, CH = valore)
       
       # Aggiunta della riga al dataframe risultati
       risultati <- rbind(risultati, new_row)
@@ -104,7 +104,7 @@ for (i in 1:length(list_eps)) {
     valore <- calinhara(dataset, clustering$cluster)
     
     # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "DBSCAN", k = NA, distance = NA, nstart = NA, eps = list_eps[i], minPts = list_minPts[j], linkage = NA, CH = valore)
+      new_row <- data.frame(metodo = "DBSCAN", k = NA, distance = NA, nstart = NA, eps = list_eps[i], minPts = list_minPts[j], k_out = max(clustering$cluster), linkage = NA, CH = valore)
       
       # Aggiunta della riga al dataframe risultati
       risultati <- rbind(risultati, new_row)
@@ -118,7 +118,7 @@ print(risultati)
 
 ```
 
-Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=20 e minPts= 5 rispetto a quelle scelte.
+Quindi verifichiamo che applicando l'algoritmo di clustering DBSCAN, la metrica di Calinski-Harabasz individua come miglior configurazione quella con i valori di 𝜀=20, minPts=5 e k_out=2 rispetto a quelle scelte.
 Nello studio di questo dataset ci limitiamo a poche configurazioni poichè l'indice restituisce valori confrontabili solo per poche di esse.
 
 ------------------------------------------------------------------------
@@ -129,6 +129,7 @@ Iperparametri:
 
 -   linkage = ("complete", "average", "single")
 
+-   distance = ("euclidean", "manhattan")
 
 ```{r}
 
@@ -141,76 +142,78 @@ risultati.hier <- data.frame(k = 2:10)
 
 # Ciclo per clustering tramite hierarchical clustering e validazione con calinhara
 for(i in list_linkage){
-  
-  # Creazione lista per i valori di Calinski-Harabasz 
-  CH.hier<- c()
-  
-  # Clustering con complete-linkage
-  H.model <- hclust(dist(dataset), i)
-  
-  # Ciclo per la validazione del clustering con calinhara
-  for (j in 2:10) {
+   for (j in list_distance) {
     
-    #Taglio dell'albero risultante dal clustering
-    cluster <- cutree(H.model, k = j) 
+    # Creazione lista per i valori di Calinski-Harabasz 
+    CH.hier<- c()
     
-    #Aggiornamento lista coi risultati
-    CH.hier <- c(CH.hier, calinhara(dataset, cluster))  
-  }
-  
-  # Aggiornamento dataframe risultati
-  if(i == "complete"){
+    # Clustering con complete-linkage
+    H.model <- hclust(dist(dataset, method = j), i)
     
-    # Aggiornamento dataframe Hierarchical-clustering
-    risultati.hier$complete <- CH.hier 
-    
-    # Calcolo ottimo locale per complete-link
-    cmplt <- localOpt(risultati.hier$complete)    
-    
-    # Selezione riga con ottimo locale
-    row_sel <- risultati.hier[risultati.hier$complete==cmplt , ]
-    
-    # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "complete", CH = row_sel$complete)
+    # Ciclo per la validazione del clustering con calinhara
+    for (x in 2:10) {
       
-      # Aggiunta della riga al dataframe risultati
-      risultati <- rbind(risultati, new_row)
-  }
-  
-  if(i == "average"){
-    
-    # Aggiornamento dataframe Hierarchical-clustering
-    risultati.hier$average <- CH.hier 
-    
-    # Calcolo ottimo locale per average-link
-    avrg <- localOpt(risultati.hier$average)    
-    
-    # Selezione riga con ottimo locale
-    row_sel <- risultati.hier[risultati.hier$average==avrg , ]
-    
-    # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "average", CH = row_sel$average)
+      #Taglio dell'albero risultante dal clustering
+      cluster <- cutree(H.model, k = x) 
       
-      # Aggiunta della riga al dataframe risultati
-      risultati <- rbind(risultati, new_row)
-  }
-  
-  if(i == "single"){
+      #Aggiornamento lista coi risultati
+      CH.hier <- c(CH.hier, calinhara(dataset, cluster))  
+    }
     
-    # Aggiornamento dataframe Hierarchical-clustering
-    risultati.hier$single <- CH.hier 
-    
-    # Calcolo ottimo locale per single-link
-    sngl <- localOpt(risultati.hier$single) 
-    
-    # Selezione riga con ottimo locale
-    row_sel <- risultati.hier[risultati.hier$single==sngl , ]
-    
-    # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "single", CH = row_sel$single)
+    # Aggiornamento dataframe risultati
+    if(i == "complete"){
       
-      # Aggiunta della riga al dataframe risultati
-      risultati <- rbind(risultati, new_row)
+      # Aggiornamento dataframe Hierarchical-clustering
+      risultati.hier$complete <- CH.hier 
+      
+      # Calcolo ottimo locale per complete-link
+      cmplt <- localOpt(risultati.hier$complete)    
+      
+      # Selezione riga con ottimo locale
+      row_sel <- risultati.hier[risultati.hier$complete==cmplt , ]
+      
+      # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = j, nstart = NA, eps = NA, minPts = NA, k_out = NA, linkage = "complete", CH = row_sel$complete)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+    }
+    
+    if(i == "average"){
+      
+      # Aggiornamento dataframe Hierarchical-clustering
+      risultati.hier$average <- CH.hier 
+      
+      # Calcolo ottimo locale per average-link
+      avrg <- localOpt(risultati.hier$average)    
+      
+      # Selezione riga con ottimo locale
+      row_sel <- risultati.hier[risultati.hier$average==avrg , ]
+      
+      # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = j, nstart = NA, eps = NA, minPts = NA, k_out = NA, linkage = "average", CH = row_sel$average)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+    }
+    
+    if(i == "single"){
+      
+      # Aggiornamento dataframe Hierarchical-clustering
+      risultati.hier$single <- CH.hier 
+      
+      # Calcolo ottimo locale per single-link
+      sngl <- localOpt(risultati.hier$single) 
+      
+      # Selezione riga con ottimo locale
+      row_sel <- risultati.hier[risultati.hier$single==sngl , ]
+      
+      # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = j, nstart = NA, eps = NA, minPts = NA, k_out = NA, linkage = "single", CH = row_sel$single)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+    }
   }
 }
 
@@ -220,7 +223,7 @@ print(risultati)
 ```
 
 Per scegliere la configurazione migliore ci limitiamo ad analizzare il clustering per le configurazioni che vanno da 2 a 10 cluster cercando un ottimo locale con il valore di k minimo.
-Per l'algoritmo di clustering Hierarchical clustering, la metrica di Calinski-Harabasz individua come miglior configurazione quella con tipo average-linkage rispetto alle altre opzioni con ottimo locale per k=2.
+Per l'algoritmo di clustering Hierarchical clustering, la metrica di Calinski-Harabasz individua come miglior configurazione quella con tipo average-linkage e distance indifferente rispetto alle altre opzioni, con ottimo locale per k=2.
 
 CONCLUSIONI:
 ```{r}
@@ -233,5 +236,5 @@ cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analiz
 
 ```
 L'analisi effettuata tramite la metrica di Calinski-Harabasz indica come miglior risultato la combinazione di DBSCAN come algoritmo di clustering con configurazione di iperparametri 𝜀=20 e minPts= 5.
-
+Notiamo inoltre come per ogni algoritmo il numero di cluster ottimale risulti identico ed uguale a 2.
 
