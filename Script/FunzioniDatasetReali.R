@@ -7,7 +7,6 @@ library(readr)
 # Funzione per la lettura del dataset, interfaccia per l'analisi
 
 AnalisiDatasetReali <- function(data){
-  source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
   
   # Lettura nome del dataset
   nome <- nomeDataset(data)
@@ -32,8 +31,8 @@ AnalisiDatasetReali <- function(data){
 CalcoloTabellaCH <- function(dataset, nome){
   
   # Creazione dataframe per i risultati
-  risultati <- data.frame(matrix(ncol = 8, nrow = 0))
-  colnames(risultati) <- c("metodo" , "k" , "distance" , "nstart" , "eps" , "minPts" , "linkage" , "CH")
+  risultati <- data.frame(matrix(ncol = 9, nrow = 0))
+  colnames(risultati) <- c("metodo" , "k" , "distance" , "nstart" , "eps" , "minPts" , "k_out" , "linkage" , "CH")
   
   
   
@@ -66,7 +65,7 @@ CalcoloTabellaCH <- function(dataset, nome){
         valore <- calinhara(dataset, obj$cluster)
         
         # Creazione riga della tabella risultati 
-        new_row <- data.frame(metodo = "K-means", k = list_k[i], distance = list_distance[j], nstart = list_nstart[n], eps = NA, minPts = NA, linkage = NA, CH = valore)
+        new_row <- data.frame(metodo = "K-means", k = list_k[i], distance = list_distance[j], nstart = list_nstart[n], eps = NA, minPts = NA, k_out = NA , linkage = NA, CH = valore)
         
         # Aggiunta della riga al dataframe risultati
         risultati <- rbind(risultati, new_row)
@@ -97,7 +96,7 @@ CalcoloTabellaCH <- function(dataset, nome){
       valore <- calinhara(dataset, clustering$cluster)
       
       # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "DBSCAN", k = NA, distance = NA, nstart = NA, eps = list_eps[i], minPts = list_minPts[j], linkage = NA, CH = valore)
+      new_row <- data.frame(metodo = "DBSCAN", k = NA, distance = NA, nstart = NA, eps = list_eps[i], minPts = list_minPts[j], k_out = max(clustering$cluster), linkage = NA, CH = valore)
       
       # Aggiunta della riga al dataframe risultati
       risultati <- rbind(risultati, new_row)
@@ -117,78 +116,81 @@ CalcoloTabellaCH <- function(dataset, nome){
   
   # Ciclo per clustering tramite hierarchical clustering e validazione con calinhara
   for(i in list_linkage){
-    
-    # Creazione lista per i valori di Calinski-Harabasz 
-    CH.hier<- c()
-    
-    # Clustering con complete-linkage
-    H.model <- hclust(dist(dataset), i)
-    
-    # Ciclo per la validazione del clustering con calinhara
-    for (j in 2:10) {
+    for (j in list_distance) {
       
-      #Taglio dell'albero risultante dal clustering
-      cluster <- cutree(H.model, k = j) 
+      # Creazione lista per i valori di Calinski-Harabasz 
+      CH.hier<- c()
       
-      #Aggiornamento lista coi risultati
-      CH.hier <- c(CH.hier, calinhara(dataset, cluster))  
-    }
-    
-    # Aggiornamento dataframe risultati
-    if(i == "complete"){
+      # Clustering con complete-linkage
+      H.model <- hclust(dist(dataset, method = j), i)
       
-      # Aggiornamento dataframe Hierarchical-clustering
-      risultati.hier$complete <- CH.hier 
+      # Ciclo per la validazione del clustering con calinhara
+      for (x in 2:10) {
+        
+        #Taglio dell'albero risultante dal clustering
+        cluster <- cutree(H.model, k = x) 
+        
+        #Aggiornamento lista coi risultati
+        CH.hier <- c(CH.hier, calinhara(dataset, cluster))  
+      }
       
-      # Calcolo ottimo locale per complete-link
-      cmplt <- localOpt(risultati.hier$complete)    
+      # Aggiornamento dataframe risultati
+      if(i == "complete"){
+        
+        # Aggiornamento dataframe Hierarchical-clustering
+        risultati.hier$complete <- CH.hier 
+        
+        # Calcolo ottimo locale per complete-link
+        cmplt <- localOpt(risultati.hier$complete)    
+        
+        # Selezione riga con ottimo locale
+        row_sel <- risultati.hier[risultati.hier$complete==cmplt , ]
+        
+        # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = j, nstart = NA, eps = NA, minPts = NA, k_out = NA, linkage = "complete", CH = row_sel$complete)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+      }
       
-      # Selezione riga con ottimo locale
-      row_sel <- risultati.hier[risultati.hier$complete==cmplt , ]
+      if(i == "average"){
+        
+        # Aggiornamento dataframe Hierarchical-clustering
+        risultati.hier$average <- CH.hier 
+        
+        # Calcolo ottimo locale per average-link
+        avrg <- localOpt(risultati.hier$average)    
+        
+        # Selezione riga con ottimo locale
+        row_sel <- risultati.hier[risultati.hier$average==avrg , ]
+        
+        # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = j, nstart = NA, eps = NA, minPts = NA, k_out = NA, linkage = "average", CH = row_sel$average)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+      }
       
-      # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "complete", CH = row_sel$complete)
-      
-      # Aggiunta della riga al dataframe risultati
-      risultati <- rbind(risultati, new_row)
-    }
-    
-    if(i == "average"){
-      
-      # Aggiornamento dataframe Hierarchical-clustering
-      risultati.hier$average <- CH.hier 
-      
-      # Calcolo ottimo locale per average-link
-      avrg <- localOpt(risultati.hier$average)    
-      
-      # Selezione riga con ottimo locale
-      row_sel <- risultati.hier[risultati.hier$average==avrg , ]
-      
-      # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "average", CH = row_sel$average)
-      
-      # Aggiunta della riga al dataframe risultati
-      risultati <- rbind(risultati, new_row)
-    }
-    
-    if(i == "single"){
-      
-      # Aggiornamento dataframe Hierarchical-clustering
-      risultati.hier$single <- CH.hier 
-      
-      # Calcolo ottimo locale per single-link
-      sngl <- localOpt(risultati.hier$single) 
-      
-      # Selezione riga con ottimo locale
-      row_sel <- risultati.hier[risultati.hier$single==sngl , ]
-      
-      # Creazione riga della tabella risultati 
-      new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = NA, nstart = NA, eps = NA, minPts = NA, linkage = "single", CH = row_sel$single)
-      
-      # Aggiunta della riga al dataframe risultati
-      risultati <- rbind(risultati, new_row)
+      if(i == "single"){
+        
+        # Aggiornamento dataframe Hierarchical-clustering
+        risultati.hier$single <- CH.hier 
+        
+        # Calcolo ottimo locale per single-link
+        sngl <- localOpt(risultati.hier$single) 
+        
+        # Selezione riga con ottimo locale
+        row_sel <- risultati.hier[risultati.hier$single==sngl , ]
+        
+        # Creazione riga della tabella risultati 
+        new_row <- data.frame(metodo = "Hierarchical-clustering", k = row_sel$k, distance = j, nstart = NA, eps = NA, minPts = NA, k_out = NA, linkage = "single", CH = row_sel$single)
+        
+        # Aggiunta della riga al dataframe risultati
+        risultati <- rbind(risultati, new_row)
+      }
     }
   }
+  
   
   
   
