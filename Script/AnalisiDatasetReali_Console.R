@@ -14,13 +14,14 @@ source("~/Calinski_Harabasz_Thesis/Script/FunzioniDatasetReali.R")
 
 # Lettura nome del dataset
 nome <- nomeDataset(args[1])
-cat(sprintf("Il dataset analizzato è : %s", nome))
+cat(sprintf("\nIl dataset analizzato è : %s\n", nome))
+print()
 
 # Lettura e pulizia del dataset da dati NA
 dataset <- na.omit(read_csv(args[1]))
 
-print("Analisi dei risultati di clustering del dataset reale passato tramite la metrica di Calinski-Harabasz")
-print("Vengono utilizzati K-means, DBSCAN e Hierarchical-clustering come algoritmi di clustering")
+print("\nAnalisi dei risultati di clustering del dataset reale passato tramite la metrica di Calinski-Harabasz\n")
+print("\nVengono utilizzati K-means, DBSCAN e Hierarchical-clustering come algoritmi di clustering\n")
 
 # Chiama la funzione per l'analisi del dataset
 CalcoloTabellaCH(dataset, nome)
