@@ -6,7 +6,7 @@ library(readr)
 
 # Funzione per la lettura del dataset, interfaccia per l'analisi
 
-AnalisiDatasetReali <- function(data){
+analisiDatasetReali <- function(data){
   
   # Lettura nome del dataset
   nome <- nomeDataset(data)
@@ -19,7 +19,7 @@ AnalisiDatasetReali <- function(data){
   print("Vengono utilizzati K-means, DBSCAN e Hierarchical-clustering come algoritmi di clustering")
   
   # Chiama la funzione per l'analisi del dataset
-  CalcoloTabellaCH(dataset, nome)
+  calcoloTabellaCH(dataset, nome)
 }
 
 ##---------------------------------------------------------------------------##
@@ -28,7 +28,7 @@ AnalisiDatasetReali <- function(data){
 
 # Funzione che itera le combinazioni di iperp. per i diversi algoritmi per il calcolo della tabella 
 
-CalcoloTabellaCH <- function(dataset, nome){
+calcoloTabellaCH <- function(dataset, nome){
   
   # Creazione dataframe per i risultati
   risultati <- data.frame(matrix(ncol = 9, nrow = 0))

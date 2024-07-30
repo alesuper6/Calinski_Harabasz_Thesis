@@ -1,0 +1,71 @@
+DOCUMENTAZIONE SCRIPT
+
+All'interno della cartella riservata agli script ci sono:
+- due file che contengono le funzioni per l'esecuzione degli script all'interno 
+  dell'ambiente di RStudio 
+- e altri due file che fungono da interfaccia per richiamare anche dal terminale
+  di windows gli script.
+
+
+Di seguito un riassunto delle funzioni implementate nei file.
+
+
+
+FunzioniMatrice.R:
+
+- creaMatrice(n) 
+   #Funzione che crea la matrice parametrica [2n, n]
+   Con la prima metà di righe di soli 0 e l'altra metà di righe di soli 1#
+    n: numero intero
+
+- modificaRigaSelezionata(matrice, riga)
+   #Funzione che modifica la matrice passata
+   Sostituisce la riga selezionata con valori compresi tra 0 e 1#
+    matrice: matrice di valori interi
+    riga: numero intero
+
+- analisiMatrice(n, console=FALSE)
+   #Funzione per iterazione dei passaggi di creazione e modifica della matrice e 
+   validazione attraverso CH
+   Il parametro console viene settato di base a False per le chiamate eseguite
+   all'interno di Rstudio#
+    n: numero intero
+    console: valore booleano
+   
+- visualizzaGrafico(grafico, n, console)
+   #Visualizzazione grafico della manipolazione della matrice#
+    grafico: oggetto di tipo grafico
+    n: numero intero
+    console: valore booleano
+    
+    
+    
+FunzioniDatasetReali.R:
+
+- analisiDatasetReali(data)
+   #Funzione per la lettura del dataset, interfaccia per l'analisi#
+    data: stringa del percorso completo del dataset 
+   
+- calcoloTabellaCH(dataset, nome)
+   #Funzione che itera le combinazioni di iperp. per i diversi algoritmi per il 
+   calcolo e la visualizzazione della tabella #
+    dataset: oggetto di tipo data
+    nome: stringa del nome del dataset
+    
+- localOpt(list)
+   #Funzione per il calcolo dell'ottimo locale con valore di k minimo per
+   hier. clustering#
+    list: lista di valori interi
+    
+- valoriEps(nome)
+   #Funzione che assegna i valori di eps in base al nome del dataset#
+    nome: stringa del nome del dataset
+
+- valoriMinPts(nome)
+   #Funzione che assegna i valori di MinPts in base al nome del dataset#
+    nome: stringa del nome del dataset   
+   
+- nomeDataset(percorso_completo) 
+   #Funzione che restituisce il nome del dataset passato alla funzione#
+    percorso_completo: stringa del percorso completo del dataset
+

@@ -9,7 +9,7 @@ n <- as.integer(args[1])  # converte il primo parametro in un intero
 source("~/Calinski_Harabasz_Thesis/Script/FunzioniMatrice.R")
 
 # Chiamata funzione per l'analisi del dataset artificiale
-file_name <- AnalisiMatrice(n, TRUE)
+file_name <- analisiMatrice(n, TRUE)
 
 # Percorso del file in formato Unix
 unix_path <- file_name

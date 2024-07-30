@@ -39,19 +39,12 @@ modificaRigaSelezionata <- function(matrice, riga) {
 
 ##---------------------------------------------------------------------------##
 
-# Definizione di una funzione per leggere un intero da tastiera
 
-readInteger <- function() {
-  n <- readline(prompt="Inserisci un intero: ")
-  return(as.integer(n))
-}
-
-##---------------------------------------------------------------------------##
 
 # Funzione per iterazione dei passaggi di modifica della matrice e validazione attraverso CH
 # Il parametro console viene settato a False di base per le chiamate eseguite all'interno di Rstudio
 
-AnalisiMatrice <- function(n, console=FALSE){
+analisiMatrice <- function(n, console=FALSE){
   
   # CASO BASE: prima metà delle righe composta di soli 0 e la seconda metà 
   # composta di soli 1.

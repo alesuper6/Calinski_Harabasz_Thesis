@@ -24,4 +24,4 @@ print("\nAnalisi dei risultati di clustering del dataset reale passato tramite l
 print("\nVengono utilizzati K-means, DBSCAN e Hierarchical-clustering come algoritmi di clustering\n")
 
 # Chiama la funzione per l'analisi del dataset
-CalcoloTabellaCH(dataset, nome)
+calcoloTabellaCH(dataset, nome)
