@@ -2,6 +2,20 @@ library(ggplot2)
 library(fpc)
 
 
+## Funzione che legge da tastiera il numero passato
+
+readInteger <- function(){
+  # Richiesta valore
+  cat("Inserisci un valore intero: ")
+  
+  # Legge il valore e lo converte in intero
+  valore <- scan(what = integer(), nmax = 1)
+  
+  return(valore)
+}
+
+##---------------------------------------------------------------------------##
+
 ## Funzione che crea la matrice parametrica [2n, n]
 ## Con la prima metà di righe di soli 0 e l'altra metà di righe di soli 1
 
