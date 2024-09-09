@@ -204,11 +204,11 @@ calcoloTabellaCH <- function(dataset, nome){
   # Stampa risultati
   print(risultati)
   
-  # Stampa miglior valore di Calinski-Harabasz per le configurazioni analizzate 
-  cat(sprintf("\nValore di Calinski-Harabasz migliore per le configurazioni analizzate : %f\n",max(risultati$CH)))
+  # Ordina il dataframe per valore di Calinski-Harabasz decrescente
+  risultati_decr <- risultati[order(risultati$CH, decreasing = TRUE),]
   
-  # Stampa della configurazione con il valore trovato
-  (risultati[risultati$CH==max(risultati$CH), ])
+  # Stampa del dataframe dei risultati ordinato per valore di Calinski-Harabasz decrescente
+  print(risultati_decr)
 }
 
 
