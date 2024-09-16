@@ -208,6 +208,7 @@ calcoloTabellaCH <- function(dataset, nome){
   risultati_decr <- risultati[order(risultati$CH, decreasing = TRUE),]
   
   # Stampa del dataframe dei risultati ordinato per valore di Calinski-Harabasz decrescente
+  cat(sprintf("\nTabella riassuntiva ordinata per valore dell'indice di Calinski-Harabasz decrescente:\n" ))
   print(risultati_decr)
 }
 
