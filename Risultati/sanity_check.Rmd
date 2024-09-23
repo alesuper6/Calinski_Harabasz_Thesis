@@ -23,7 +23,7 @@ library(ggplot2)
 library(readr)
 library(fpc)
 
-load("~/Calinski_Harabasz_Thesis/Data/Dataset_CheckFunzioni.RData")
+load("~/Calinski_Harabasz_Thesis/Data/Dataset_SanityCheck.RData")
 
 # Esempio 1: 
 # dataset con due cluster ben separati tra loro
@@ -44,6 +44,11 @@ Valore atteso -\> $inf$
 # Valore atteso -> inf.
 ris_sep <- kmeans(cl_separati, 2, , 100)
 print(calinhara(cl_separati[,1:2], ris_sep$cluster))
+
+ggplot(cl_separati, aes(x = x, y = y, color = as.factor(ris_sep$cluster))) +
+  geom_point() +
+  labs(color = "Cluster") +
+  theme_minimal()
 ```
 
 
@@ -70,5 +75,10 @@ Valore atteso -\> $0$
 # Valore atteso -> inf.
 ris_sovr <- kmeans(cl_sovrapposti, 2, , 100)
 print(calinhara(cl_sovrapposti[,1:2], ris_sovr$cluster))
+
+ggplot(cl_sovrapposti, aes(x = x, y = y, color = as.factor(ris_sovr$cluster))) +
+  geom_point() +
+  labs(color = "Cluster") +
+  theme_minimal()
 ```
 
