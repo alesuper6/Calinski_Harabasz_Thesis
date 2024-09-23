@@ -15,7 +15,7 @@ effettuato con l'algoritmo K-means per un numero di clusters pari a 2.
 
 CASO BASE
 
-Si analizza come caso base da cui partirela situazione con la prima metà
+Si analizza come caso base da cui partire la situazione con la prima metà
 delle righe composta di soli 0 e la seconda metà composta di soli 1.
 Questa sarà la matrice base da cui partire e da modificare.
 
