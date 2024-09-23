@@ -9,9 +9,9 @@ editor_options:
     wrap: 72
 ---
 
-Sanity check della funzione CH.IDX del pacchetto UniversalCVI. Vogliamo
+Sanity check della funzione calinhara del pacchetto fpc. Vogliamo
 verificare il corretto funzionamento della metrica di Calinski-Harabasz
-implementata nella funzione CH.IDX.
+implementata nella funzione calinhara.
 
 Applichiamo la funzione a due diversi dataset per cui ci aspettiamo un
 determinato valore dell'indice di Calinski-Harabasz.
