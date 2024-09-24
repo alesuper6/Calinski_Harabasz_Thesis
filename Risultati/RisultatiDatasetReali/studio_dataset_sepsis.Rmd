@@ -83,9 +83,9 @@ Algoritmo di clustering: DBSCAN
 
 Iperparametri:
 
--   𝜀 = (18, 19.8, 18) 
+-   𝜀 = (18, 19.8, 21.6) 
 
--   minPts = (10, 10, 11)
+-   minPts = (8, 9, 10)
 
 ```{r}
 
